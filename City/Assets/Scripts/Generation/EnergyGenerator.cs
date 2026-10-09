@@ -20,6 +20,13 @@ public sealed class EnergyGenerator
     private Material _batteryMaterial;
     private Material _equipmentMaterial;
 
+    // EV charging + parking
+    private Material _asphaltMaterial;
+    private Material _stallLineMaterial;
+    private Material _evChargerMaterial;
+    private Material _evCanopyMaterial;
+    private Material[] _carMaterials;
+
     // ── Geometry constants ────────────────────────────────────────────────────
     private const float PanelTilt   = 15f;
     private const float PanelWidth  = 1.6f;
@@ -184,9 +191,23 @@ public sealed class EnergyGenerator
                 baseY);
         }
 
+        // EV charging hubs + parking scattered through commercial / mixed-use sectors
+        int evHubCount = 0;
+        foreach (SectorData sector in sectors)
+        {
+            if (sector?.geometry?.bounds == null || sector.geometry.bounds.Length < 4) continue;
+            string type = Convert.ToString(ReadValue(sector, "type"));
+            bool isCommercial = string.Equals(type, "commercial", StringComparison.OrdinalIgnoreCase)
+                              || string.Equals(type, "mixed_use", StringComparison.OrdinalIgnoreCase);
+            bool evFlag = sector.energy != null && sector.energy.ev_charging;
+            if (!isCommercial && !evFlag) continue;
+
+            evHubCount += CreateEvHubsForSector(sector);
+        }
+
         energyMgr.InitializeData(energyZones, climate, solarFarmCount, turbineCount);
 
-        Debug.Log($"[Energy] Visuals synchronized with AI Planner: Generated {solarFarmCount} solar arrays ({panelAzimuth}° azimuth) and {turbineCount} wind turbines ({dominantWindDir}° wind heading, {renewableTarget:P0} target).");
+        Debug.Log($"[Energy] Visuals synchronized with AI Planner: Generated {solarFarmCount} solar arrays ({panelAzimuth}° azimuth), {turbineCount} wind turbines ({dominantWindDir}° wind heading), {evHubCount} EV charging hubs, {renewableTarget:P0} target.");
     }
 
     // ── Materials ─────────────────────────────────────────────────────────────
@@ -222,6 +243,33 @@ public sealed class EnergyGenerator
             new Color(0.25f, 0.3f, 0.35f),
             new Color(0.0f,  0.45f, 1.6f));
         _equipmentMaterial.enableInstancing = true;
+
+        _asphaltMaterial = MakeMaterial("EV_Asphalt",
+            new Color(0.12f, 0.13f, 0.15f), Color.black);
+        _asphaltMaterial.enableInstancing = true;
+
+        _stallLineMaterial = MakeMaterial("EV_StallLines",
+            new Color(0.85f, 0.87f, 0.9f), Color.black);
+        _stallLineMaterial.enableInstancing = true;
+
+        _evChargerMaterial = MakeMaterial("EV_Charger",
+            new Color(0.03f, 0.18f, 0.32f),
+            new Color(0.1f,  0.55f, 1.3f));
+        _evChargerMaterial.enableInstancing = true;
+
+        _evCanopyMaterial = MakeMaterial("EV_SolarCanopy",
+            new Color(0.02f, 0.06f, 0.2f),
+            new Color(0.0f,  0.22f, 0.9f));
+        _evCanopyMaterial.enableInstancing = true;
+
+        _carMaterials = new[]
+        {
+            MakeMaterial("EV_Car_1", new Color(0.80f, 0.82f, 0.85f), Color.black),
+            MakeMaterial("EV_Car_2", new Color(0.20f, 0.35f, 0.55f), Color.black),
+            MakeMaterial("EV_Car_3", new Color(0.55f, 0.20f, 0.22f), Color.black),
+            MakeMaterial("EV_Car_4", new Color(0.18f, 0.20f, 0.24f), Color.black),
+        };
+        foreach (Material m in _carMaterials) m.enableInstancing = true;
     }
 
     private static Material MakeMaterial(string name, Color baseColor, Color emissionColor)
@@ -494,6 +542,114 @@ public sealed class EnergyGenerator
                 new Vector3(0.1f, 1f, 0.1f),
                 _panelFrameMaterial, sub);
             post.AddComponent<SubstationVisualizer>();
+        }
+    }
+
+    // ── EV charging hubs + parking ────────────────────────────────────────────
+
+    private int CreateEvHubsForSector(SectorData sector)
+    {
+        float[] b = sector.geometry.bounds;
+        float sx = b[0], sz = b[1], w = Mathf.Abs(b[2]), d = Mathf.Abs(b[3]);
+        if (w < 80f || d < 80f) return 0;
+
+        int seed = (sector.id != null ? sector.id.GetHashCode() : 12345) ^ 0x5EED;
+        var rng = new System.Random(seed);
+
+        const float inset = 75f;
+        const float spacing = 300f;
+        int cols = Mathf.Clamp(Mathf.FloorToInt((w - inset * 2f) / spacing) + 1, 1, 3);
+        int rows = Mathf.Clamp(Mathf.FloorToInt((d - inset * 2f) / spacing) + 1, 1, 3);
+        float cellW = (w - inset * 2f) / cols;
+        float cellD = (d - inset * 2f) / rows;
+
+        int count = 0;
+        const int cap = 6;
+        for (int r = 0; r < rows && count < cap; r++)
+        {
+            for (int c = 0; c < cols && count < cap; c++)
+            {
+                if (rng.NextDouble() < 0.30) continue; // deterministic scatter
+                float cx = sx + inset + (c + 0.5f) * cellW + (float)(rng.NextDouble() - 0.5) * cellW * 0.3f;
+                float cz = sz + inset + (r + 0.5f) * cellD + (float)(rng.NextDouble() - 0.5) * cellD * 0.3f;
+                float baseY = _terrainGen != null ? _terrainGen.SampleHeight(cx, cz) : 0f;
+                CreateEvChargingHub(cx, cz, baseY, rng);
+                count++;
+            }
+        }
+
+        if (count == 0) // guarantee at least one hub per qualifying sector
+        {
+            float cx = sx + w * 0.5f, cz = sz + d * 0.5f;
+            float baseY = _terrainGen != null ? _terrainGen.SampleHeight(cx, cz) : 0f;
+            CreateEvChargingHub(cx, cz, baseY, rng);
+            count = 1;
+        }
+        return count;
+    }
+
+    private void CreateEvChargingHub(float cx, float cz, float baseY, System.Random rng)
+    {
+        Transform hub = CreateGroup("EVChargingHub");
+
+        const float lotW = 34f, lotD = 22f;
+        float groundY = baseY + 0.06f;
+
+        // Clickable hub: collider + EnergySource so it selects into the EV console
+        BoxCollider col = hub.gameObject.AddComponent<BoxCollider>();
+        col.center = new Vector3(cx, baseY + 2f, cz);
+        col.size = new Vector3(lotW, 6f, lotD);
+        EnergySource src = hub.gameObject.AddComponent<EnergySource>();
+        src.sourceType = EnergyType.EV;
+
+        // Asphalt lot
+        CreateCube("ParkingLot", new Vector3(cx, groundY, cz),
+            new Vector3(lotW, 0.08f, lotD), _asphaltMaterial, hub);
+
+        // Stall markings (two bays per side)
+        const int bays = 8;
+        float bayW = lotW / bays;
+        for (int i = 0; i <= bays; i++)
+        {
+            float lx = cx - lotW * 0.5f + i * bayW;
+            CreateCube("StallLine", new Vector3(lx, groundY + 0.05f, cz - lotD * 0.25f),
+                new Vector3(0.18f, 0.02f, lotD * 0.42f), _stallLineMaterial, hub);
+            CreateCube("StallLine", new Vector3(lx, groundY + 0.05f, cz + lotD * 0.25f),
+                new Vector3(0.18f, 0.02f, lotD * 0.42f), _stallLineMaterial, hub);
+        }
+
+        // Solar carport canopy on posts
+        GameObject canopy = CreateCube("EVCanopy", new Vector3(cx, baseY + 3.4f, cz),
+            new Vector3(lotW * 0.92f, 0.18f, lotD * 0.5f), _evCanopyMaterial, hub);
+        canopy.transform.rotation = Quaternion.Euler(-8f, 0f, 0f);
+        for (int i = -1; i <= 1; i += 2)
+            for (int j = -1; j <= 1; j += 2)
+                CreateCylinder("CanopyPost",
+                    new Vector3(cx + i * lotW * 0.42f, baseY + 1.7f, cz + j * lotD * 0.22f),
+                    new Vector3(0.2f, 1.7f, 0.2f), _equipmentMaterial, hub);
+
+        // EV charger pedestals along the centre island
+        const int chargers = 4;
+        for (int i = 0; i < chargers; i++)
+        {
+            float t = (i + 0.5f) / chargers;
+            float x = cx - lotW * 0.5f + 3f + t * (lotW - 6f);
+            CreateCube("EVCharger", new Vector3(x, baseY + 0.75f, cz),
+                new Vector3(0.5f, 1.5f, 0.35f), _evChargerMaterial, hub);
+            CreateCube("EVChargerHead", new Vector3(x, baseY + 1.55f, cz),
+                new Vector3(0.6f, 0.35f, 0.45f), _panelFrameMaterial, hub);
+        }
+
+        // A few parked EVs in bays
+        int cars = 3 + rng.Next(0, 3);
+        for (int i = 0; i < cars; i++)
+        {
+            int bay = rng.Next(0, bays);
+            float x = cx - lotW * 0.5f + (bay + 0.5f) * bayW;
+            float zside = (rng.Next(0, 2) == 0 ? -1f : 1f) * lotD * 0.25f;
+            Material cm = _carMaterials[rng.Next(0, _carMaterials.Length)];
+            CreateCube("EVCar", new Vector3(x, baseY + 0.6f, cz + zside),
+                new Vector3(bayW * 0.8f, 1.1f, lotD * 0.34f), cm, hub);
         }
     }
 

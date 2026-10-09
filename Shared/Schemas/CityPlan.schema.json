@@ -1442,6 +1442,10 @@
                             },
                             "battery_storage": {
                                 "type": "boolean"
+                            },
+                            "ev_charging": {
+                                "type": "boolean",
+                                "description": "Whether EV charging hubs and parking should be placed within the sector."
                             }
                         },
                         "additionalProperties": false

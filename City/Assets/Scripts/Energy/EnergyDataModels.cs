@@ -209,3 +209,58 @@ public class GridTelemetryData
         isGridConnected = true;
     }
 }
+
+[Serializable]
+public class EvTelemetryData
+{
+    public int activeCount = 8;                 // number of charging stations / hubs
+    public int portsPerStation = 8;             // charging ports per hub
+    public float ratedCapacityMw = 3.0f;        // total installed charging capacity
+    public float utilizationPercent = 55f;      // share of ports currently delivering power
+    public float renewableSharePercent = 82f;   // % of charging energy served by clean sources
+    public float chargerEfficiencyPercent = 94f;
+    public string operatingStatus = "SMART_CHARGING"; // SMART_CHARGING | FULL_POWER | OFFLINE
+
+    public float defaultRatedCapacity = 3.0f;
+    public float defaultUtilization = 55f;
+    public float defaultRenewableShare = 82f;
+    public float defaultEfficiency = 94f;
+
+    // Power currently dispatched to vehicles (treated like a generator "output" in the console).
+    public float CurrentOutputMw
+    {
+        get
+        {
+            if (operatingStatus == "OFFLINE") return 0f;
+            float util = operatingStatus == "FULL_POWER" ? 100f : utilizationPercent;
+            float eff = chargerEfficiencyPercent / 100f;
+            return Mathf.Clamp(ratedCapacityMw * (util / 100f) * eff, 0f, ratedCapacityMw);
+        }
+    }
+
+    public int TotalPorts => activeCount * portsPerStation;
+    public int ActiveSessions => Mathf.RoundToInt(TotalPorts * Mathf.Clamp01(utilizationPercent / 100f));
+    public float CapacityFactor => ratedCapacityMw > 0f ? Mathf.Clamp01(CurrentOutputMw / ratedCapacityMw) * 100f : 0f;
+    public float DailyEnergyMwh => CurrentOutputMw * 12f; // ~12 effective charging-hours/day
+    // CO2 avoided by displacing ICE miles with (renewable-weighted) electric miles.
+    public float Co2OffsetTonsPerHour => CurrentOutputMw * (renewableSharePercent / 100f) * 0.62f;
+    public int VehiclesServedDaily => (int)(DailyEnergyMwh * 1000f / 40f); // ~40 kWh per top-up
+    public int HomesPowered => (int)(CurrentOutputMw * 1000f / 1.4f);
+
+    public void SetEcoOptimal()
+    {
+        renewableSharePercent = 100f;      // charge entirely from solar/wind surplus
+        utilizationPercent = 70f;          // demand-shifted to clean-generation windows
+        chargerEfficiencyPercent = 97f;
+        operatingStatus = "SMART_CHARGING";
+    }
+
+    public void ResetDefaults()
+    {
+        ratedCapacityMw = defaultRatedCapacity;
+        utilizationPercent = defaultUtilization;
+        renewableSharePercent = defaultRenewableShare;
+        chargerEfficiencyPercent = defaultEfficiency;
+        operatingStatus = "SMART_CHARGING";
+    }
+}

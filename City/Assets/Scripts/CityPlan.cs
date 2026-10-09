@@ -475,6 +475,7 @@ public class SectorEnergyData
     [JsonProperty("solar_coverage_target")] public float solar_coverage_target = 0f;
     [JsonProperty("district_energy")]       public bool  district_energy       = false;
     [JsonProperty("battery_storage")]       public bool  battery_storage       = false;
+    [JsonProperty("ev_charging")]           public bool  ev_charging           = false;
 }
 
 public class SectorConstraintsData

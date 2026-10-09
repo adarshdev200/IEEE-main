@@ -434,6 +434,9 @@ public class EnergyConsoleUI : MonoBehaviour
             case EnergyType.Grid:
                 DrawGridConsole(EnergyManager.Instance.GridData);
                 break;
+            case EnergyType.EV:
+                DrawEvConsole(EnergyManager.Instance.EvData);
+                break;
         }
 
         // Municipal Decarbonization Ratio
@@ -456,6 +459,7 @@ public class EnergyConsoleUI : MonoBehaviour
             EnergyType.Solar   => ("Photovoltaic Solar Farm", "High-Yield Solar Matrix"),
             EnergyType.Storage => ("BESS Storage Reserve", "Grid-Buffering Battery System"),
             EnergyType.Grid    => ("Smart Municipal Microgrid", "Distribution & Substation Hub"),
+            EnergyType.EV      => ("EV Charging Network", "Smart Clean-Mobility Hubs"),
             _                  => ("Renewable Energy Asset", "Dispatch Control System")
         };
 
@@ -486,6 +490,8 @@ public class EnergyConsoleUI : MonoBehaviour
             EnergyManager.Instance.SelectEnergySource(EnergyType.Storage);
         if (DrawTabButton("Grid", currentType == EnergyType.Grid))
             EnergyManager.Instance.SelectEnergySource(EnergyType.Grid);
+        if (DrawTabButton("EV", currentType == EnergyType.EV))
+            EnergyManager.Instance.SelectEnergySource(EnergyType.EV);
         GUILayout.EndHorizontal();
         GUILayout.Space(6);
     }
@@ -505,6 +511,7 @@ public class EnergyConsoleUI : MonoBehaviour
             EnergyType.Solar   => EnergyManager.Instance.SolarData.CurrentOutputMw,
             EnergyType.Storage => Mathf.Max(0f, EnergyManager.Instance.StorageData.powerFlowMw),
             EnergyType.Grid    => EnergyManager.Instance.WindData.CurrentOutputMw + EnergyManager.Instance.SolarData.CurrentOutputMw,
+            EnergyType.EV      => EnergyManager.Instance.EvData.CurrentOutputMw * (EnergyManager.Instance.EvData.renewableSharePercent / 100f),
             _                  => 0f
         };
 
@@ -782,6 +789,67 @@ public class EnergyConsoleUI : MonoBehaviour
         GUILayout.Space(8);
     }
 
+    // ─── EV Charging Console ──────────────────────────────────────────────────
+
+    private void DrawEvConsole(EvTelemetryData d)
+    {
+        DrawKpiGrid(
+            $"{d.CurrentOutputMw:F1} MW", "CHARGING LOAD",
+            $"{d.CapacityFactor:F0}%", "PORT UTILIZATION",
+            $"{d.ratedCapacityMw:F1} MW", $"RATED CAP ({d.activeCount} HUBS)",
+            $"{d.ActiveSessions}", "ACTIVE SESSIONS"
+        );
+
+        GUILayout.Label("OPERATING PARAMETERS", _sectionTitleStyle);
+
+        // Port utilization
+        GUILayout.BeginHorizontal();
+        GUILayout.Label($"Port Utilization: <b>{d.utilizationPercent:F0}%</b>", _sliderLabelStyle);
+        GUILayout.FlexibleSpace();
+        GUILayout.Label($"{d.TotalPorts} ports", _subHeaderStyle);
+        GUILayout.EndHorizontal();
+        d.utilizationPercent = DrawSlider(d.utilizationPercent, 0.0f, 100.0f);
+        GUILayout.Space(4);
+
+        // Renewable share
+        GUILayout.BeginHorizontal();
+        GUILayout.Label($"Renewable-Powered Share: <b>{d.renewableSharePercent:F0}%</b>", _sliderLabelStyle);
+        GUILayout.FlexibleSpace();
+        GUILayout.Label(GetEvCleanRating(d.renewableSharePercent), _subHeaderStyle);
+        GUILayout.EndHorizontal();
+        d.renewableSharePercent = DrawSlider(d.renewableSharePercent, 0.0f, 100.0f);
+        GUILayout.Space(4);
+
+        // Charger capacity
+        GUILayout.Label($"Installed Charging Capacity: <b>{d.ratedCapacityMw:F1} MW</b>", _sliderLabelStyle);
+        d.ratedCapacityMw = DrawSlider(d.ratedCapacityMw, 0.5f, 20.0f);
+        GUILayout.Space(8);
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Label($"Vehicles Served / Day: <b>{d.VehiclesServedDaily:N0}</b>", _ecoMetricRowStyle);
+        GUILayout.FlexibleSpace();
+        GUILayout.Label($"Daily Energy: <b>{d.DailyEnergyMwh:F0} MWh</b>", _ecoMetricRowStyle);
+        GUILayout.EndHorizontal();
+        GUILayout.Space(8);
+
+        // Charging mode
+        GUILayout.Label("Charging Mode", _sectionTitleStyle);
+        GUILayout.BeginHorizontal();
+        if (DrawModeButton("Smart (Clean)", d.operatingStatus == "SMART_CHARGING")) d.operatingStatus = "SMART_CHARGING";
+        if (DrawModeButton("Full Power", d.operatingStatus == "FULL_POWER")) d.operatingStatus = "FULL_POWER";
+        if (DrawModeButton("Offline", d.operatingStatus == "OFFLINE")) d.operatingStatus = "OFFLINE";
+        GUILayout.EndHorizontal();
+        GUILayout.Space(8);
+    }
+
+    private string GetEvCleanRating(float share) => share switch
+    {
+        < 40f => "Grid-Dependent",
+        < 70f => "Mostly Clean",
+        < 95f => "High Renewable",
+        _     => "100% Clean"
+    };
+
     private bool DrawModeButton(string label, bool isSelected)
     {
         return GUILayout.Button(label, isSelected ? _activeButtonStyle : _buttonStyle, GUILayout.ExpandWidth(true));
@@ -855,6 +923,9 @@ public class EnergyConsoleUI : MonoBehaviour
                 case EnergyType.Grid:
                     EnergyManager.Instance.GridData.SetEcoOptimal();
                     break;
+                case EnergyType.EV:
+                    EnergyManager.Instance.EvData.SetEcoOptimal();
+                    break;
             }
         }
 
@@ -874,6 +945,9 @@ public class EnergyConsoleUI : MonoBehaviour
                     break;
                 case EnergyType.Grid:
                     EnergyManager.Instance.GridData.ResetDefaults();
+                    break;
+                case EnergyType.EV:
+                    EnergyManager.Instance.EvData.ResetDefaults();
                     break;
             }
         }
@@ -924,6 +998,7 @@ public class EnergyConsoleUI : MonoBehaviour
                 EnergyType.Solar   => $"Solar {(i + 1):D2}",
                 EnergyType.Storage => $"Storage {(i + 1):D2}",
                 EnergyType.Grid    => "Substation",
+                EnergyType.EV      => $"EV Hub {(i + 1):D2}",
                 _                  => "Energy Unit"
             };
 

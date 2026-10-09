@@ -16,6 +16,7 @@ public class EnergyManager : MonoBehaviour
     public SolarTelemetryData SolarData { get; } = new SolarTelemetryData();
     public StorageTelemetryData StorageData { get; } = new StorageTelemetryData();
     public GridTelemetryData GridData { get; } = new GridTelemetryData();
+    public EvTelemetryData EvData { get; } = new EvTelemetryData();
 
     private readonly Dictionary<EnergyType, List<EnergySource>> _sourcesByType =
         new Dictionary<EnergyType, List<EnergySource>>
@@ -23,7 +24,8 @@ public class EnergyManager : MonoBehaviour
             { EnergyType.Wind, new List<EnergySource>() },
             { EnergyType.Solar, new List<EnergySource>() },
             { EnergyType.Storage, new List<EnergySource>() },
-            { EnergyType.Grid, new List<EnergySource>() }
+            { EnergyType.Grid, new List<EnergySource>() },
+            { EnergyType.EV, new List<EnergySource>() }
         };
 
     private void Awake()
@@ -81,6 +83,14 @@ public class EnergyManager : MonoBehaviour
         SolarData.activeCount = _sourcesByType[EnergyType.Solar].Count;
         StorageData.activeCount = _sourcesByType[EnergyType.Storage].Count;
         GridData.activeCount = Mathf.Max(1, _sourcesByType[EnergyType.Grid].Count);
+
+        int evCount = _sourcesByType[EnergyType.EV].Count;
+        if (evCount > 0)
+        {
+            EvData.activeCount = evCount;
+            EvData.ratedCapacityMw = evCount * EvData.portsPerStation * 0.05f; // ~50 kW per port
+            EvData.defaultRatedCapacity = EvData.ratedCapacityMw;
+        }
     }
 
     public void InitializeData(
@@ -198,6 +208,7 @@ public class EnergyManager : MonoBehaviour
             EnergyType.Solar   => new Color(1.0f, 0.85f, 0.18f) * 2.4f,  // Radiant Solar Gold
             EnergyType.Storage => new Color(0.15f, 0.82f, 0.70f) * 2.4f, // Clean Botanical Teal
             EnergyType.Grid    => new Color(0.20f, 0.98f, 0.45f) * 2.4f, // Vivid Lush Emerald
+            EnergyType.EV      => new Color(0.15f, 0.70f, 1.0f) * 2.4f,  // Electric Charge Blue
             _                  => Color.white
         };
     }
