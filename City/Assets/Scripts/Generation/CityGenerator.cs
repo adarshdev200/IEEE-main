@@ -123,6 +123,9 @@ public class CityGenerator : MonoBehaviour
             Debug.LogError("[City] Generation subsystem error:\n" + ex.Message + "\n" + ex.StackTrace);
         }
 
+        // Register clickable clusters so sectors and energy assets can be labelled on click.
+        CityClusterLabels.EnsureExists().RegisterClusters(_plan.sectors);
+
         FrameCityView();
 
         Debug.Log("[City] Generation complete.");
