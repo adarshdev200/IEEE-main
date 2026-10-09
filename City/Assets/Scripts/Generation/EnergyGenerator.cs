@@ -27,6 +27,9 @@ public sealed class EnergyGenerator
     private Material _evCanopyMaterial;
     private Material[] _carMaterials;
 
+    // Imported 3D models (glb via glTFast) keyed by energy type; null/absent → primitive fallback.
+    private readonly Dictionary<EnergyType, GameObject> _models = new Dictionary<EnergyType, GameObject>();
+
     // ── Geometry constants ────────────────────────────────────────────────────
     private const float PanelTilt   = 15f;
     private const float PanelWidth  = 1.6f;
@@ -60,6 +63,7 @@ public sealed class EnergyGenerator
     {
         Debug.Log($"[Energy] Generate called. Sectors: {sectors?.Count ?? -1}");
         CreateMaterials();
+        LoadModels();
 
         GameObject rootObject = new GameObject("Energy");
         rootObject.transform.SetParent(_parent, false);
@@ -334,6 +338,10 @@ public sealed class EnergyGenerator
                 float z = startZ + offsetZ + row * rowSpacing + PanelDepth * 0.5f;
                 float panelY = baseY + 0.8f + PanelDepth * 0.5f * Mathf.Sin(tiltRad);
 
+                // Imported solar model (clickable holder) when available; else primitive panel.
+                if (PlaceModel(EnergyType.Solar, new Vector3(x, baseY, z), colSpacing, panelAzimuth - 180f, farm, true) != null)
+                    continue;
+
                 // Panel body
                 GameObject panel = CreateCube("SolarPanel",
                     new Vector3(x, panelY, z),
@@ -405,6 +413,10 @@ public sealed class EnergyGenerator
         EnergySource src = turbine.gameObject.AddComponent<EnergySource>();
         src.sourceType = EnergyType.Wind;
 
+        // Imported wind-turbine model (visual only; group above provides collider + EnergySource).
+        if (PlaceModel(EnergyType.Wind, new Vector3(x, baseY, z), 9f, windDirection, turbine, false) != null)
+            return;
+
         // Tower
         CreateCylinder("TurbineTower",
             new Vector3(x, baseY + towerH * 0.5f, z),
@@ -471,6 +483,10 @@ public sealed class EnergyGenerator
         Transform storage = CreateGroup("EnergyStorage");
         float groundY = baseY + 0.7f;
 
+        // Imported storage model (clickable holder) when available; else primitive battery units.
+        if (PlaceModel(EnergyType.Storage, new Vector3(x, baseY, z), 9f, 0f, storage, true) != null)
+            return;
+
         for (int i = 0; i < 3; i++)
         {
             float ox = (i - 1) * 3f;
@@ -504,6 +520,10 @@ public sealed class EnergyGenerator
 
         EnergySource src = sub.gameObject.AddComponent<EnergySource>();
         src.sourceType = EnergyType.Grid;
+
+        // Imported grid/substation model (visual only; group above provides collider + EnergySource).
+        if (PlaceModel(EnergyType.Grid, new Vector3(x, baseY, z), 10f, 0f, sub, false) != null)
+            return;
 
         CreateCube("SubstationBase",
             new Vector3(x, baseY + 0.15f, z),
@@ -634,6 +654,11 @@ public sealed class EnergyGenerator
         {
             float t = (i + 0.5f) / chargers;
             float x = cx - lotW * 0.5f + 3f + t * (lotW - 6f);
+
+            // Imported EV-charger model (visual only; hub group provides collider + EnergySource).
+            if (PlaceModel(EnergyType.EV, new Vector3(x, baseY, cz), 1.6f, 0f, hub, false) != null)
+                continue;
+
             CreateCube("EVCharger", new Vector3(x, baseY + 0.75f, cz),
                 new Vector3(0.5f, 1.5f, 0.35f), _evChargerMaterial, hub);
             CreateCube("EVChargerHead", new Vector3(x, baseY + 1.55f, cz),
@@ -651,6 +676,111 @@ public sealed class EnergyGenerator
             CreateCube("EVCar", new Vector3(x, baseY + 0.6f, cz + zside),
                 new Vector3(bayW * 0.8f, 1.1f, lotD * 0.34f), cm, hub);
         }
+    }
+
+    // ── Imported model loading & placement ────────────────────────────────────
+
+    // Resource paths are relative to any Assets/Resources folder (no extension).
+    private void LoadModels()
+    {
+        _models.Clear();
+        TryLoadModel(EnergyType.Wind,    "EnergyModels/Wind/model");
+        TryLoadModel(EnergyType.Solar,   "EnergyModels/Solar/model");
+        TryLoadModel(EnergyType.Storage, "EnergyModels/Storage/model");
+        TryLoadModel(EnergyType.EV,      "EnergyModels/EV/model");   // supplied later; primitive fallback until then
+        TryLoadModel(EnergyType.Grid,    "EnergyModels/Grid/model"); // supplied later; primitive fallback until then
+
+        if (_models.Count > 0)
+            Debug.Log($"[Energy] Loaded {_models.Count} imported energy model(s): {string.Join(", ", _models.Keys)}");
+    }
+
+    private void TryLoadModel(EnergyType type, string resourcePath)
+    {
+        GameObject prefab = Resources.Load<GameObject>(resourcePath);
+        if (prefab != null) _models[type] = prefab;
+    }
+
+    private bool HasModel(EnergyType type) => _models.TryGetValue(type, out GameObject p) && p != null;
+
+    /// <summary>
+    /// Instantiates the imported model for <paramref name="type"/> (if one is loaded),
+    /// auto-scaled from its renderer bounds to <paramref name="targetFootprint"/> metres on its
+    /// largest horizontal axis, grounded so its base sits at <paramref name="groundPos"/>, yawed,
+    /// with import colliders stripped and shadows disabled (matching the primitive look).
+    ///
+    /// When <paramref name="addSourceCollider"/> is true the model is wrapped in a holder that
+    /// carries its own BoxCollider + EnergySource (used where no parent group provides them, e.g.
+    /// solar panels and storage). Otherwise the model is purely visual and clickability comes from
+    /// the parent group's existing collider + EnergySource (wind, substation, EV hub).
+    ///
+    /// Returns the placed object, or null when no model is available (caller falls back to primitives).
+    /// </summary>
+    private GameObject PlaceModel(
+        EnergyType type, Vector3 groundPos, float targetFootprint, float yawDeg,
+        Transform parent, bool addSourceCollider)
+    {
+        if (!HasModel(type)) return null;
+
+        Transform host;
+        if (addSourceCollider)
+        {
+            GameObject holder = new GameObject($"{type}Model");
+            holder.transform.SetParent(parent, false);
+            holder.transform.position = groundPos; // unit scale, no rotation → simple world/local mapping
+            host = holder.transform;
+        }
+        else
+        {
+            host = parent;
+        }
+
+        GameObject inst = UnityEngine.Object.Instantiate(_models[type], host);
+        inst.transform.rotation = Quaternion.Euler(0f, yawDeg, 0f);
+
+        Renderer[] rends = inst.GetComponentsInChildren<Renderer>();
+        if (rends.Length > 0)
+        {
+            Bounds b = GetBounds(rends);
+            float horiz = Mathf.Max(b.size.x, b.size.z);
+            if (horiz > 1e-4f && targetFootprint > 0f)
+                inst.transform.localScale *= targetFootprint / horiz;
+
+            b = GetBounds(rends); // recompute after scaling
+            inst.transform.position += groundPos - new Vector3(b.center.x, b.min.y, b.center.z);
+
+            foreach (Renderer r in rends)
+            {
+                r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+                r.receiveShadows = false;
+            }
+        }
+        else
+        {
+            inst.transform.position = groundPos;
+        }
+
+        foreach (Collider c in inst.GetComponentsInChildren<Collider>())
+            UnityEngine.Object.Destroy(c);
+
+        if (!addSourceCollider) return inst;
+
+        // Holder gets a clickable collider sized to the final world bounds (holder is unit-scale, unrotated).
+        Bounds fb = rends.Length > 0 ? GetBounds(host.GetComponentsInChildren<Renderer>())
+                                     : new Bounds(host.position, Vector3.one);
+        BoxCollider bc = host.gameObject.AddComponent<BoxCollider>();
+        bc.center = fb.center - host.position;
+        bc.size   = fb.size;
+
+        EnergySource src = host.gameObject.AddComponent<EnergySource>();
+        src.sourceType = type;
+        return host.gameObject;
+    }
+
+    private static Bounds GetBounds(Renderer[] rends)
+    {
+        Bounds b = rends[0].bounds;
+        for (int i = 1; i < rends.Length; i++) b.Encapsulate(rends[i].bounds);
+        return b;
     }
 
     // ── Primitive helpers ─────────────────────────────────────────────────────
