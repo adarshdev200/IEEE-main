@@ -344,8 +344,8 @@ public sealed class EnergyGenerator
                 {
                     // Restore console-driven tilt on the model's visual (same behaviour as the primitive panel).
                     Transform visual = solarModel.transform.childCount > 0 ? solarModel.transform.GetChild(0) : solarModel.transform;
-                    SolarPanelTilter tilter = visual.gameObject.AddComponent<SolarPanelTilter>();
-                    tilter.Initialize(panelAzimuth, PanelTilt);
+                    SolarPanelTilter modelTilter = visual.gameObject.AddComponent<SolarPanelTilter>();
+                    modelTilter.Initialize(panelAzimuth, PanelTilt);
                     continue;
                 }
 
@@ -430,9 +430,9 @@ public sealed class EnergyGenerator
             Transform rotor = FindChildByName(windModel.transform, "rotor");
             if (rotor != null)
             {
-                WindTurbineSpinner spinner = rotor.gameObject.AddComponent<WindTurbineSpinner>();
-                spinner.RotationSpeed = Mathf.Clamp(windSpeed * 14f, 60f, 120f) + UnityEngine.Random.Range(-10f, 10f);
-                spinner.RotationAxis = Vector3.forward;
+                WindTurbineSpinner modelSpinner = rotor.gameObject.AddComponent<WindTurbineSpinner>();
+                modelSpinner.RotationSpeed = Mathf.Clamp(windSpeed * 14f, 60f, 120f) + UnityEngine.Random.Range(-10f, 10f);
+                modelSpinner.RotationAxis = Vector3.forward;
             }
             return;
         }
