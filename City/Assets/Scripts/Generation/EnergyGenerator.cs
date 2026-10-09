@@ -339,8 +339,15 @@ public sealed class EnergyGenerator
                 float panelY = baseY + 0.8f + PanelDepth * 0.5f * Mathf.Sin(tiltRad);
 
                 // Imported solar model (clickable holder) when available; else primitive panel.
-                if (PlaceModel(EnergyType.Solar, new Vector3(x, baseY, z), colSpacing, panelAzimuth - 180f, farm, true) != null)
+                GameObject solarModel = PlaceModel(EnergyType.Solar, new Vector3(x, baseY, z), colSpacing, panelAzimuth - 180f, farm, true);
+                if (solarModel != null)
+                {
+                    // Restore console-driven tilt on the model's visual (same behaviour as the primitive panel).
+                    Transform visual = solarModel.transform.childCount > 0 ? solarModel.transform.GetChild(0) : solarModel.transform;
+                    SolarPanelTilter tilter = visual.gameObject.AddComponent<SolarPanelTilter>();
+                    tilter.Initialize(panelAzimuth, PanelTilt);
                     continue;
+                }
 
                 // Panel body
                 GameObject panel = CreateCube("SolarPanel",
@@ -414,8 +421,21 @@ public sealed class EnergyGenerator
         src.sourceType = EnergyType.Wind;
 
         // Imported wind-turbine model (visual only; group above provides collider + EnergySource).
-        if (PlaceModel(EnergyType.Wind, new Vector3(x, baseY, z), 9f, windDirection, turbine, false) != null)
+        // Fit by height so the turbine reads as a tall tower rather than a stub.
+        GameObject windModel = PlaceModel(EnergyType.Wind, new Vector3(x, baseY, z), towerH + TurbineBladeLength * 2f, windDirection, turbine, false, fitByHeight: true);
+        if (windModel != null)
+        {
+            // Restore console-driven spin on the model's rotor node.
+            // EnergyManager.UpdateWindTurbineSpeeds() drives every WindTurbineSpinner from the console.
+            Transform rotor = FindChildByName(windModel.transform, "rotor");
+            if (rotor != null)
+            {
+                WindTurbineSpinner spinner = rotor.gameObject.AddComponent<WindTurbineSpinner>();
+                spinner.RotationSpeed = Mathf.Clamp(windSpeed * 14f, 60f, 120f) + UnityEngine.Random.Range(-10f, 10f);
+                spinner.RotationAxis = Vector3.forward;
+            }
             return;
+        }
 
         // Tower
         CreateCylinder("TurbineTower",
@@ -716,8 +736,8 @@ public sealed class EnergyGenerator
     /// Returns the placed object, or null when no model is available (caller falls back to primitives).
     /// </summary>
     private GameObject PlaceModel(
-        EnergyType type, Vector3 groundPos, float targetFootprint, float yawDeg,
-        Transform parent, bool addSourceCollider)
+        EnergyType type, Vector3 groundPos, float targetSize, float yawDeg,
+        Transform parent, bool addSourceCollider, bool fitByHeight = false)
     {
         if (!HasModel(type)) return null;
 
@@ -741,9 +761,9 @@ public sealed class EnergyGenerator
         if (rends.Length > 0)
         {
             Bounds b = GetBounds(rends);
-            float horiz = Mathf.Max(b.size.x, b.size.z);
-            if (horiz > 1e-4f && targetFootprint > 0f)
-                inst.transform.localScale *= targetFootprint / horiz;
+            float measure = fitByHeight ? b.size.y : Mathf.Max(b.size.x, b.size.z);
+            if (measure > 1e-4f && targetSize > 0f)
+                inst.transform.localScale *= targetSize / measure;
 
             b = GetBounds(rends); // recompute after scaling
             inst.transform.position += groundPos - new Vector3(b.center.x, b.min.y, b.center.z);
@@ -781,6 +801,27 @@ public sealed class EnergyGenerator
         Bounds b = rends[0].bounds;
         for (int i = 1; i < rends.Length; i++) b.Encapsulate(rends[i].bounds);
         return b;
+    }
+
+    /// <summary>
+    /// Depth-first search for a descendant transform matching <paramref name="target"/>:
+    /// exact name first, then a group (has children) whose name contains it, then any match.
+    /// </summary>
+    private static Transform FindChildByName(Transform root, string target)
+    {
+        target = target.ToLowerInvariant();
+        Transform[] all = root.GetComponentsInChildren<Transform>(true);
+
+        foreach (Transform t in all)
+            if (t != root && t.name.ToLowerInvariant() == target) return t;
+
+        foreach (Transform t in all)
+            if (t != root && t.childCount > 0 && t.name.ToLowerInvariant().Contains(target)) return t;
+
+        foreach (Transform t in all)
+            if (t != root && t.name.ToLowerInvariant().Contains(target)) return t;
+
+        return null;
     }
 
     // ── Primitive helpers ─────────────────────────────────────────────────────
