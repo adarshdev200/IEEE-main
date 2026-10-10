@@ -1,0 +1,3472 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "city": {
+    "id": "chandigarh_india",
+    "name": "Chandigarh",
+    "location": {
+      "country": "India",
+      "region": "Union Territory",
+      "latitude": 30.7333,
+      "longitude": 76.7794
+    },
+    "population": {
+      "target": 1200000,
+      "current": 1150000,
+      "growth_rate": 0.018
+    },
+    "dimensions": {
+      "width": 7000,
+      "depth": 7000
+    },
+    "coordinate_system": {
+      "units": "meters",
+      "origin": [
+        0,
+        0
+      ],
+      "x_axis": "east",
+      "z_axis": "north"
+    },
+    "planning": {
+      "development_model": "planned",
+      "density_model": "uniform",
+      "primary_orientation": 45,
+      "urban_growth_direction": "southeast",
+      "centrality": [
+        3500,
+        3500
+      ]
+    }
+  },
+  "terrain": {
+    "type": "flat",
+    "elevation": {
+      "minimum": 300,
+      "maximum": 360,
+      "sea_level": 0,
+      "distribution": "north_high"
+    },
+    "slope": {
+      "minimum": 0,
+      "maximum": 8,
+      "preferred_building": 2,
+      "maximum_building": 10,
+      "maximum_road": 5
+    },
+    "roughness": {
+      "level": 0.15,
+      "scale": 800,
+      "octaves": 3,
+      "persistence": 0.4,
+      "lacunarity": 2
+    },
+    "hydrology": {
+      "drainage_pattern": "parallel",
+      "water_flow_direction": 215,
+      "flood_risk": "low",
+      "flood_plain": false,
+      "retention_required": true,
+      "natural_drainage": true
+    },
+    "soil": {
+      "type": "alluvial",
+      "stability": "good",
+      "drainage": "good",
+      "bearing_capacity": 180
+    },
+    "buildability": {
+      "minimum_buildable_ratio": 0.75,
+      "preferred_slope": 2,
+      "maximum_slope": 10,
+      "exclude_floodplains": true,
+      "exclude_water_bodies": true,
+      "exclude_unstable_soil": true,
+      "terracing_allowed": false
+    },
+    "generation": {
+      "method": "flat",
+      "resolution": 257,
+      "height_scale": 12,
+      "seed": 307333,
+      "noise": {
+        "scale": 800,
+        "octaves": 3,
+        "persistence": 0.4,
+        "lacunarity": 2
+      }
+    }
+  },
+  "climate": {
+    "classification": "subtropical",
+    "temperature": {
+      "annual_average": 24.2,
+      "minimum": 2,
+      "maximum": 44,
+      "summer_average": 33,
+      "winter_average": 14,
+      "heatwave_threshold": 40,
+      "coldwave_threshold": 4
+    },
+    "precipitation": {
+      "annual_mm": 1110,
+      "pattern": "monsoon",
+      "wet_season": [
+        7,
+        8,
+        9
+      ],
+      "dry_season": [
+        10,
+        11,
+        12,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "peak_monthly_mm": 320,
+      "rainfall_intensity": "high"
+    },
+    "humidity": {
+      "annual_average": 60,
+      "summer_average": 45,
+      "winter_average": 70
+    },
+    "solar": {
+      "average_irradiance": 5.8,
+      "peak_sun_hours": 5.8,
+      "annual_solar_energy": 2050,
+      "preferred_panel_orientation": 180,
+      "seasonal_variation": 0.25
+    },
+    "wind": {
+      "average_speed": 3.2,
+      "maximum_speed": 28,
+      "dominant_direction": 300,
+      "seasonal_directions": [
+        {
+          "season": "monsoon",
+          "direction": 120,
+          "speed": 4.2
+        },
+        {
+          "season": "winter",
+          "direction": 300,
+          "speed": 2.8
+        }
+      ],
+      "energy_potential": "moderate"
+    },
+    "extreme_weather": {
+      "heatwaves": "high",
+      "flooding": "moderate",
+      "storms": "high",
+      "drought": "low",
+      "cyclones": "none"
+    },
+    "seasons": [
+      {
+        "name": "spring",
+        "months": [
+          3,
+          4
+        ],
+        "average_temperature": 23,
+        "precipitation_mm": 30,
+        "solar_factor": 1.2,
+        "wind_factor": 1
+      },
+      {
+        "name": "summer",
+        "months": [
+          5,
+          6
+        ],
+        "average_temperature": 36,
+        "precipitation_mm": 80,
+        "solar_factor": 1.4,
+        "wind_factor": 1.1
+      },
+      {
+        "name": "monsoon",
+        "months": [
+          7,
+          8,
+          9
+        ],
+        "average_temperature": 29,
+        "precipitation_mm": 850,
+        "solar_factor": 0.8,
+        "wind_factor": 1.2
+      },
+      {
+        "name": "winter",
+        "months": [
+          10,
+          11,
+          12,
+          1,
+          2
+        ],
+        "average_temperature": 14,
+        "precipitation_mm": 150,
+        "solar_factor": 0.9,
+        "wind_factor": 0.8
+      }
+    ]
+  },
+  "land_use": {
+    "categories": [
+      {
+        "id": "res",
+        "name": "Residential Sectors",
+        "type": "residential",
+        "target_ratio": 0.4,
+        "color": "#4CAF50"
+      },
+      {
+        "id": "green",
+        "name": "Leisure Valley & Green Belts",
+        "type": "green",
+        "target_ratio": 0.35,
+        "color": "#2E7D32"
+      },
+      {
+        "id": "comm",
+        "name": "City Centre & Shopping Sectors",
+        "type": "commercial",
+        "target_ratio": 0.1,
+        "color": "#2196F3"
+      },
+      {
+        "id": "civic",
+        "name": "Capitol & Educational Hubs",
+        "type": "civic",
+        "target_ratio": 0.08,
+        "color": "#9C27B0"
+      },
+      {
+        "id": "ind",
+        "name": "Industrial & Tech Parks",
+        "type": "industrial",
+        "target_ratio": 0.07,
+        "color": "#FF9800"
+      }
+    ],
+    "targets": {
+      "residential": 0.4,
+      "green": 0.35,
+      "commercial": 0.1,
+      "industrial": 0.07
+    },
+    "constraints": {
+      "minimum_green_ratio": 0.3,
+      "maximum_industrial_ratio": 0.1
+    },
+    "mixing": {
+      "allowed": true,
+      "preferred_combinations": [
+        [
+          "residential",
+          "green"
+        ],
+        [
+          "commercial",
+          "civic"
+        ]
+      ]
+    },
+    "proximity": {
+      "residential_to_green": 200,
+      "residential_to_transit": 300
+    }
+  },
+  "sectors": [
+    {
+      "id": "sector_01_capitol",
+      "name": "Sector 1 Capitol Complex",
+      "type": "civic",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          3000,
+          5600,
+          1200,
+          1000
+        ]
+      },
+      "population": {
+        "target": 8000,
+        "current": 7500,
+        "daytime_population": 45000,
+        "growth_rate": 0.005
+      },
+      "density": {
+        "population": 30,
+        "floor_area": 1.2,
+        "building_coverage": 0.2,
+        "development_intensity": "low"
+      },
+      "land_use": {
+        "primary": "civic",
+        "secondary": [
+          "green"
+        ],
+        "primary_ratio": 0.7,
+        "secondary_ratio": 0.3
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "government",
+          "community"
+        ],
+        "height": {
+          "minimum_floors": 2,
+          "maximum_floors": 6,
+          "preferred_floors": 4
+        },
+        "footprint": {
+          "minimum_width": 35,
+          "maximum_width": 90,
+          "minimum_depth": 30,
+          "maximum_depth": 70
+        },
+        "spacing": {
+          "building_gap": 15,
+          "front_setback": 12,
+          "side_setback": 8,
+          "rear_setback": 12
+        },
+        "coverage": {
+          "maximum": 0.25,
+          "preferred": 0.2
+        },
+        "orientation": {
+          "mode": "grid_aligned",
+          "angle": 45,
+          "variation": 0
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 45,
+        "blocks": {
+          "minimum_width": 200,
+          "maximum_width": 400,
+          "minimum_depth": 150,
+          "maximum_depth": 300
+        },
+        "local_roads": {
+          "spacing": 200,
+          "width": 14,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 4
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 3
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 10
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.45,
+        "tree_canopy_target": 0.45,
+        "tree_density": 90,
+        "courtyards": true,
+        "green_roofs": true,
+        "green_walls": true,
+        "permeable_surface_target": 0.6
+      },
+      "services": [
+        {
+          "type": "government"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.8,
+        "district_energy": true,
+        "battery_storage": true
+      },
+      "constraints": {
+        "maximum_slope": 5,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": true,
+        "development_priority": "high"
+      }
+    },
+    {
+      "id": "sector_01_sukhna_lake",
+      "name": "Sector 1 Sukhna Lake & Rock Garden",
+      "type": "park",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          4400,
+          5600,
+          1600,
+          1100
+        ]
+      },
+      "population": {
+        "target": 1200,
+        "current": 1000,
+        "daytime_population": 35000,
+        "growth_rate": 0
+      },
+      "density": {
+        "population": 2,
+        "floor_area": 0.05,
+        "building_coverage": 0.03,
+        "development_intensity": "low"
+      },
+      "land_use": {
+        "primary": "green",
+        "secondary": [
+          "water"
+        ],
+        "primary_ratio": 0.65,
+        "secondary_ratio": 0.35
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "community"
+        ],
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 2,
+          "preferred_floors": 1
+        },
+        "footprint": {
+          "minimum_width": 15,
+          "maximum_width": 30,
+          "minimum_depth": 15,
+          "maximum_depth": 30
+        },
+        "spacing": {
+          "building_gap": 25,
+          "front_setback": 15,
+          "side_setback": 10,
+          "rear_setback": 15
+        },
+        "coverage": {
+          "maximum": 0.05,
+          "preferred": 0.03
+        },
+        "orientation": {
+          "mode": "grid_aligned",
+          "angle": 45,
+          "variation": 0
+        }
+      },
+      "street_rules": {
+        "pattern": "organic",
+        "orientation": 45,
+        "blocks": {
+          "minimum_width": 300,
+          "maximum_width": 600,
+          "minimum_depth": 250,
+          "maximum_depth": 500
+        },
+        "local_roads": {
+          "spacing": 350,
+          "width": 8,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 4
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 3
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 8
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.85,
+        "tree_canopy_target": 0.55,
+        "tree_density": 130,
+        "courtyards": false,
+        "green_roofs": false,
+        "green_walls": false,
+        "permeable_surface_target": 0.9
+      },
+      "services": [
+        {
+          "type": "park"
+        },
+        {
+          "type": "recreation_center"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.5,
+        "district_energy": false,
+        "battery_storage": true
+      },
+      "constraints": {
+        "maximum_slope": 6,
+        "avoid_floodplain": true,
+        "avoid_water": false,
+        "protected": true,
+        "development_priority": "low"
+      }
+    },
+    {
+      "id": "sector_17_city_centre",
+      "name": "Sector 17 City Centre Plaza",
+      "type": "commercial",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          3000,
+          3600,
+          1000,
+          800
+        ]
+      },
+      "population": {
+        "target": 20000,
+        "current": 19000,
+        "daytime_population": 110000,
+        "growth_rate": 0.01
+      },
+      "density": {
+        "population": 80,
+        "floor_area": 3,
+        "building_coverage": 0.5,
+        "development_intensity": "high"
+      },
+      "land_use": {
+        "primary": "commercial",
+        "secondary": [
+          "civic"
+        ],
+        "primary_ratio": 0.75,
+        "secondary_ratio": 0.25
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "retail",
+          "office",
+          "government"
+        ],
+        "height": {
+          "minimum_floors": 4,
+          "maximum_floors": 6,
+          "preferred_floors": 4
+        },
+        "footprint": {
+          "minimum_width": 25,
+          "maximum_width": 55,
+          "minimum_depth": 25,
+          "maximum_depth": 50
+        },
+        "spacing": {
+          "building_gap": 6,
+          "front_setback": 4,
+          "side_setback": 0,
+          "rear_setback": 4
+        },
+        "coverage": {
+          "maximum": 0.58,
+          "preferred": 0.5
+        },
+        "orientation": {
+          "mode": "grid_aligned",
+          "angle": 45,
+          "variation": 0
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 45,
+        "blocks": {
+          "minimum_width": 100,
+          "maximum_width": 180,
+          "minimum_depth": 90,
+          "maximum_depth": 150
+        },
+        "local_roads": {
+          "spacing": 120,
+          "width": 12,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 6
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 3
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 10
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.25,
+        "tree_canopy_target": 0.3,
+        "tree_density": 60,
+        "courtyards": true,
+        "green_roofs": true,
+        "green_walls": true,
+        "permeable_surface_target": 0.35
+      },
+      "services": [
+        {
+          "type": "market"
+        },
+        {
+          "type": "transit_station"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.75,
+        "district_energy": true,
+        "battery_storage": true
+      },
+      "constraints": {
+        "maximum_slope": 4,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": false,
+        "development_priority": "high"
+      }
+    },
+    {
+      "id": "sector_14_panjab_university",
+      "name": "Sector 14 Panjab University Campus",
+      "type": "civic",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          1600,
+          4600,
+          1200,
+          900
+        ]
+      },
+      "population": {
+        "target": 35000,
+        "current": 34000,
+        "daytime_population": 55000,
+        "growth_rate": 0.01
+      },
+      "density": {
+        "population": 60,
+        "floor_area": 1.8,
+        "building_coverage": 0.32,
+        "development_intensity": "medium"
+      },
+      "land_use": {
+        "primary": "civic",
+        "secondary": [
+          "residential"
+        ],
+        "primary_ratio": 0.8,
+        "secondary_ratio": 0.2
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "school",
+          "apartment",
+          "community"
+        ],
+        "height": {
+          "minimum_floors": 2,
+          "maximum_floors": 6,
+          "preferred_floors": 4
+        },
+        "footprint": {
+          "minimum_width": 30,
+          "maximum_width": 70,
+          "minimum_depth": 28,
+          "maximum_depth": 55
+        },
+        "spacing": {
+          "building_gap": 8,
+          "front_setback": 6,
+          "side_setback": 4,
+          "rear_setback": 6
+        },
+        "coverage": {
+          "maximum": 0.38,
+          "preferred": 0.32
+        },
+        "orientation": {
+          "mode": "grid_aligned",
+          "angle": 45,
+          "variation": 5
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 45,
+        "blocks": {
+          "minimum_width": 140,
+          "maximum_width": 240,
+          "minimum_depth": 110,
+          "maximum_depth": 180
+        },
+        "local_roads": {
+          "spacing": 150,
+          "width": 10,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 3.5
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 3
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 10
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.4,
+        "tree_canopy_target": 0.42,
+        "tree_density": 95,
+        "courtyards": true,
+        "green_roofs": true,
+        "green_walls": false,
+        "permeable_surface_target": 0.5
+      },
+      "services": [
+        {
+          "type": "school"
+        },
+        {
+          "type": "library"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.8,
+        "district_energy": true,
+        "battery_storage": true
+      },
+      "constraints": {
+        "maximum_slope": 5,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": false,
+        "development_priority": "high"
+      }
+    },
+    {
+      "id": "sector_12_pgi_hospital",
+      "name": "Sector 12 PGIMER Hospital Complex",
+      "type": "civic",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          1600,
+          5600,
+          1200,
+          800
+        ]
+      },
+      "population": {
+        "target": 25000,
+        "current": 24000,
+        "daytime_population": 75000,
+        "growth_rate": 0.015
+      },
+      "density": {
+        "population": 70,
+        "floor_area": 2.5,
+        "building_coverage": 0.4,
+        "development_intensity": "high"
+      },
+      "land_use": {
+        "primary": "civic",
+        "secondary": [
+          "commercial"
+        ],
+        "primary_ratio": 0.85,
+        "secondary_ratio": 0.15
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "hospital",
+          "office"
+        ],
+        "height": {
+          "minimum_floors": 4,
+          "maximum_floors": 10,
+          "preferred_floors": 6
+        },
+        "footprint": {
+          "minimum_width": 35,
+          "maximum_width": 75,
+          "minimum_depth": 32,
+          "maximum_depth": 60
+        },
+        "spacing": {
+          "building_gap": 8,
+          "front_setback": 6,
+          "side_setback": 4,
+          "rear_setback": 6
+        },
+        "coverage": {
+          "maximum": 0.48,
+          "preferred": 0.4
+        },
+        "orientation": {
+          "mode": "grid_aligned",
+          "angle": 45,
+          "variation": 0
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 45,
+        "blocks": {
+          "minimum_width": 130,
+          "maximum_width": 220,
+          "minimum_depth": 110,
+          "maximum_depth": 170
+        },
+        "local_roads": {
+          "spacing": 140,
+          "width": 12,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 4
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 10
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.3,
+        "tree_canopy_target": 0.32,
+        "tree_density": 70,
+        "courtyards": true,
+        "green_roofs": true,
+        "green_walls": true,
+        "permeable_surface_target": 0.4
+      },
+      "services": [
+        {
+          "type": "hospital"
+        },
+        {
+          "type": "clinic"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.75,
+        "district_energy": true,
+        "battery_storage": true
+      },
+      "constraints": {
+        "maximum_slope": 5,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": false,
+        "development_priority": "high"
+      }
+    },
+    {
+      "id": "sector_16_rose_garden",
+      "name": "Sector 16 Rose Garden & Leisure Valley",
+      "type": "park",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          2900,
+          4600,
+          1000,
+          800
+        ]
+      },
+      "population": {
+        "target": 5000,
+        "current": 4800,
+        "daytime_population": 30000,
+        "growth_rate": 0
+      },
+      "density": {
+        "population": 10,
+        "floor_area": 0.4,
+        "building_coverage": 0.1,
+        "development_intensity": "low"
+      },
+      "land_use": {
+        "primary": "green",
+        "secondary": [
+          "residential"
+        ],
+        "primary_ratio": 0.85,
+        "secondary_ratio": 0.15
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "community",
+          "house"
+        ],
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 3,
+          "preferred_floors": 2
+        },
+        "footprint": {
+          "minimum_width": 18,
+          "maximum_width": 35,
+          "minimum_depth": 18,
+          "maximum_depth": 35
+        },
+        "spacing": {
+          "building_gap": 12,
+          "front_setback": 8,
+          "side_setback": 6,
+          "rear_setback": 8
+        },
+        "coverage": {
+          "maximum": 0.15,
+          "preferred": 0.1
+        },
+        "orientation": {
+          "mode": "grid_aligned",
+          "angle": 45,
+          "variation": 0
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 45,
+        "blocks": {
+          "minimum_width": 160,
+          "maximum_width": 300,
+          "minimum_depth": 140,
+          "maximum_depth": 250
+        },
+        "local_roads": {
+          "spacing": 180,
+          "width": 10,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 4
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 3
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 8
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.7,
+        "tree_canopy_target": 0.5,
+        "tree_density": 110,
+        "courtyards": false,
+        "green_roofs": true,
+        "green_walls": false,
+        "permeable_surface_target": 0.8
+      },
+      "services": [
+        {
+          "type": "park"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.6,
+        "district_energy": true,
+        "battery_storage": false
+      },
+      "constraints": {
+        "maximum_slope": 5,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": true,
+        "development_priority": "low"
+      }
+    },
+    {
+      "id": "sector_22_residential",
+      "name": "Sector 22 Heritage Residential Sector",
+      "type": "residential",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          1800,
+          3600,
+          1000,
+          800
+        ]
+      },
+      "population": {
+        "target": 60000,
+        "current": 58500,
+        "daytime_population": 35000,
+        "growth_rate": 0.01
+      },
+      "density": {
+        "population": 150,
+        "floor_area": 2.2,
+        "building_coverage": 0.42,
+        "development_intensity": "medium"
+      },
+      "land_use": {
+        "primary": "residential",
+        "secondary": [
+          "commercial"
+        ],
+        "primary_ratio": 0.8,
+        "secondary_ratio": 0.2
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "house",
+          "apartment",
+          "retail"
+        ],
+        "height": {
+          "minimum_floors": 2,
+          "maximum_floors": 4,
+          "preferred_floors": 3
+        },
+        "footprint": {
+          "minimum_width": 16,
+          "maximum_width": 36,
+          "minimum_depth": 16,
+          "maximum_depth": 32
+        },
+        "spacing": {
+          "building_gap": 4,
+          "front_setback": 3,
+          "side_setback": 2,
+          "rear_setback": 3
+        },
+        "coverage": {
+          "maximum": 0.48,
+          "preferred": 0.42
+        },
+        "orientation": {
+          "mode": "grid_aligned",
+          "angle": 45,
+          "variation": 0
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 45,
+        "blocks": {
+          "minimum_width": 110,
+          "maximum_width": 190,
+          "minimum_depth": 90,
+          "maximum_depth": 150
+        },
+        "local_roads": {
+          "spacing": 120,
+          "width": 10,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 3
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 10
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.35,
+        "tree_canopy_target": 0.38,
+        "tree_density": 80,
+        "courtyards": true,
+        "green_roofs": true,
+        "green_walls": false,
+        "permeable_surface_target": 0.45
+      },
+      "services": [
+        {
+          "type": "market"
+        },
+        {
+          "type": "clinic"
+        },
+        {
+          "type": "school"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.7,
+        "district_energy": true,
+        "battery_storage": false
+      },
+      "constraints": {
+        "maximum_slope": 4,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": false,
+        "development_priority": "normal"
+      }
+    },
+    {
+      "id": "sector_35_commercial",
+      "name": "Sector 35 Culinary & Commercial Hub",
+      "type": "commercial",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          1800,
+          2600,
+          1000,
+          800
+        ]
+      },
+      "population": {
+        "target": 45000,
+        "current": 43500,
+        "daytime_population": 75000,
+        "growth_rate": 0.015
+      },
+      "density": {
+        "population": 110,
+        "floor_area": 2.8,
+        "building_coverage": 0.48,
+        "development_intensity": "high"
+      },
+      "land_use": {
+        "primary": "commercial",
+        "secondary": [
+          "residential"
+        ],
+        "primary_ratio": 0.7,
+        "secondary_ratio": 0.3
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "retail",
+          "apartment",
+          "mixed_use"
+        ],
+        "height": {
+          "minimum_floors": 3,
+          "maximum_floors": 6,
+          "preferred_floors": 4
+        },
+        "footprint": {
+          "minimum_width": 22,
+          "maximum_width": 48,
+          "minimum_depth": 22,
+          "maximum_depth": 42
+        },
+        "spacing": {
+          "building_gap": 4,
+          "front_setback": 3,
+          "side_setback": 1,
+          "rear_setback": 3
+        },
+        "coverage": {
+          "maximum": 0.55,
+          "preferred": 0.48
+        },
+        "orientation": {
+          "mode": "grid_aligned",
+          "angle": 45,
+          "variation": 0
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 45,
+        "blocks": {
+          "minimum_width": 100,
+          "maximum_width": 180,
+          "minimum_depth": 90,
+          "maximum_depth": 140
+        },
+        "local_roads": {
+          "spacing": 110,
+          "width": 12,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 4
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 10
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.28,
+        "tree_canopy_target": 0.3,
+        "tree_density": 65,
+        "courtyards": true,
+        "green_roofs": true,
+        "green_walls": true,
+        "permeable_surface_target": 0.38
+      },
+      "services": [
+        {
+          "type": "market"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.75,
+        "district_energy": true,
+        "battery_storage": true
+      },
+      "constraints": {
+        "maximum_slope": 4,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": false,
+        "development_priority": "high"
+      }
+    },
+    {
+      "id": "sector_43_isbt",
+      "name": "Sector 43 ISBT Transit Hub & District Court",
+      "type": "transport",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          1800,
+          1600,
+          1000,
+          800
+        ]
+      },
+      "population": {
+        "target": 30000,
+        "current": 29000,
+        "daytime_population": 85000,
+        "growth_rate": 0.015
+      },
+      "density": {
+        "population": 75,
+        "floor_area": 2.5,
+        "building_coverage": 0.45,
+        "development_intensity": "high"
+      },
+      "land_use": {
+        "primary": "transport",
+        "secondary": [
+          "civic",
+          "commercial"
+        ],
+        "primary_ratio": 0.6,
+        "secondary_ratio": 0.4
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "office",
+          "parking",
+          "government",
+          "retail"
+        ],
+        "height": {
+          "minimum_floors": 3,
+          "maximum_floors": 8,
+          "preferred_floors": 5
+        },
+        "footprint": {
+          "minimum_width": 28,
+          "maximum_width": 60,
+          "minimum_depth": 28,
+          "maximum_depth": 50
+        },
+        "spacing": {
+          "building_gap": 6,
+          "front_setback": 4,
+          "side_setback": 3,
+          "rear_setback": 4
+        },
+        "coverage": {
+          "maximum": 0.52,
+          "preferred": 0.45
+        },
+        "orientation": {
+          "mode": "grid_aligned",
+          "angle": 45,
+          "variation": 0
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 45,
+        "blocks": {
+          "minimum_width": 110,
+          "maximum_width": 190,
+          "minimum_depth": 90,
+          "maximum_depth": 150
+        },
+        "local_roads": {
+          "spacing": 130,
+          "width": 14,
+          "lanes": 4
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 4
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 12
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.3,
+        "tree_canopy_target": 0.3,
+        "tree_density": 65,
+        "courtyards": true,
+        "green_roofs": true,
+        "green_walls": true,
+        "permeable_surface_target": 0.4
+      },
+      "services": [
+        {
+          "type": "transit_station"
+        },
+        {
+          "type": "government"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.8,
+        "district_energy": true,
+        "battery_storage": true
+      },
+      "constraints": {
+        "maximum_slope": 4,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": false,
+        "development_priority": "high"
+      }
+    },
+    {
+      "id": "sector_34_coaching",
+      "name": "Sector 34 Institutional & Commercial Sector",
+      "type": "commercial",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          3000,
+          2600,
+          1000,
+          800
+        ]
+      },
+      "population": {
+        "target": 50000,
+        "current": 48000,
+        "daytime_population": 90000,
+        "growth_rate": 0.02
+      },
+      "density": {
+        "population": 120,
+        "floor_area": 3.2,
+        "building_coverage": 0.48,
+        "development_intensity": "high"
+      },
+      "land_use": {
+        "primary": "commercial",
+        "secondary": [
+          "civic"
+        ],
+        "primary_ratio": 0.7,
+        "secondary_ratio": 0.3
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "office",
+          "retail",
+          "mixed_use"
+        ],
+        "height": {
+          "minimum_floors": 4,
+          "maximum_floors": 8,
+          "preferred_floors": 5
+        },
+        "footprint": {
+          "minimum_width": 25,
+          "maximum_width": 55,
+          "minimum_depth": 25,
+          "maximum_depth": 50
+        },
+        "spacing": {
+          "building_gap": 5,
+          "front_setback": 3,
+          "side_setback": 2,
+          "rear_setback": 4
+        },
+        "coverage": {
+          "maximum": 0.55,
+          "preferred": 0.48
+        },
+        "orientation": {
+          "mode": "grid_aligned",
+          "angle": 45,
+          "variation": 0
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 45,
+        "blocks": {
+          "minimum_width": 100,
+          "maximum_width": 180,
+          "minimum_depth": 90,
+          "maximum_depth": 140
+        },
+        "local_roads": {
+          "spacing": 120,
+          "width": 12,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 4
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 10
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.26,
+        "tree_canopy_target": 0.28,
+        "tree_density": 60,
+        "courtyards": true,
+        "green_roofs": true,
+        "green_walls": true,
+        "permeable_surface_target": 0.35
+      },
+      "services": [
+        {
+          "type": "school"
+        },
+        {
+          "type": "market"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.8,
+        "district_energy": true,
+        "battery_storage": true
+      },
+      "constraints": {
+        "maximum_slope": 4,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": false,
+        "development_priority": "high"
+      }
+    },
+    {
+      "id": "industrial_area_ph1",
+      "name": "Industrial Area Phase 1",
+      "type": "industrial",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          4200,
+          3600,
+          1100,
+          900
+        ]
+      },
+      "population": {
+        "target": 15000,
+        "current": 14000,
+        "daytime_population": 65000,
+        "growth_rate": 0.01
+      },
+      "density": {
+        "population": 25,
+        "floor_area": 1.8,
+        "building_coverage": 0.45,
+        "development_intensity": "medium"
+      },
+      "land_use": {
+        "primary": "industrial",
+        "secondary": [
+          "commercial"
+        ],
+        "primary_ratio": 0.75,
+        "secondary_ratio": 0.25
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "industrial",
+          "warehouse",
+          "office"
+        ],
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 4,
+          "preferred_floors": 2
+        },
+        "footprint": {
+          "minimum_width": 35,
+          "maximum_width": 80,
+          "minimum_depth": 35,
+          "maximum_depth": 70
+        },
+        "spacing": {
+          "building_gap": 6,
+          "front_setback": 5,
+          "side_setback": 3,
+          "rear_setback": 5
+        },
+        "coverage": {
+          "maximum": 0.52,
+          "preferred": 0.45
+        },
+        "orientation": {
+          "mode": "grid_aligned",
+          "angle": 45,
+          "variation": 0
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 45,
+        "blocks": {
+          "minimum_width": 130,
+          "maximum_width": 240,
+          "minimum_depth": 110,
+          "maximum_depth": 180
+        },
+        "local_roads": {
+          "spacing": 150,
+          "width": 14,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 3
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 15
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.22,
+        "tree_canopy_target": 0.22,
+        "tree_density": 45,
+        "courtyards": false,
+        "green_roofs": true,
+        "green_walls": false,
+        "permeable_surface_target": 0.32
+      },
+      "services": [
+        {
+          "type": "market"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.85,
+        "district_energy": true,
+        "battery_storage": true
+      },
+      "constraints": {
+        "maximum_slope": 4,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": false,
+        "development_priority": "normal"
+      }
+    },
+    {
+      "id": "industrial_area_ph2",
+      "name": "Industrial Area Phase 2 & Solar Grid Hub",
+      "type": "energy",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          4200,
+          2500,
+          1100,
+          900
+        ]
+      },
+      "population": {
+        "target": 12000,
+        "current": 11000,
+        "daytime_population": 55000,
+        "growth_rate": 0.01
+      },
+      "density": {
+        "population": 20,
+        "floor_area": 1.5,
+        "building_coverage": 0.4,
+        "development_intensity": "medium"
+      },
+      "land_use": {
+        "primary": "energy",
+        "secondary": [
+          "industrial"
+        ],
+        "primary_ratio": 0.7,
+        "secondary_ratio": 0.3
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "utility",
+          "industrial",
+          "warehouse"
+        ],
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 3,
+          "preferred_floors": 2
+        },
+        "footprint": {
+          "minimum_width": 35,
+          "maximum_width": 80,
+          "minimum_depth": 35,
+          "maximum_depth": 70
+        },
+        "spacing": {
+          "building_gap": 8,
+          "front_setback": 6,
+          "side_setback": 4,
+          "rear_setback": 6
+        },
+        "coverage": {
+          "maximum": 0.48,
+          "preferred": 0.4
+        },
+        "orientation": {
+          "mode": "grid_aligned",
+          "angle": 45,
+          "variation": 0
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 45,
+        "blocks": {
+          "minimum_width": 140,
+          "maximum_width": 250,
+          "minimum_depth": 120,
+          "maximum_depth": 190
+        },
+        "local_roads": {
+          "spacing": 160,
+          "width": 14,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 2.5
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 15
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.25,
+        "tree_canopy_target": 0.25,
+        "tree_density": 50,
+        "courtyards": false,
+        "green_roofs": true,
+        "green_walls": false,
+        "permeable_surface_target": 0.35
+      },
+      "services": [
+        {
+          "type": "government"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.9,
+        "district_energy": true,
+        "battery_storage": true
+      },
+      "constraints": {
+        "maximum_slope": 4,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": false,
+        "development_priority": "high"
+      }
+    },
+    {
+      "id": "it_park_kishangarh",
+      "name": "Rajiv Gandhi IT Park & Tech Hub",
+      "type": "commercial",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          5400,
+          4600,
+          1100,
+          900
+        ]
+      },
+      "population": {
+        "target": 25000,
+        "current": 24000,
+        "daytime_population": 70000,
+        "growth_rate": 0.025
+      },
+      "density": {
+        "population": 80,
+        "floor_area": 3.5,
+        "building_coverage": 0.45,
+        "development_intensity": "high"
+      },
+      "land_use": {
+        "primary": "commercial",
+        "secondary": [
+          "mixed"
+        ],
+        "primary_ratio": 0.8,
+        "secondary_ratio": 0.2
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "office",
+          "mixed_use",
+          "parking"
+        ],
+        "height": {
+          "minimum_floors": 4,
+          "maximum_floors": 12,
+          "preferred_floors": 7
+        },
+        "footprint": {
+          "minimum_width": 30,
+          "maximum_width": 70,
+          "minimum_depth": 30,
+          "maximum_depth": 60
+        },
+        "spacing": {
+          "building_gap": 6,
+          "front_setback": 5,
+          "side_setback": 3,
+          "rear_setback": 5
+        },
+        "coverage": {
+          "maximum": 0.5,
+          "preferred": 0.45
+        },
+        "orientation": {
+          "mode": "grid_aligned",
+          "angle": 45,
+          "variation": 0
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 45,
+        "blocks": {
+          "minimum_width": 120,
+          "maximum_width": 200,
+          "minimum_depth": 100,
+          "maximum_depth": 160
+        },
+        "local_roads": {
+          "spacing": 140,
+          "width": 12,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 4
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 12
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.32,
+        "tree_canopy_target": 0.35,
+        "tree_density": 75,
+        "courtyards": true,
+        "green_roofs": true,
+        "green_walls": true,
+        "permeable_surface_target": 0.42
+      },
+      "services": [
+        {
+          "type": "transit_station"
+        },
+        {
+          "type": "community_center"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.8,
+        "district_energy": true,
+        "battery_storage": true
+      },
+      "constraints": {
+        "maximum_slope": 5,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": false,
+        "development_priority": "high"
+      }
+    },
+    {
+      "id": "sector_09_civic_res",
+      "name": "Sector 9 High-Income Residential & Police HQ",
+      "type": "residential",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          3000,
+          4600,
+          1000,
+          800
+        ]
+      },
+      "population": {
+        "target": 30000,
+        "current": 29000,
+        "daytime_population": 22000,
+        "growth_rate": 0.01
+      },
+      "density": {
+        "population": 75,
+        "floor_area": 1.6,
+        "building_coverage": 0.32,
+        "development_intensity": "medium"
+      },
+      "land_use": {
+        "primary": "residential",
+        "secondary": [
+          "civic"
+        ],
+        "primary_ratio": 0.8,
+        "secondary_ratio": 0.2
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "house",
+          "apartment",
+          "government"
+        ],
+        "height": {
+          "minimum_floors": 2,
+          "maximum_floors": 4,
+          "preferred_floors": 3
+        },
+        "footprint": {
+          "minimum_width": 20,
+          "maximum_width": 42,
+          "minimum_depth": 20,
+          "maximum_depth": 38
+        },
+        "spacing": {
+          "building_gap": 6,
+          "front_setback": 5,
+          "side_setback": 3,
+          "rear_setback": 5
+        },
+        "coverage": {
+          "maximum": 0.38,
+          "preferred": 0.32
+        },
+        "orientation": {
+          "mode": "grid_aligned",
+          "angle": 45,
+          "variation": 0
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 45,
+        "blocks": {
+          "minimum_width": 120,
+          "maximum_width": 200,
+          "minimum_depth": 100,
+          "maximum_depth": 160
+        },
+        "local_roads": {
+          "spacing": 130,
+          "width": 10,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 3
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 10
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.4,
+        "tree_canopy_target": 0.42,
+        "tree_density": 85,
+        "courtyards": true,
+        "green_roofs": true,
+        "green_walls": false,
+        "permeable_surface_target": 0.5
+      },
+      "services": [
+        {
+          "type": "police_station"
+        },
+        {
+          "type": "school"
+        },
+        {
+          "type": "park"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.75,
+        "district_energy": true,
+        "battery_storage": false
+      },
+      "constraints": {
+        "maximum_slope": 4,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": false,
+        "development_priority": "normal"
+      }
+    },
+    {
+      "id": "leisure_valley_belt",
+      "name": "Leisure Valley Central Diagonal Green Belt",
+      "type": "park",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          2400,
+          3000,
+          700,
+          2400
+        ]
+      },
+      "population": {
+        "target": 2000,
+        "current": 1800,
+        "daytime_population": 40000,
+        "growth_rate": 0
+      },
+      "density": {
+        "population": 5,
+        "floor_area": 0.1,
+        "building_coverage": 0.04,
+        "development_intensity": "low"
+      },
+      "land_use": {
+        "primary": "green",
+        "secondary": [
+          "civic"
+        ],
+        "primary_ratio": 0.9,
+        "secondary_ratio": 0.1
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "community"
+        ],
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 2,
+          "preferred_floors": 1
+        },
+        "footprint": {
+          "minimum_width": 15,
+          "maximum_width": 30,
+          "minimum_depth": 15,
+          "maximum_depth": 30
+        },
+        "spacing": {
+          "building_gap": 20,
+          "front_setback": 10,
+          "side_setback": 8,
+          "rear_setback": 10
+        },
+        "coverage": {
+          "maximum": 0.08,
+          "preferred": 0.04
+        },
+        "orientation": {
+          "mode": "grid_aligned",
+          "angle": 45,
+          "variation": 0
+        }
+      },
+      "street_rules": {
+        "pattern": "organic",
+        "orientation": 45,
+        "blocks": {
+          "minimum_width": 250,
+          "maximum_width": 500,
+          "minimum_depth": 200,
+          "maximum_depth": 400
+        },
+        "local_roads": {
+          "spacing": 300,
+          "width": 8,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 4
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 3
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 8
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.8,
+        "tree_canopy_target": 0.52,
+        "tree_density": 120,
+        "courtyards": false,
+        "green_roofs": true,
+        "green_walls": false,
+        "permeable_surface_target": 0.85
+      },
+      "services": [
+        {
+          "type": "park"
+        },
+        {
+          "type": "recreation_center"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.5,
+        "district_energy": true,
+        "battery_storage": false
+      },
+      "constraints": {
+        "maximum_slope": 5,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": true,
+        "development_priority": "low"
+      }
+    },
+    {
+      "id": "sector_48_southern",
+      "name": "Sector 48 Modern Southern Residential Sector",
+      "type": "residential",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          3000,
+          1600,
+          1000,
+          800
+        ]
+      },
+      "population": {
+        "target": 65000,
+        "current": 62000,
+        "daytime_population": 38000,
+        "growth_rate": 0.02
+      },
+      "density": {
+        "population": 160,
+        "floor_area": 2.5,
+        "building_coverage": 0.44,
+        "development_intensity": "medium"
+      },
+      "land_use": {
+        "primary": "residential",
+        "secondary": [
+          "commercial"
+        ],
+        "primary_ratio": 0.8,
+        "secondary_ratio": 0.2
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "apartment",
+          "tower",
+          "retail"
+        ],
+        "height": {
+          "minimum_floors": 4,
+          "maximum_floors": 8,
+          "preferred_floors": 6
+        },
+        "footprint": {
+          "minimum_width": 22,
+          "maximum_width": 45,
+          "minimum_depth": 22,
+          "maximum_depth": 40
+        },
+        "spacing": {
+          "building_gap": 5,
+          "front_setback": 4,
+          "side_setback": 2,
+          "rear_setback": 4
+        },
+        "coverage": {
+          "maximum": 0.5,
+          "preferred": 0.44
+        },
+        "orientation": {
+          "mode": "grid_aligned",
+          "angle": 45,
+          "variation": 0
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 45,
+        "blocks": {
+          "minimum_width": 110,
+          "maximum_width": 190,
+          "minimum_depth": 90,
+          "maximum_depth": 150
+        },
+        "local_roads": {
+          "spacing": 120,
+          "width": 10,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 3.5
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 10
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.35,
+        "tree_canopy_target": 0.35,
+        "tree_density": 75,
+        "courtyards": true,
+        "green_roofs": true,
+        "green_walls": false,
+        "permeable_surface_target": 0.45
+      },
+      "services": [
+        {
+          "type": "market"
+        },
+        {
+          "type": "recreation_center"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.8,
+        "district_energy": true,
+        "battery_storage": true
+      },
+      "constraints": {
+        "maximum_slope": 4,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": false,
+        "development_priority": "high"
+      }
+    }
+  ],
+  "road_graph": {
+    "nodes": [
+      {
+        "id": "n_capitol",
+        "position": [
+          3600,
+          6100
+        ],
+        "type": "intersection",
+        "capacity": 4
+      },
+      {
+        "id": "n_sukhna",
+        "position": [
+          5200,
+          6100
+        ],
+        "type": "intersection",
+        "capacity": 4
+      },
+      {
+        "id": "n_sec17",
+        "position": [
+          3500,
+          4000
+        ],
+        "type": "intersection",
+        "capacity": 4
+      },
+      {
+        "id": "n_pu14",
+        "position": [
+          2200,
+          5050
+        ],
+        "type": "intersection",
+        "capacity": 4
+      },
+      {
+        "id": "n_pgi12",
+        "position": [
+          2200,
+          6000
+        ],
+        "type": "intersection",
+        "capacity": 4
+      },
+      {
+        "id": "n_rose16",
+        "position": [
+          3400,
+          5000
+        ],
+        "type": "intersection",
+        "capacity": 4
+      },
+      {
+        "id": "n_sec22",
+        "position": [
+          2300,
+          4000
+        ],
+        "type": "intersection",
+        "capacity": 4
+      },
+      {
+        "id": "n_sec35",
+        "position": [
+          2300,
+          3000
+        ],
+        "type": "intersection",
+        "capacity": 4
+      },
+      {
+        "id": "n_isbt43",
+        "position": [
+          2300,
+          2000
+        ],
+        "type": "intersection",
+        "capacity": 4
+      },
+      {
+        "id": "n_sec34",
+        "position": [
+          3500,
+          3000
+        ],
+        "type": "intersection",
+        "capacity": 4
+      },
+      {
+        "id": "n_ind1",
+        "position": [
+          4750,
+          4050
+        ],
+        "type": "intersection",
+        "capacity": 4
+      },
+      {
+        "id": "n_ind2",
+        "position": [
+          4750,
+          2950
+        ],
+        "type": "intersection",
+        "capacity": 4
+      },
+      {
+        "id": "n_itpark",
+        "position": [
+          5950,
+          5050
+        ],
+        "type": "intersection",
+        "capacity": 4
+      },
+      {
+        "id": "n_sec09",
+        "position": [
+          3500,
+          5000
+        ],
+        "type": "intersection",
+        "capacity": 4
+      },
+      {
+        "id": "n_sec48",
+        "position": [
+          3500,
+          2000
+        ],
+        "type": "intersection",
+        "capacity": 4
+      }
+    ],
+    "edges": [
+      {
+        "id": "e_jan_marg_1",
+        "from": "n_capitol",
+        "to": "n_sec09",
+        "type": "arterial",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 30,
+        "lanes": 4,
+        "speed_limit": 60,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 4
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 3,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 10
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_jan_marg_2",
+        "from": "n_sec09",
+        "to": "n_sec17",
+        "type": "arterial",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 30,
+        "lanes": 4,
+        "speed_limit": 60,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 4
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 3,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 10
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_jan_marg_3",
+        "from": "n_sec17",
+        "to": "n_sec34",
+        "type": "arterial",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 30,
+        "lanes": 4,
+        "speed_limit": 60,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 4
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 3,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 10
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_jan_marg_4",
+        "from": "n_sec34",
+        "to": "n_sec48",
+        "type": "arterial",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 30,
+        "lanes": 4,
+        "speed_limit": 60,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 4
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 3,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 10
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_madhya_marg_1",
+        "from": "n_pgi12",
+        "to": "n_pu14",
+        "type": "motorway",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 36,
+        "lanes": 6,
+        "speed_limit": 70,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 3
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 3,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 12
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_madhya_marg_2",
+        "from": "n_pu14",
+        "to": "n_sec09",
+        "type": "motorway",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 36,
+        "lanes": 6,
+        "speed_limit": 70,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 3
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 3,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 12
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_madhya_marg_3",
+        "from": "n_sec09",
+        "to": "n_ind1",
+        "type": "motorway",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 36,
+        "lanes": 6,
+        "speed_limit": 70,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 3
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 3,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 12
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_madhya_marg_4",
+        "from": "n_ind1",
+        "to": "n_itpark",
+        "type": "motorway",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 36,
+        "lanes": 6,
+        "speed_limit": 70,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 3
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 3,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 12
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_himalayan_marg_1",
+        "from": "n_sec22",
+        "to": "n_sec17",
+        "type": "arterial",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 26,
+        "lanes": 4,
+        "speed_limit": 50,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 3.5
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 10
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_dakshin_marg_1",
+        "from": "n_isbt43",
+        "to": "n_sec48",
+        "type": "motorway",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 34,
+        "lanes": 6,
+        "speed_limit": 70,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 3
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 3,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 12
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_dakshin_marg_2",
+        "from": "n_sec48",
+        "to": "n_ind2",
+        "type": "motorway",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 34,
+        "lanes": 6,
+        "speed_limit": 70,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 3
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 3,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 12
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_v3_west_1",
+        "from": "n_sec22",
+        "to": "n_sec35",
+        "type": "collector",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 22,
+        "lanes": 2,
+        "speed_limit": 50,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 3
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 12
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_v3_west_2",
+        "from": "n_sec35",
+        "to": "n_isbt43",
+        "type": "collector",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 22,
+        "lanes": 2,
+        "speed_limit": 50,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 3
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 12
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_capitol_sukhna",
+        "from": "n_capitol",
+        "to": "n_sukhna",
+        "type": "collector",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 24,
+        "lanes": 2,
+        "speed_limit": 40,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 4
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 3,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 10
+        },
+        "street_lighting": true,
+        "public_transport": true
+      }
+    ],
+    "hierarchy": {
+      "arterial": {
+        "default_width": 30,
+        "default_lanes": 4,
+        "default_speed": 60,
+        "sidewalk": true,
+        "cycling": true,
+        "street_lighting": true
+      },
+      "collector": {
+        "default_width": 22,
+        "default_lanes": 2,
+        "default_speed": 50,
+        "sidewalk": true,
+        "cycling": true,
+        "street_lighting": true
+      },
+      "local": {
+        "default_width": 12,
+        "default_lanes": 2,
+        "default_speed": 30,
+        "sidewalk": true,
+        "cycling": true,
+        "street_lighting": true
+      }
+    },
+    "connectivity": {
+      "minimum_node_degree": 2,
+      "maximum_dead_end_ratio": 0.02
+    },
+    "generation": {
+      "primary_pattern": "grid"
+    }
+  },
+  "blocks": {
+    "generation": {
+      "method": "road_bounded",
+      "respect_sector_boundaries": true,
+      "respect_road_hierarchy": true,
+      "arterial_block_boundary": true,
+      "collector_block_boundary": true,
+      "allow_irregular_blocks": false
+    },
+    "size": {
+      "minimum_area": 3000,
+      "maximum_area": 25000,
+      "minimum_width": 60,
+      "maximum_width": 200,
+      "minimum_depth": 50,
+      "maximum_depth": 150,
+      "preferred_area": 9500,
+      "preferred_aspect_ratio": 1.5,
+      "maximum_aspect_ratio": 3
+    },
+    "shape": {
+      "preferred": "rectangular",
+      "regularity": 0.92,
+      "corner_treatment": "sharp",
+      "minimum_angle": 85,
+      "maximum_angle": 95
+    },
+    "subdivision": {
+      "enabled": true,
+      "method": "frontage_based",
+      "minimum_plot_area": 300,
+      "maximum_plot_area": 2500,
+      "minimum_frontage": 14,
+      "maximum_frontage": 55,
+      "minimum_depth": 20,
+      "maximum_depth": 60,
+      "internal_access": true,
+      "internal_road_width": 7
+    },
+    "development": {
+      "maximum_building_coverage": 0.55,
+      "preferred_building_coverage": 0.4,
+      "minimum_open_space": 0.3,
+      "minimum_green_space": 0.25,
+      "courtyard_ratio": 0.18,
+      "frontage_activation": "high",
+      "parking": {
+        "allowed": true,
+        "maximum_surface_ratio": 0.08,
+        "underground_preferred": true
+      }
+    }
+  },
+  "buildings": {
+    "archetypes": [
+      {
+        "id": "res_lowrise",
+        "type": "house",
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 3,
+          "floor_height": 3.2
+        },
+        "footprint": {
+          "minimum_width": 15,
+          "maximum_width": 30,
+          "minimum_depth": 15,
+          "maximum_depth": 30
+        },
+        "density": "low",
+        "mixed_use": false
+      },
+      {
+        "id": "res_midrise",
+        "type": "apartment",
+        "height": {
+          "minimum_floors": 3,
+          "maximum_floors": 6,
+          "floor_height": 3.3
+        },
+        "footprint": {
+          "minimum_width": 20,
+          "maximum_width": 45,
+          "minimum_depth": 20,
+          "maximum_depth": 40
+        },
+        "density": "medium",
+        "mixed_use": true
+      },
+      {
+        "id": "highrise_residential",
+        "type": "tower",
+        "height": {
+          "minimum_floors": 6,
+          "maximum_floors": 12,
+          "floor_height": 3.4
+        },
+        "footprint": {
+          "minimum_width": 25,
+          "maximum_width": 50,
+          "minimum_depth": 25,
+          "maximum_depth": 50
+        },
+        "density": "high",
+        "mixed_use": true
+      },
+      {
+        "id": "office_midrise",
+        "type": "office",
+        "height": {
+          "minimum_floors": 3,
+          "maximum_floors": 8,
+          "floor_height": 3.8
+        },
+        "footprint": {
+          "minimum_width": 30,
+          "maximum_width": 65,
+          "minimum_depth": 28,
+          "maximum_depth": 58
+        },
+        "density": "medium",
+        "mixed_use": false
+      },
+      {
+        "id": "commercial_retail",
+        "type": "retail",
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 4,
+          "floor_height": 4
+        },
+        "footprint": {
+          "minimum_width": 25,
+          "maximum_width": 55,
+          "minimum_depth": 22,
+          "maximum_depth": 48
+        },
+        "density": "medium",
+        "mixed_use": true
+      },
+      {
+        "id": "mixed_use_block",
+        "type": "mixed_use",
+        "height": {
+          "minimum_floors": 4,
+          "maximum_floors": 8,
+          "floor_height": 3.5
+        },
+        "footprint": {
+          "minimum_width": 30,
+          "maximum_width": 65,
+          "minimum_depth": 26,
+          "maximum_depth": 52
+        },
+        "density": "high",
+        "mixed_use": true
+      },
+      {
+        "id": "industrial_facility",
+        "type": "industrial",
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 3,
+          "floor_height": 4.8
+        },
+        "footprint": {
+          "minimum_width": 38,
+          "maximum_width": 80,
+          "minimum_depth": 35,
+          "maximum_depth": 70
+        },
+        "density": "low",
+        "mixed_use": false
+      },
+      {
+        "id": "logistics_warehouse",
+        "type": "warehouse",
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 2,
+          "floor_height": 7.5
+        },
+        "footprint": {
+          "minimum_width": 45,
+          "maximum_width": 95,
+          "minimum_depth": 40,
+          "maximum_depth": 85
+        },
+        "density": "low",
+        "mixed_use": false
+      },
+      {
+        "id": "school_campus",
+        "type": "school",
+        "height": {
+          "minimum_floors": 2,
+          "maximum_floors": 4,
+          "floor_height": 3.8
+        },
+        "footprint": {
+          "minimum_width": 30,
+          "maximum_width": 65,
+          "minimum_depth": 28,
+          "maximum_depth": 52
+        },
+        "density": "medium",
+        "mixed_use": false
+      },
+      {
+        "id": "hospital_complex",
+        "type": "hospital",
+        "height": {
+          "minimum_floors": 4,
+          "maximum_floors": 8,
+          "floor_height": 4
+        },
+        "footprint": {
+          "minimum_width": 38,
+          "maximum_width": 75,
+          "minimum_depth": 32,
+          "maximum_depth": 60
+        },
+        "density": "medium",
+        "mixed_use": false
+      },
+      {
+        "id": "civic_government",
+        "type": "government",
+        "height": {
+          "minimum_floors": 2,
+          "maximum_floors": 6,
+          "floor_height": 4.2
+        },
+        "footprint": {
+          "minimum_width": 32,
+          "maximum_width": 75,
+          "minimum_depth": 28,
+          "maximum_depth": 55
+        },
+        "density": "medium",
+        "mixed_use": false
+      },
+      {
+        "id": "community_hub",
+        "type": "community",
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 3,
+          "floor_height": 3.8
+        },
+        "footprint": {
+          "minimum_width": 18,
+          "maximum_width": 35,
+          "minimum_depth": 16,
+          "maximum_depth": 30
+        },
+        "density": "low",
+        "mixed_use": false
+      },
+      {
+        "id": "parking_structure",
+        "type": "parking",
+        "height": {
+          "minimum_floors": 2,
+          "maximum_floors": 5,
+          "floor_height": 3
+        },
+        "footprint": {
+          "minimum_width": 28,
+          "maximum_width": 52,
+          "minimum_depth": 28,
+          "maximum_depth": 52
+        },
+        "density": "medium",
+        "mixed_use": false
+      },
+      {
+        "id": "utility_substation",
+        "type": "utility",
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 2,
+          "floor_height": 4.5
+        },
+        "footprint": {
+          "minimum_width": 15,
+          "maximum_width": 28,
+          "minimum_depth": 15,
+          "maximum_depth": 28
+        },
+        "density": "low",
+        "mixed_use": false
+      }
+    ],
+    "generation": {
+      "distribution": "density_weighted",
+      "placement": "plot_based",
+      "seed": 307333,
+      "maximum_buildings_per_block": 14
+    },
+    "orientation": {
+      "mode": "grid_aligned",
+      "preferred_angle": 45,
+      "variation": 5
+    },
+    "spacing": {
+      "minimum_building_gap": 6,
+      "maximum_building_gap": 18,
+      "minimum_front_setback": 4,
+      "minimum_side_setback": 2,
+      "minimum_rear_setback": 4
+    },
+    "sustainability": {
+      "rooftop_solar_allowed": true,
+      "rooftop_solar_required": true,
+      "solar_coverage_target": 0.75,
+      "green_roof_target": 0.25,
+      "green_wall_target": 0.1,
+      "rainwater_collection": true,
+      "passive_cooling": true,
+      "natural_ventilation": true,
+      "energy_efficiency": "high_efficiency"
+    }
+  },
+  "transport": {
+    "mode_share": {
+      "walking": 0.3,
+      "cycling": 0.25,
+      "public_transport": 0.3,
+      "private_vehicle": 0.12,
+      "other": 0.03
+    },
+    "public_transport": {
+      "enabled": true,
+      "modes": [
+        "bus",
+        "brt"
+      ],
+      "coverage": {
+        "maximum_walk_distance": 350,
+        "minimum_population_coverage": 0.92
+      },
+      "stops": {
+        "minimum_spacing": 250,
+        "maximum_spacing": 550
+      },
+      "priority": "high"
+    },
+    "walking": {
+      "enabled": true,
+      "minimum_sidewalk_width": 3,
+      "maximum_distance_to_daily_services": 350,
+      "pedestrian_priority_zones": true,
+      "traffic_calming": true,
+      "shade_required": true,
+      "universal_access": true
+    },
+    "cycling": {
+      "enabled": true,
+      "minimum_lane_width": 2.5,
+      "separated_from_traffic": true,
+      "maximum_distance_to_cycle_network": 200,
+      "bike_parking": true
+    },
+    "roads": {
+      "private_vehicle_priority": "low",
+      "traffic_calming": true,
+      "low_emission_zones": true,
+      "freight_routes": true,
+      "emergency_route_access": true
+    },
+    "parking": {
+      "strategy": "reduced",
+      "maximum_surface_parking_ratio": 0.08,
+      "underground_parking_preferred": true,
+      "park_and_ride": true,
+      "ev_charging": true
+    },
+    "accessibility": {
+      "universal_design": true,
+      "maximum_gradient": 4,
+      "accessible_transit": true,
+      "accessible_crossings": true
+    }
+  },
+  "water": {
+    "supply": {
+      "sources": [
+        "surface_water",
+        "rainwater",
+        "recycled_water"
+      ],
+      "daily_capacity": 320000,
+      "reliability": "high",
+      "groundwater_recharge": true
+    },
+    "distribution": {
+      "potable_network": true,
+      "non_potable_network": true,
+      "district_metering": true,
+      "leakage_target": 0.05,
+      "storage_required": true
+    },
+    "consumption": {
+      "target_per_capita_daily": 130,
+      "maximum_per_capita_daily": 160,
+      "industrial_reuse_required": true,
+      "greywater_reuse": true
+    },
+    "stormwater": {
+      "strategy": "sustainable_drainage",
+      "retention_required": true,
+      "infiltration_required": true,
+      "permeable_surface_target": 0.45,
+      "rain_gardens": true,
+      "bioswales": true,
+      "retention_ponds": true,
+      "flood_protection_level": "high"
+    },
+    "wastewater": {
+      "treatment": "hybrid",
+      "reuse_target": 0.75,
+      "treated_water_uses": [
+        "irrigation",
+        "industrial",
+        "toilet_flushing"
+      ],
+      "sewage_treatment_required": true
+    },
+    "conservation": {
+      "rainwater_harvesting": true,
+      "water_efficient_landscaping": true,
+      "native_vegetation_preferred": true,
+      "irrigation_efficiency_target": 0.88,
+      "water_reuse_target": 0.75
+    }
+  },
+  "energy_zones": {
+    "generation": {
+      "sources": [
+        "solar",
+        "grid",
+        "biomass"
+      ],
+      "renewable_target": 0.85,
+      "solar": {
+        "preferred": true,
+        "minimum_capacity_mw": 200,
+        "maximum_capacity_mw": 400,
+        "rooftop_generation": true,
+        "ground_mounted_generation": true
+      },
+      "wind": {
+        "preferred": false,
+        "minimum_capacity_mw": 10,
+        "maximum_capacity_mw": 30
+      }
+    },
+    "storage": {
+      "enabled": true,
+      "technologies": [
+        "battery",
+        "thermal"
+      ],
+      "minimum_capacity_mwh": 250,
+      "maximum_capacity_mwh": 600,
+      "distributed_storage": true
+    },
+    "distribution": {
+      "grid_connected": true,
+      "microgrids": true,
+      "smart_grid": true,
+      "district_energy": true,
+      "maximum_transmission_loss": 0.04,
+      "backup_generation": true
+    },
+    "zoning": {
+      "renewable_zones": [
+        {
+          "type": "rooftop_solar",
+          "priority": "high",
+          "minimum_area": 0
+        },
+        {
+          "type": "solar_farm",
+          "priority": "high",
+          "minimum_area": 45000
+        }
+      ],
+      "utility_zones": [
+        "substation",
+        "battery_storage",
+        "charging_hub",
+        "district_energy"
+      ],
+      "avoid_residential": true,
+      "avoid_water": true,
+      "avoid_protected_land": true
+    }
+  },
+  "vegetation": {
+    "green_space": {
+      "minimum_ratio": 0.35,
+      "target_ratio": 0.42,
+      "types": [
+        "park",
+        "forest",
+        "green_corridor",
+        "community_garden",
+        "street_green"
+      ],
+      "connectivity_required": true,
+      "maximum_distance_to_green_space": 200
+    },
+    "trees": {
+      "canopy_target": 0.38,
+      "minimum_tree_density": 85,
+      "street_tree_spacing": 8,
+      "native_species_preferred": true,
+      "shade_priority": true,
+      "mature_canopy_required": true
+    },
+    "planting": {
+      "strategy": "native_ecology",
+      "native_species_only": false,
+      "drought_tolerant_preferred": true,
+      "water_efficient": true,
+      "green_roofs": true,
+      "green_walls": true,
+      "rain_gardens": true
+    },
+    "biodiversity": {
+      "priority": "high",
+      "wildlife_corridors": true,
+      "habitat_zones": true,
+      "protected_natural_areas": true,
+      "minimum_habitat_ratio": 0.15,
+      "native_species_target": 0.85
+    },
+    "generation": {
+      "distribution": "density_weighted",
+      "density": 80,
+      "seed": 307333,
+      "terrain_adaptation": true,
+      "water_adaptation": true,
+      "avoid_buildings": true,
+      "avoid_roads": true
+    }
+  },
+  "environment": {
+    "air_quality": {
+      "target": "excellent",
+      "pollution_control": true,
+      "green_buffers": true,
+      "industrial_separation": true
+    },
+    "noise": {
+      "control_required": true,
+      "maximum_daytime_db": 52,
+      "maximum_nighttime_db": 40,
+      "quiet_zones": true,
+      "noise_buffers": true
+    },
+    "climate_resilience": {
+      "priority": "high",
+      "heat_resilience": true,
+      "flood_resilience": true,
+      "drought_resilience": true,
+      "storm_resilience": true,
+      "sea_level_rise_resilience": false,
+      "maximum_urban_heat_island_intensity": 2
+    },
+    "pollution": {
+      "air": true,
+      "water": true,
+      "soil": true,
+      "light": true,
+      "industrial_emission_controls": true,
+      "waste_management": true
+    },
+    "natural_resources": {
+      "protected_areas": true,
+      "resource_efficiency": "high_efficiency",
+      "soil_protection": true,
+      "groundwater_protection": true,
+      "wetland_protection": true,
+      "deforestation_avoidance": true
+    }
+  },
+  "sustainability": {
+    "energy": {
+      "renewable_share_target": 0.85,
+      "energy_efficiency_target": 0.45,
+      "grid_dependency_target": 0.15,
+      "energy_storage_target": 0.3,
+      "net_zero_target": true
+    },
+    "transport": {
+      "sustainable_mode_share": 0.85,
+      "maximum_average_commute_distance": 4000,
+      "maximum_average_commute_time": 20,
+      "vehicle_emission_target": 0
+    },
+    "water": {
+      "water_reuse_target": 0.75,
+      "water_loss_target": 0.05,
+      "rainwater_capture_target": 0.6,
+      "groundwater_recharge_target": 0.25
+    },
+    "land": {
+      "green_space_target": 0.42,
+      "built_land_target": 0.45,
+      "protected_land_target": 0.13,
+      "permeable_surface_target": 0.5
+    },
+    "environment": {
+      "carbon_emission_target": 350,
+      "air_quality_target": "excellent",
+      "urban_heat_reduction_target": 3.5,
+      "biodiversity_target": 0.4
+    },
+    "resource_efficiency": {
+      "waste_recycling_target": 0.85,
+      "waste_to_landfill_target": 0.03,
+      "material_reuse_target": 0.4,
+      "circular_economy_target": 0.7
+    }
+  },
+  "generation": {
+    "seed": 307333,
+    "deterministic": true,
+    "detail_level": "high",
+    "terrain_detail": "medium",
+    "building_detail": "medium",
+    "vegetation_detail": "high",
+    "road_detail": "high",
+    "randomness": 0.1,
+    "lod": {
+      "enabled": true,
+      "distances": [
+        100,
+        300,
+        800,
+        2000
+      ]
+    },
+    "coordinate_precision": 0.1
+  }
+}

@@ -1,0 +1,3192 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "city": {
+    "id": "oslo_norway",
+    "name": "Oslo",
+    "location": {
+      "country": "Norway",
+      "region": "Østlandet",
+      "latitude": 59.9139,
+      "longitude": 10.7522
+    },
+    "population": {
+      "target": 700000,
+      "current": 698000,
+      "growth_rate": 0.012
+    },
+    "dimensions": {
+      "width": 6000,
+      "depth": 6000
+    },
+    "coordinate_system": {
+      "units": "meters",
+      "origin": [
+        0,
+        0
+      ],
+      "x_axis": "east",
+      "z_axis": "north"
+    },
+    "planning": {
+      "development_model": "hybrid",
+      "density_model": "transit_oriented",
+      "primary_orientation": 15,
+      "urban_growth_direction": "north",
+      "centrality": [
+        3000,
+        1800
+      ]
+    }
+  },
+  "terrain": {
+    "type": "coastal",
+    "elevation": {
+      "minimum": 0,
+      "maximum": 350,
+      "sea_level": 0,
+      "distribution": "north_high"
+    },
+    "slope": {
+      "minimum": 0,
+      "maximum": 35,
+      "preferred_building": 4,
+      "maximum_building": 15,
+      "maximum_road": 10
+    },
+    "roughness": {
+      "level": 0.45,
+      "scale": 600,
+      "octaves": 4,
+      "persistence": 0.5,
+      "lacunarity": 2
+    },
+    "hydrology": {
+      "drainage_pattern": "dendritic",
+      "water_flow_direction": 180,
+      "flood_risk": "low",
+      "flood_plain": false,
+      "retention_required": true,
+      "natural_drainage": true
+    },
+    "soil": {
+      "type": "clay_loam",
+      "stability": "good",
+      "drainage": "good",
+      "bearing_capacity": 220
+    },
+    "buildability": {
+      "minimum_buildable_ratio": 0.55,
+      "preferred_slope": 5,
+      "maximum_slope": 15,
+      "exclude_floodplains": true,
+      "exclude_water_bodies": true,
+      "exclude_unstable_soil": true,
+      "terracing_allowed": true
+    },
+    "generation": {
+      "method": "noise",
+      "resolution": 257,
+      "height_scale": 45,
+      "seed": 599139,
+      "noise": {
+        "scale": 600,
+        "octaves": 4,
+        "persistence": 0.5,
+        "lacunarity": 2
+      }
+    }
+  },
+  "climate": {
+    "classification": "temperate",
+    "temperature": {
+      "annual_average": 6.8,
+      "minimum": -18,
+      "maximum": 30,
+      "summer_average": 17.5,
+      "winter_average": -3,
+      "heatwave_threshold": 27,
+      "coldwave_threshold": -12
+    },
+    "precipitation": {
+      "annual_mm": 810,
+      "pattern": "seasonal",
+      "wet_season": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "dry_season": [
+        2,
+        3,
+        4
+      ],
+      "peak_monthly_mm": 95,
+      "rainfall_intensity": "moderate"
+    },
+    "humidity": {
+      "annual_average": 75,
+      "summer_average": 65,
+      "winter_average": 82
+    },
+    "solar": {
+      "average_irradiance": 3.2,
+      "peak_sun_hours": 3.8,
+      "annual_solar_energy": 1150,
+      "preferred_panel_orientation": 180,
+      "seasonal_variation": 0.65
+    },
+    "wind": {
+      "average_speed": 3.8,
+      "maximum_speed": 24,
+      "dominant_direction": 210,
+      "seasonal_directions": [
+        {
+          "season": "winter",
+          "direction": 210,
+          "speed": 4.5
+        },
+        {
+          "season": "summer",
+          "direction": 190,
+          "speed": 3.1
+        }
+      ],
+      "energy_potential": "moderate"
+    },
+    "extreme_weather": {
+      "heatwaves": "low",
+      "flooding": "moderate",
+      "storms": "moderate",
+      "drought": "low",
+      "cyclones": "none"
+    },
+    "seasons": [
+      {
+        "name": "spring",
+        "months": [
+          3,
+          4,
+          5
+        ],
+        "average_temperature": 6,
+        "precipitation_mm": 160,
+        "solar_factor": 1,
+        "wind_factor": 1
+      },
+      {
+        "name": "summer",
+        "months": [
+          6,
+          7,
+          8
+        ],
+        "average_temperature": 17.5,
+        "precipitation_mm": 210,
+        "solar_factor": 1.5,
+        "wind_factor": 0.8
+      },
+      {
+        "name": "autumn",
+        "months": [
+          9,
+          10,
+          11
+        ],
+        "average_temperature": 6.5,
+        "precipitation_mm": 250,
+        "solar_factor": 0.7,
+        "wind_factor": 1.1
+      },
+      {
+        "name": "winter",
+        "months": [
+          12,
+          1,
+          2
+        ],
+        "average_temperature": -3,
+        "precipitation_mm": 190,
+        "solar_factor": 0.3,
+        "wind_factor": 1.2
+      }
+    ]
+  },
+  "land_use": {
+    "categories": [
+      {
+        "id": "res",
+        "name": "Residential",
+        "type": "residential",
+        "target_ratio": 0.32,
+        "color": "#4CAF50"
+      },
+      {
+        "id": "green",
+        "name": "Forest & Parks",
+        "type": "green",
+        "target_ratio": 0.35,
+        "color": "#2E7D32"
+      },
+      {
+        "id": "comm",
+        "name": "Commercial & Civic",
+        "type": "commercial",
+        "target_ratio": 0.15,
+        "color": "#2196F3"
+      },
+      {
+        "id": "ind",
+        "name": "Logistics & Energy",
+        "type": "industrial",
+        "target_ratio": 0.08,
+        "color": "#FF9800"
+      },
+      {
+        "id": "water",
+        "name": "Fjord & Harbor",
+        "type": "water",
+        "target_ratio": 0.1,
+        "color": "#0288D1"
+      }
+    ],
+    "targets": {
+      "residential": 0.32,
+      "green": 0.35,
+      "commercial": 0.15,
+      "industrial": 0.08
+    },
+    "constraints": {
+      "minimum_green_ratio": 0.3,
+      "maximum_industrial_ratio": 0.1
+    },
+    "mixing": {
+      "allowed": true,
+      "preferred_combinations": [
+        [
+          "residential",
+          "commercial"
+        ],
+        [
+          "commercial",
+          "civic"
+        ]
+      ]
+    },
+    "proximity": {
+      "residential_to_green": 300,
+      "residential_to_transit": 400
+    }
+  },
+  "sectors": [
+    {
+      "id": "sentrum_core",
+      "name": "Sentrum & Karl Johans Gate",
+      "type": "civic",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          2600,
+          1600,
+          800,
+          600
+        ]
+      },
+      "population": {
+        "target": 25000,
+        "current": 24000,
+        "daytime_population": 95000,
+        "growth_rate": 0.01
+      },
+      "density": {
+        "population": 120,
+        "floor_area": 3.2,
+        "building_coverage": 0.55,
+        "development_intensity": "high"
+      },
+      "land_use": {
+        "primary": "civic",
+        "secondary": [
+          "commercial",
+          "residential"
+        ],
+        "primary_ratio": 0.5,
+        "secondary_ratio": 0.5
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "government",
+          "retail",
+          "office",
+          "mixed_use"
+        ],
+        "height": {
+          "minimum_floors": 4,
+          "maximum_floors": 9,
+          "preferred_floors": 6
+        },
+        "footprint": {
+          "minimum_width": 25,
+          "maximum_width": 60,
+          "minimum_depth": 25,
+          "maximum_depth": 50
+        },
+        "spacing": {
+          "building_gap": 4,
+          "front_setback": 2,
+          "side_setback": 0,
+          "rear_setback": 4
+        },
+        "coverage": {
+          "maximum": 0.65,
+          "preferred": 0.55
+        },
+        "orientation": {
+          "mode": "road_aligned",
+          "angle": 15,
+          "variation": 5
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 15,
+        "blocks": {
+          "minimum_width": 80,
+          "maximum_width": 160,
+          "minimum_depth": 80,
+          "maximum_depth": 140
+        },
+        "local_roads": {
+          "spacing": 100,
+          "width": 12,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 4
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 15
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.2,
+        "tree_canopy_target": 0.25,
+        "tree_density": 45,
+        "courtyards": true,
+        "green_roofs": true,
+        "green_walls": true,
+        "permeable_surface_target": 0.3
+      },
+      "services": [
+        {
+          "type": "transit_station"
+        },
+        {
+          "type": "library"
+        },
+        {
+          "type": "government"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.5,
+        "district_energy": true,
+        "battery_storage": true
+      },
+      "constraints": {
+        "maximum_slope": 10,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": false,
+        "development_priority": "high"
+      }
+    },
+    {
+      "id": "bjorvika_barcode",
+      "name": "Bjørvika Waterfront & Barcode",
+      "type": "mixed_use",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          3400,
+          1500,
+          900,
+          500
+        ]
+      },
+      "population": {
+        "target": 35000,
+        "current": 33000,
+        "daytime_population": 65000,
+        "growth_rate": 0.02
+      },
+      "density": {
+        "population": 180,
+        "floor_area": 4.5,
+        "building_coverage": 0.48,
+        "development_intensity": "high"
+      },
+      "land_use": {
+        "primary": "mixed",
+        "secondary": [
+          "commercial",
+          "residential"
+        ],
+        "primary_ratio": 0.6,
+        "secondary_ratio": 0.4
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "mixed_use",
+          "office",
+          "tower"
+        ],
+        "height": {
+          "minimum_floors": 6,
+          "maximum_floors": 20,
+          "preferred_floors": 12
+        },
+        "footprint": {
+          "minimum_width": 30,
+          "maximum_width": 70,
+          "minimum_depth": 30,
+          "maximum_depth": 60
+        },
+        "spacing": {
+          "building_gap": 6,
+          "front_setback": 3,
+          "side_setback": 2,
+          "rear_setback": 4
+        },
+        "coverage": {
+          "maximum": 0.55,
+          "preferred": 0.48
+        },
+        "orientation": {
+          "mode": "road_aligned",
+          "angle": 15,
+          "variation": 5
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 15,
+        "blocks": {
+          "minimum_width": 100,
+          "maximum_width": 200,
+          "minimum_depth": 90,
+          "maximum_depth": 150
+        },
+        "local_roads": {
+          "spacing": 120,
+          "width": 14,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 5
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 3
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 12
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.25,
+        "tree_canopy_target": 0.25,
+        "tree_density": 50,
+        "courtyards": true,
+        "green_roofs": true,
+        "green_walls": true,
+        "permeable_surface_target": 0.35
+      },
+      "services": [
+        {
+          "type": "community_center"
+        },
+        {
+          "type": "transit_station"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.6,
+        "district_energy": true,
+        "battery_storage": true
+      },
+      "constraints": {
+        "maximum_slope": 5,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": false,
+        "development_priority": "high"
+      }
+    },
+    {
+      "id": "aker_brygge",
+      "name": "Aker Brygge & Tjuvholmen",
+      "type": "commercial",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          2000,
+          1400,
+          600,
+          500
+        ]
+      },
+      "population": {
+        "target": 18000,
+        "current": 17500,
+        "daytime_population": 40000,
+        "growth_rate": 0.01
+      },
+      "density": {
+        "population": 140,
+        "floor_area": 3.8,
+        "building_coverage": 0.5,
+        "development_intensity": "high"
+      },
+      "land_use": {
+        "primary": "commercial",
+        "secondary": [
+          "residential"
+        ],
+        "primary_ratio": 0.7,
+        "secondary_ratio": 0.3
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "retail",
+          "office",
+          "mixed_use"
+        ],
+        "height": {
+          "minimum_floors": 4,
+          "maximum_floors": 9,
+          "preferred_floors": 6
+        },
+        "footprint": {
+          "minimum_width": 25,
+          "maximum_width": 55,
+          "minimum_depth": 25,
+          "maximum_depth": 50
+        },
+        "spacing": {
+          "building_gap": 5,
+          "front_setback": 2,
+          "side_setback": 2,
+          "rear_setback": 3
+        },
+        "coverage": {
+          "maximum": 0.58,
+          "preferred": 0.5
+        },
+        "orientation": {
+          "mode": "road_aligned",
+          "angle": 0,
+          "variation": 8
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 0,
+        "blocks": {
+          "minimum_width": 90,
+          "maximum_width": 150,
+          "minimum_depth": 80,
+          "maximum_depth": 130
+        },
+        "local_roads": {
+          "spacing": 110,
+          "width": 10,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 4
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 15
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.22,
+        "tree_canopy_target": 0.2,
+        "tree_density": 40,
+        "courtyards": true,
+        "green_roofs": true,
+        "green_walls": true,
+        "permeable_surface_target": 0.3
+      },
+      "services": [
+        {
+          "type": "transit_station"
+        },
+        {
+          "type": "market"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.5,
+        "district_energy": true,
+        "battery_storage": true
+      },
+      "constraints": {
+        "maximum_slope": 5,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": false,
+        "development_priority": "high"
+      }
+    },
+    {
+      "id": "grunerlokka",
+      "name": "Grünerløkka & Vulkan Cultural District",
+      "type": "residential",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          3000,
+          2200,
+          900,
+          800
+        ]
+      },
+      "population": {
+        "target": 65000,
+        "current": 64000,
+        "daytime_population": 45000,
+        "growth_rate": 0.015
+      },
+      "density": {
+        "population": 160,
+        "floor_area": 2.8,
+        "building_coverage": 0.42,
+        "development_intensity": "medium"
+      },
+      "land_use": {
+        "primary": "residential",
+        "secondary": [
+          "commercial",
+          "green"
+        ],
+        "primary_ratio": 0.65,
+        "secondary_ratio": 0.35
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "apartment",
+          "mixed_use",
+          "community"
+        ],
+        "height": {
+          "minimum_floors": 4,
+          "maximum_floors": 6,
+          "preferred_floors": 5
+        },
+        "footprint": {
+          "minimum_width": 20,
+          "maximum_width": 45,
+          "minimum_depth": 20,
+          "maximum_depth": 40
+        },
+        "spacing": {
+          "building_gap": 4,
+          "front_setback": 2,
+          "side_setback": 1,
+          "rear_setback": 4
+        },
+        "coverage": {
+          "maximum": 0.5,
+          "preferred": 0.42
+        },
+        "orientation": {
+          "mode": "road_aligned",
+          "angle": 15,
+          "variation": 5
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 15,
+        "blocks": {
+          "minimum_width": 100,
+          "maximum_width": 180,
+          "minimum_depth": 90,
+          "maximum_depth": 140
+        },
+        "local_roads": {
+          "spacing": 120,
+          "width": 10,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 3
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 12
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.3,
+        "tree_canopy_target": 0.32,
+        "tree_density": 65,
+        "courtyards": true,
+        "green_roofs": true,
+        "green_walls": false,
+        "permeable_surface_target": 0.4
+      },
+      "services": [
+        {
+          "type": "market"
+        },
+        {
+          "type": "park"
+        },
+        {
+          "type": "school"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.55,
+        "district_energy": true,
+        "battery_storage": false
+      },
+      "constraints": {
+        "maximum_slope": 10,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": false,
+        "development_priority": "normal"
+      }
+    },
+    {
+      "id": "frogner_majorstuen",
+      "name": "Frogner & Majorstuen Avenues",
+      "type": "residential",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          1800,
+          2000,
+          1100,
+          900
+        ]
+      },
+      "population": {
+        "target": 75000,
+        "current": 73500,
+        "daytime_population": 40000,
+        "growth_rate": 0.01
+      },
+      "density": {
+        "population": 130,
+        "floor_area": 2.5,
+        "building_coverage": 0.38,
+        "development_intensity": "medium"
+      },
+      "land_use": {
+        "primary": "residential",
+        "secondary": [
+          "commercial"
+        ],
+        "primary_ratio": 0.8,
+        "secondary_ratio": 0.2
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "apartment",
+          "office",
+          "retail"
+        ],
+        "height": {
+          "minimum_floors": 3,
+          "maximum_floors": 6,
+          "preferred_floors": 5
+        },
+        "footprint": {
+          "minimum_width": 22,
+          "maximum_width": 50,
+          "minimum_depth": 22,
+          "maximum_depth": 45
+        },
+        "spacing": {
+          "building_gap": 5,
+          "front_setback": 3,
+          "side_setback": 2,
+          "rear_setback": 5
+        },
+        "coverage": {
+          "maximum": 0.45,
+          "preferred": 0.38
+        },
+        "orientation": {
+          "mode": "road_aligned",
+          "angle": 0,
+          "variation": 5
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 0,
+        "blocks": {
+          "minimum_width": 110,
+          "maximum_width": 200,
+          "minimum_depth": 100,
+          "maximum_depth": 160
+        },
+        "local_roads": {
+          "spacing": 130,
+          "width": 12,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 3.5
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 10
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.35,
+        "tree_canopy_target": 0.35,
+        "tree_density": 70,
+        "courtyards": true,
+        "green_roofs": true,
+        "green_walls": false,
+        "permeable_surface_target": 0.45
+      },
+      "services": [
+        {
+          "type": "transit_station"
+        },
+        {
+          "type": "school"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.6,
+        "district_energy": true,
+        "battery_storage": false
+      },
+      "constraints": {
+        "maximum_slope": 12,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": false,
+        "development_priority": "normal"
+      }
+    },
+    {
+      "id": "vigeland_frognerparken",
+      "name": "Vigeland Park & Frogner Park Green Belt",
+      "type": "park",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          1400,
+          2900,
+          1000,
+          800
+        ]
+      },
+      "population": {
+        "target": 1000,
+        "current": 800,
+        "daytime_population": 25000,
+        "growth_rate": 0
+      },
+      "density": {
+        "population": 2,
+        "floor_area": 0.05,
+        "building_coverage": 0.02,
+        "development_intensity": "low"
+      },
+      "land_use": {
+        "primary": "green",
+        "secondary": [
+          "civic"
+        ],
+        "primary_ratio": 0.95,
+        "secondary_ratio": 0.05
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "community"
+        ],
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 2,
+          "preferred_floors": 1
+        },
+        "footprint": {
+          "minimum_width": 15,
+          "maximum_width": 30,
+          "minimum_depth": 15,
+          "maximum_depth": 30
+        },
+        "spacing": {
+          "building_gap": 20,
+          "front_setback": 10,
+          "side_setback": 10,
+          "rear_setback": 10
+        },
+        "coverage": {
+          "maximum": 0.05,
+          "preferred": 0.02
+        },
+        "orientation": {
+          "mode": "grid_aligned",
+          "angle": 0,
+          "variation": 0
+        }
+      },
+      "street_rules": {
+        "pattern": "organic",
+        "orientation": 0,
+        "blocks": {
+          "minimum_width": 200,
+          "maximum_width": 500,
+          "minimum_depth": 200,
+          "maximum_depth": 400
+        },
+        "local_roads": {
+          "spacing": 300,
+          "width": 6,
+          "lanes": 1
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 3
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 3
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 8
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.85,
+        "tree_canopy_target": 0.5,
+        "tree_density": 120,
+        "courtyards": false,
+        "green_roofs": false,
+        "green_walls": false,
+        "permeable_surface_target": 0.9
+      },
+      "services": [
+        {
+          "type": "park"
+        },
+        {
+          "type": "recreation_center"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": false,
+        "solar_coverage_target": 0.1,
+        "district_energy": true,
+        "battery_storage": false
+      },
+      "constraints": {
+        "maximum_slope": 15,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": true,
+        "development_priority": "low"
+      }
+    },
+    {
+      "id": "holmenkollen_nordmarka",
+      "name": "Holmenkollen & Nordmarka Forest Foothills",
+      "type": "forest",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          1000,
+          3900,
+          2200,
+          1800
+        ]
+      },
+      "population": {
+        "target": 30000,
+        "current": 29000,
+        "daytime_population": 15000,
+        "growth_rate": 0.005
+      },
+      "density": {
+        "population": 15,
+        "floor_area": 0.3,
+        "building_coverage": 0.12,
+        "development_intensity": "low"
+      },
+      "land_use": {
+        "primary": "green",
+        "secondary": [
+          "residential"
+        ],
+        "primary_ratio": 0.7,
+        "secondary_ratio": 0.3
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "house",
+          "community"
+        ],
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 3,
+          "preferred_floors": 2
+        },
+        "footprint": {
+          "minimum_width": 15,
+          "maximum_width": 35,
+          "minimum_depth": 15,
+          "maximum_depth": 30
+        },
+        "spacing": {
+          "building_gap": 10,
+          "front_setback": 6,
+          "side_setback": 5,
+          "rear_setback": 6
+        },
+        "coverage": {
+          "maximum": 0.2,
+          "preferred": 0.12
+        },
+        "orientation": {
+          "mode": "road_aligned",
+          "angle": 0,
+          "variation": 20
+        }
+      },
+      "street_rules": {
+        "pattern": "organic",
+        "orientation": 0,
+        "blocks": {
+          "minimum_width": 150,
+          "maximum_width": 350,
+          "minimum_depth": 120,
+          "maximum_depth": 250
+        },
+        "local_roads": {
+          "spacing": 200,
+          "width": 8,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 2
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 10
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.7,
+        "tree_canopy_target": 0.6,
+        "tree_density": 150,
+        "courtyards": false,
+        "green_roofs": true,
+        "green_walls": false,
+        "permeable_surface_target": 0.8
+      },
+      "services": [
+        {
+          "type": "recreation_center"
+        },
+        {
+          "type": "transit_station"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.6,
+        "district_energy": false,
+        "battery_storage": true
+      },
+      "constraints": {
+        "maximum_slope": 25,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": true,
+        "development_priority": "low"
+      }
+    },
+    {
+      "id": "okern_hasle",
+      "name": "Økern & Hasle Transit Hub",
+      "type": "mixed_use",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          4000,
+          2700,
+          1200,
+          1000
+        ]
+      },
+      "population": {
+        "target": 55000,
+        "current": 52000,
+        "daytime_population": 40000,
+        "growth_rate": 0.025
+      },
+      "density": {
+        "population": 150,
+        "floor_area": 3.5,
+        "building_coverage": 0.45,
+        "development_intensity": "high"
+      },
+      "land_use": {
+        "primary": "mixed",
+        "secondary": [
+          "commercial",
+          "residential"
+        ],
+        "primary_ratio": 0.55,
+        "secondary_ratio": 0.45
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "mixed_use",
+          "office",
+          "tower",
+          "school"
+        ],
+        "height": {
+          "minimum_floors": 5,
+          "maximum_floors": 16,
+          "preferred_floors": 10
+        },
+        "footprint": {
+          "minimum_width": 28,
+          "maximum_width": 65,
+          "minimum_depth": 28,
+          "maximum_depth": 55
+        },
+        "spacing": {
+          "building_gap": 6,
+          "front_setback": 3,
+          "side_setback": 2,
+          "rear_setback": 4
+        },
+        "coverage": {
+          "maximum": 0.52,
+          "preferred": 0.45
+        },
+        "orientation": {
+          "mode": "road_aligned",
+          "angle": 0,
+          "variation": 5
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 0,
+        "blocks": {
+          "minimum_width": 100,
+          "maximum_width": 200,
+          "minimum_depth": 90,
+          "maximum_depth": 160
+        },
+        "local_roads": {
+          "spacing": 130,
+          "width": 12,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 4
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 12
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.28,
+        "tree_canopy_target": 0.28,
+        "tree_density": 55,
+        "courtyards": true,
+        "green_roofs": true,
+        "green_walls": true,
+        "permeable_surface_target": 0.38
+      },
+      "services": [
+        {
+          "type": "transit_station"
+        },
+        {
+          "type": "market"
+        },
+        {
+          "type": "school"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.65,
+        "district_energy": true,
+        "battery_storage": true
+      },
+      "constraints": {
+        "maximum_slope": 8,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": false,
+        "development_priority": "high"
+      }
+    },
+    {
+      "id": "alnabru_freight",
+      "name": "Alnabru Freight & Industrial Corridor",
+      "type": "industrial",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          4400,
+          1600,
+          1300,
+          900
+        ]
+      },
+      "population": {
+        "target": 5000,
+        "current": 4500,
+        "daytime_population": 35000,
+        "growth_rate": 0.005
+      },
+      "density": {
+        "population": 10,
+        "floor_area": 1.2,
+        "building_coverage": 0.4,
+        "development_intensity": "medium"
+      },
+      "land_use": {
+        "primary": "industrial",
+        "secondary": [
+          "transport"
+        ],
+        "primary_ratio": 0.8,
+        "secondary_ratio": 0.2
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "industrial",
+          "warehouse",
+          "utility"
+        ],
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 4,
+          "preferred_floors": 2
+        },
+        "footprint": {
+          "minimum_width": 40,
+          "maximum_width": 110,
+          "minimum_depth": 40,
+          "maximum_depth": 90
+        },
+        "spacing": {
+          "building_gap": 8,
+          "front_setback": 6,
+          "side_setback": 4,
+          "rear_setback": 6
+        },
+        "coverage": {
+          "maximum": 0.5,
+          "preferred": 0.4
+        },
+        "orientation": {
+          "mode": "road_aligned",
+          "angle": 0,
+          "variation": 5
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 0,
+        "blocks": {
+          "minimum_width": 150,
+          "maximum_width": 300,
+          "minimum_depth": 120,
+          "maximum_depth": 220
+        },
+        "local_roads": {
+          "spacing": 180,
+          "width": 16,
+          "lanes": 4
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 2
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 20
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.2,
+        "tree_canopy_target": 0.15,
+        "tree_density": 30,
+        "courtyards": false,
+        "green_roofs": true,
+        "green_walls": false,
+        "permeable_surface_target": 0.3
+      },
+      "services": [
+        {
+          "type": "transit_station"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.75,
+        "district_energy": true,
+        "battery_storage": true
+      },
+      "constraints": {
+        "maximum_slope": 6,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": false,
+        "development_priority": "normal"
+      }
+    },
+    {
+      "id": "ulleval_blindern",
+      "name": "University of Oslo Blindern & Ullevål Campus",
+      "type": "civic",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          2200,
+          3000,
+          1100,
+          800
+        ]
+      },
+      "population": {
+        "target": 40000,
+        "current": 38000,
+        "daytime_population": 60000,
+        "growth_rate": 0.01
+      },
+      "density": {
+        "population": 90,
+        "floor_area": 2.2,
+        "building_coverage": 0.35,
+        "development_intensity": "medium"
+      },
+      "land_use": {
+        "primary": "civic",
+        "secondary": [
+          "residential"
+        ],
+        "primary_ratio": 0.75,
+        "secondary_ratio": 0.25
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "school",
+          "hospital",
+          "government",
+          "apartment"
+        ],
+        "height": {
+          "minimum_floors": 3,
+          "maximum_floors": 8,
+          "preferred_floors": 5
+        },
+        "footprint": {
+          "minimum_width": 30,
+          "maximum_width": 75,
+          "minimum_depth": 30,
+          "maximum_depth": 60
+        },
+        "spacing": {
+          "building_gap": 8,
+          "front_setback": 5,
+          "side_setback": 4,
+          "rear_setback": 5
+        },
+        "coverage": {
+          "maximum": 0.42,
+          "preferred": 0.35
+        },
+        "orientation": {
+          "mode": "road_aligned",
+          "angle": 0,
+          "variation": 5
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 0,
+        "blocks": {
+          "minimum_width": 120,
+          "maximum_width": 220,
+          "minimum_depth": 100,
+          "maximum_depth": 180
+        },
+        "local_roads": {
+          "spacing": 140,
+          "width": 10,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 4
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 3
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 12
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.35,
+        "tree_canopy_target": 0.35,
+        "tree_density": 80,
+        "courtyards": true,
+        "green_roofs": true,
+        "green_walls": true,
+        "permeable_surface_target": 0.45
+      },
+      "services": [
+        {
+          "type": "school"
+        },
+        {
+          "type": "hospital"
+        },
+        {
+          "type": "transit_station"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.65,
+        "district_energy": true,
+        "battery_storage": true
+      },
+      "constraints": {
+        "maximum_slope": 10,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": false,
+        "development_priority": "high"
+      }
+    },
+    {
+      "id": "grefsen_kjelsas",
+      "name": "Grefsen & Kjelsås Northern Slopes",
+      "type": "residential",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          3300,
+          3700,
+          1100,
+          1000
+        ]
+      },
+      "population": {
+        "target": 42000,
+        "current": 41000,
+        "daytime_population": 22000,
+        "growth_rate": 0.01
+      },
+      "density": {
+        "population": 85,
+        "floor_area": 1.6,
+        "building_coverage": 0.3,
+        "development_intensity": "low"
+      },
+      "land_use": {
+        "primary": "residential",
+        "secondary": [
+          "green"
+        ],
+        "primary_ratio": 0.75,
+        "secondary_ratio": 0.25
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "house",
+          "apartment"
+        ],
+        "height": {
+          "minimum_floors": 2,
+          "maximum_floors": 4,
+          "preferred_floors": 3
+        },
+        "footprint": {
+          "minimum_width": 18,
+          "maximum_width": 40,
+          "minimum_depth": 18,
+          "maximum_depth": 35
+        },
+        "spacing": {
+          "building_gap": 6,
+          "front_setback": 4,
+          "side_setback": 3,
+          "rear_setback": 4
+        },
+        "coverage": {
+          "maximum": 0.35,
+          "preferred": 0.3
+        },
+        "orientation": {
+          "mode": "road_aligned",
+          "angle": 0,
+          "variation": 10
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 0,
+        "blocks": {
+          "minimum_width": 120,
+          "maximum_width": 200,
+          "minimum_depth": 100,
+          "maximum_depth": 160
+        },
+        "local_roads": {
+          "spacing": 140,
+          "width": 9,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 2.5
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 12
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.4,
+        "tree_canopy_target": 0.4,
+        "tree_density": 85,
+        "courtyards": false,
+        "green_roofs": true,
+        "green_walls": false,
+        "permeable_surface_target": 0.5
+      },
+      "services": [
+        {
+          "type": "school"
+        },
+        {
+          "type": "park"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.6,
+        "district_energy": true,
+        "battery_storage": false
+      },
+      "constraints": {
+        "maximum_slope": 18,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": false,
+        "development_priority": "normal"
+      }
+    },
+    {
+      "id": "klemetsrud_energy",
+      "name": "Klemetsrud Waste-to-Energy District Plant",
+      "type": "energy",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          4800,
+          800,
+          800,
+          700
+        ]
+      },
+      "population": {
+        "target": 2000,
+        "current": 1800,
+        "daytime_population": 8000,
+        "growth_rate": 0
+      },
+      "density": {
+        "population": 5,
+        "floor_area": 0.8,
+        "building_coverage": 0.25,
+        "development_intensity": "low"
+      },
+      "land_use": {
+        "primary": "energy",
+        "secondary": [
+          "industrial"
+        ],
+        "primary_ratio": 0.85,
+        "secondary_ratio": 0.15
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "utility",
+          "industrial"
+        ],
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 4,
+          "preferred_floors": 2
+        },
+        "footprint": {
+          "minimum_width": 30,
+          "maximum_width": 90,
+          "minimum_depth": 30,
+          "maximum_depth": 80
+        },
+        "spacing": {
+          "building_gap": 10,
+          "front_setback": 8,
+          "side_setback": 6,
+          "rear_setback": 8
+        },
+        "coverage": {
+          "maximum": 0.35,
+          "preferred": 0.25
+        },
+        "orientation": {
+          "mode": "road_aligned",
+          "angle": 0,
+          "variation": 0
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 0,
+        "blocks": {
+          "minimum_width": 160,
+          "maximum_width": 300,
+          "minimum_depth": 140,
+          "maximum_depth": 250
+        },
+        "local_roads": {
+          "spacing": 200,
+          "width": 14,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 2
+        },
+        "cycling": {
+          "enabled": false,
+          "width": 0
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 20
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.3,
+        "tree_canopy_target": 0.25,
+        "tree_density": 50,
+        "courtyards": false,
+        "green_roofs": true,
+        "green_walls": false,
+        "permeable_surface_target": 0.4
+      },
+      "services": [
+        {
+          "type": "government"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.7,
+        "district_energy": true,
+        "battery_storage": true
+      },
+      "constraints": {
+        "maximum_slope": 12,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": false,
+        "development_priority": "high"
+      }
+    },
+    {
+      "id": "oslofjord_marine",
+      "name": "Inner Oslofjord Marine & Harbor Sector",
+      "type": "transport",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          2000,
+          400,
+          2000,
+          900
+        ]
+      },
+      "population": {
+        "target": 500,
+        "current": 400,
+        "daytime_population": 12000,
+        "growth_rate": 0
+      },
+      "density": {
+        "population": 1,
+        "floor_area": 0.1,
+        "building_coverage": 0.05,
+        "development_intensity": "low"
+      },
+      "land_use": {
+        "primary": "transport",
+        "secondary": [
+          "green"
+        ],
+        "primary_ratio": 0.8,
+        "secondary_ratio": 0.2
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "utility",
+          "community"
+        ],
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 2,
+          "preferred_floors": 1
+        },
+        "footprint": {
+          "minimum_width": 15,
+          "maximum_width": 40,
+          "minimum_depth": 15,
+          "maximum_depth": 30
+        },
+        "spacing": {
+          "building_gap": 15,
+          "front_setback": 10,
+          "side_setback": 5,
+          "rear_setback": 10
+        },
+        "coverage": {
+          "maximum": 0.1,
+          "preferred": 0.05
+        },
+        "orientation": {
+          "mode": "road_aligned",
+          "angle": 0,
+          "variation": 0
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 0,
+        "blocks": {
+          "minimum_width": 200,
+          "maximum_width": 400,
+          "minimum_depth": 150,
+          "maximum_depth": 300
+        },
+        "local_roads": {
+          "spacing": 250,
+          "width": 10,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 3
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 15
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.4,
+        "tree_canopy_target": 0.2,
+        "tree_density": 40,
+        "courtyards": false,
+        "green_roofs": false,
+        "green_walls": false,
+        "permeable_surface_target": 0.6
+      },
+      "services": [
+        {
+          "type": "transit_station"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.4,
+        "district_energy": true,
+        "battery_storage": true
+      },
+      "constraints": {
+        "maximum_slope": 5,
+        "avoid_floodplain": false,
+        "avoid_water": false,
+        "protected": false,
+        "development_priority": "normal"
+      }
+    },
+    {
+      "id": "lysaker_western",
+      "name": "Lysaker Western Tech & Office Corridor",
+      "type": "commercial",
+      "geometry": {
+        "type": "rectangle",
+        "bounds": [
+          600,
+          1600,
+          1100,
+          900
+        ]
+      },
+      "population": {
+        "target": 20000,
+        "current": 19500,
+        "daytime_population": 45000,
+        "growth_rate": 0.015
+      },
+      "density": {
+        "population": 80,
+        "floor_area": 3,
+        "building_coverage": 0.44,
+        "development_intensity": "high"
+      },
+      "land_use": {
+        "primary": "commercial",
+        "secondary": [
+          "residential"
+        ],
+        "primary_ratio": 0.75,
+        "secondary_ratio": 0.25
+      },
+      "building_rules": {
+        "allowed_archetypes": [
+          "office",
+          "mixed_use",
+          "parking"
+        ],
+        "height": {
+          "minimum_floors": 4,
+          "maximum_floors": 10,
+          "preferred_floors": 7
+        },
+        "footprint": {
+          "minimum_width": 28,
+          "maximum_width": 65,
+          "minimum_depth": 28,
+          "maximum_depth": 55
+        },
+        "spacing": {
+          "building_gap": 6,
+          "front_setback": 4,
+          "side_setback": 3,
+          "rear_setback": 4
+        },
+        "coverage": {
+          "maximum": 0.5,
+          "preferred": 0.44
+        },
+        "orientation": {
+          "mode": "road_aligned",
+          "angle": 0,
+          "variation": 5
+        }
+      },
+      "street_rules": {
+        "pattern": "grid",
+        "orientation": 0,
+        "blocks": {
+          "minimum_width": 110,
+          "maximum_width": 190,
+          "minimum_depth": 90,
+          "maximum_depth": 150
+        },
+        "local_roads": {
+          "spacing": 130,
+          "width": 12,
+          "lanes": 2
+        },
+        "sidewalk": {
+          "enabled": true,
+          "width": 3.5
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 12
+        }
+      },
+      "green_rules": {
+        "minimum_ratio": 0.25,
+        "tree_canopy_target": 0.25,
+        "tree_density": 50,
+        "courtyards": true,
+        "green_roofs": true,
+        "green_walls": true,
+        "permeable_surface_target": 0.35
+      },
+      "services": [
+        {
+          "type": "transit_station"
+        }
+      ],
+      "energy": {
+        "rooftop_solar": true,
+        "solar_coverage_target": 0.6,
+        "district_energy": true,
+        "battery_storage": true
+      },
+      "constraints": {
+        "maximum_slope": 10,
+        "avoid_floodplain": true,
+        "avoid_water": true,
+        "protected": false,
+        "development_priority": "high"
+      }
+    }
+  ],
+  "road_graph": {
+    "nodes": [
+      {
+        "id": "n_sentrum",
+        "position": [
+          3000,
+          1900
+        ],
+        "type": "intersection",
+        "capacity": 4
+      },
+      {
+        "id": "n_bjorvika",
+        "position": [
+          3800,
+          1750
+        ],
+        "type": "intersection",
+        "capacity": 4
+      },
+      {
+        "id": "n_aker_brygge",
+        "position": [
+          2300,
+          1650
+        ],
+        "type": "intersection",
+        "capacity": 4
+      },
+      {
+        "id": "n_grunerlokka",
+        "position": [
+          3450,
+          2600
+        ],
+        "type": "intersection",
+        "capacity": 4
+      },
+      {
+        "id": "n_frogner",
+        "position": [
+          2350,
+          2450
+        ],
+        "type": "intersection",
+        "capacity": 4
+      },
+      {
+        "id": "n_vigeland",
+        "position": [
+          1900,
+          3300
+        ],
+        "type": "intersection",
+        "capacity": 3
+      },
+      {
+        "id": "n_holmenkollen",
+        "position": [
+          2100,
+          4800
+        ],
+        "type": "intersection",
+        "capacity": 3
+      },
+      {
+        "id": "n_okern",
+        "position": [
+          4600,
+          3200
+        ],
+        "type": "intersection",
+        "capacity": 4
+      },
+      {
+        "id": "n_alnabru",
+        "position": [
+          5050,
+          2050
+        ],
+        "type": "intersection",
+        "capacity": 4
+      },
+      {
+        "id": "n_ulleval",
+        "position": [
+          2750,
+          3400
+        ],
+        "type": "intersection",
+        "capacity": 4
+      },
+      {
+        "id": "n_grefsen",
+        "position": [
+          3850,
+          4200
+        ],
+        "type": "intersection",
+        "capacity": 4
+      },
+      {
+        "id": "n_klemetsrud",
+        "position": [
+          5200,
+          1150
+        ],
+        "type": "intersection",
+        "capacity": 3
+      },
+      {
+        "id": "n_lysaker",
+        "position": [
+          1150,
+          2050
+        ],
+        "type": "intersection",
+        "capacity": 4
+      }
+    ],
+    "edges": [
+      {
+        "id": "e_r1_1",
+        "from": "n_sentrum",
+        "to": "n_bjorvika",
+        "type": "arterial",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 28,
+        "lanes": 4,
+        "speed_limit": 50,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 4
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 3,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 12
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_r1_2",
+        "from": "n_sentrum",
+        "to": "n_aker_brygge",
+        "type": "arterial",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 24,
+        "lanes": 2,
+        "speed_limit": 40,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 4
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 12
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_r2_1",
+        "from": "n_sentrum",
+        "to": "n_grunerlokka",
+        "type": "arterial",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 22,
+        "lanes": 2,
+        "speed_limit": 40,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 3.5
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 15
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_r2_2",
+        "from": "n_sentrum",
+        "to": "n_frogner",
+        "type": "arterial",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 24,
+        "lanes": 2,
+        "speed_limit": 40,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 3.5
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 12
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_r3_1",
+        "from": "n_frogner",
+        "to": "n_vigeland",
+        "type": "collector",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 20,
+        "lanes": 2,
+        "speed_limit": 40,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 3
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 10
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_r3_2",
+        "from": "n_vigeland",
+        "to": "n_holmenkollen",
+        "type": "collector",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 18,
+        "lanes": 2,
+        "speed_limit": 50,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 2.5
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2,
+          "separated": false
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 15
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_ring3_1",
+        "from": "n_lysaker",
+        "to": "n_frogner",
+        "type": "motorway",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 32,
+        "lanes": 4,
+        "speed_limit": 80,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 2.5
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 20
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_ring3_2",
+        "from": "n_frogner",
+        "to": "n_ulleval",
+        "type": "motorway",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 32,
+        "lanes": 4,
+        "speed_limit": 70,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 2.5
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 20
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_ring3_3",
+        "from": "n_ulleval",
+        "to": "n_grefsen",
+        "type": "motorway",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 32,
+        "lanes": 4,
+        "speed_limit": 70,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 2.5
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 20
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_ring3_4",
+        "from": "n_grefsen",
+        "to": "n_okern",
+        "type": "motorway",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 32,
+        "lanes": 4,
+        "speed_limit": 70,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 2.5
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 20
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_e6_1",
+        "from": "n_okern",
+        "to": "n_alnabru",
+        "type": "motorway",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 36,
+        "lanes": 6,
+        "speed_limit": 90,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": false,
+          "width": 0
+        },
+        "cycling": {
+          "enabled": false,
+          "width": 0,
+          "separated": false
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 25
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_e6_2",
+        "from": "n_alnabru",
+        "to": "n_klemetsrud",
+        "type": "motorway",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 36,
+        "lanes": 6,
+        "speed_limit": 90,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": false,
+          "width": 0
+        },
+        "cycling": {
+          "enabled": false,
+          "width": 0,
+          "separated": false
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 25
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_bjorvika_alnabru",
+        "from": "n_bjorvika",
+        "to": "n_alnabru",
+        "type": "arterial",
+        "geometry": {
+          "routing": "straight"
+        },
+        "width": 26,
+        "lanes": 4,
+        "speed_limit": 60,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 3
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 15
+        },
+        "street_lighting": true,
+        "public_transport": true
+      }
+    ],
+    "hierarchy": {
+      "arterial": {
+        "default_width": 28,
+        "default_lanes": 4,
+        "default_speed": 50,
+        "sidewalk": true,
+        "cycling": true,
+        "street_lighting": true
+      },
+      "collector": {
+        "default_width": 20,
+        "default_lanes": 2,
+        "default_speed": 40,
+        "sidewalk": true,
+        "cycling": true,
+        "street_lighting": true
+      },
+      "local": {
+        "default_width": 12,
+        "default_lanes": 2,
+        "default_speed": 30,
+        "sidewalk": true,
+        "cycling": true,
+        "street_lighting": true
+      }
+    },
+    "connectivity": {
+      "minimum_node_degree": 2,
+      "maximum_dead_end_ratio": 0.05
+    },
+    "generation": {
+      "primary_pattern": "grid"
+    }
+  },
+  "blocks": {
+    "generation": {
+      "method": "road_bounded",
+      "respect_sector_boundaries": true,
+      "respect_road_hierarchy": true,
+      "arterial_block_boundary": true,
+      "collector_block_boundary": true,
+      "allow_irregular_blocks": true
+    },
+    "size": {
+      "minimum_area": 2500,
+      "maximum_area": 22000,
+      "minimum_width": 50,
+      "maximum_width": 180,
+      "minimum_depth": 40,
+      "maximum_depth": 140,
+      "preferred_area": 8500,
+      "preferred_aspect_ratio": 1.4,
+      "maximum_aspect_ratio": 3
+    },
+    "shape": {
+      "preferred": "rectangular",
+      "regularity": 0.82,
+      "corner_treatment": "rounded",
+      "minimum_angle": 60,
+      "maximum_angle": 120
+    },
+    "subdivision": {
+      "enabled": true,
+      "method": "frontage_based",
+      "minimum_plot_area": 250,
+      "maximum_plot_area": 2200,
+      "minimum_frontage": 12,
+      "maximum_frontage": 50,
+      "minimum_depth": 18,
+      "maximum_depth": 55,
+      "internal_access": true,
+      "internal_road_width": 6
+    },
+    "development": {
+      "maximum_building_coverage": 0.6,
+      "preferred_building_coverage": 0.42,
+      "minimum_open_space": 0.25,
+      "minimum_green_space": 0.2,
+      "courtyard_ratio": 0.15,
+      "frontage_activation": "high",
+      "parking": {
+        "allowed": true,
+        "maximum_surface_ratio": 0.05,
+        "underground_preferred": true
+      }
+    }
+  },
+  "buildings": {
+    "archetypes": [
+      {
+        "id": "res_lowrise",
+        "type": "house",
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 3,
+          "floor_height": 3.2
+        },
+        "footprint": {
+          "minimum_width": 14,
+          "maximum_width": 28,
+          "minimum_depth": 14,
+          "maximum_depth": 28
+        },
+        "density": "low",
+        "mixed_use": false
+      },
+      {
+        "id": "res_midrise",
+        "type": "apartment",
+        "height": {
+          "minimum_floors": 4,
+          "maximum_floors": 6,
+          "floor_height": 3.3
+        },
+        "footprint": {
+          "minimum_width": 22,
+          "maximum_width": 48,
+          "minimum_depth": 20,
+          "maximum_depth": 42
+        },
+        "density": "medium",
+        "mixed_use": true
+      },
+      {
+        "id": "highrise_residential",
+        "type": "tower",
+        "height": {
+          "minimum_floors": 7,
+          "maximum_floors": 18,
+          "floor_height": 3.4
+        },
+        "footprint": {
+          "minimum_width": 28,
+          "maximum_width": 55,
+          "minimum_depth": 28,
+          "maximum_depth": 55
+        },
+        "density": "high",
+        "mixed_use": true
+      },
+      {
+        "id": "office_midrise",
+        "type": "office",
+        "height": {
+          "minimum_floors": 4,
+          "maximum_floors": 12,
+          "floor_height": 3.8
+        },
+        "footprint": {
+          "minimum_width": 32,
+          "maximum_width": 65,
+          "minimum_depth": 30,
+          "maximum_depth": 60
+        },
+        "density": "medium",
+        "mixed_use": false
+      },
+      {
+        "id": "commercial_retail",
+        "type": "retail",
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 4,
+          "floor_height": 4
+        },
+        "footprint": {
+          "minimum_width": 25,
+          "maximum_width": 58,
+          "minimum_depth": 22,
+          "maximum_depth": 48
+        },
+        "density": "medium",
+        "mixed_use": true
+      },
+      {
+        "id": "mixed_use_block",
+        "type": "mixed_use",
+        "height": {
+          "minimum_floors": 5,
+          "maximum_floors": 14,
+          "floor_height": 3.5
+        },
+        "footprint": {
+          "minimum_width": 32,
+          "maximum_width": 68,
+          "minimum_depth": 28,
+          "maximum_depth": 54
+        },
+        "density": "high",
+        "mixed_use": true
+      },
+      {
+        "id": "industrial_facility",
+        "type": "industrial",
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 3,
+          "floor_height": 5
+        },
+        "footprint": {
+          "minimum_width": 40,
+          "maximum_width": 85,
+          "minimum_depth": 38,
+          "maximum_depth": 75
+        },
+        "density": "low",
+        "mixed_use": false
+      },
+      {
+        "id": "logistics_warehouse",
+        "type": "warehouse",
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 2,
+          "floor_height": 8
+        },
+        "footprint": {
+          "minimum_width": 48,
+          "maximum_width": 100,
+          "minimum_depth": 42,
+          "maximum_depth": 88
+        },
+        "density": "low",
+        "mixed_use": false
+      },
+      {
+        "id": "school_campus",
+        "type": "school",
+        "height": {
+          "minimum_floors": 2,
+          "maximum_floors": 4,
+          "floor_height": 3.8
+        },
+        "footprint": {
+          "minimum_width": 32,
+          "maximum_width": 60,
+          "minimum_depth": 28,
+          "maximum_depth": 50
+        },
+        "density": "medium",
+        "mixed_use": false
+      },
+      {
+        "id": "hospital_complex",
+        "type": "hospital",
+        "height": {
+          "minimum_floors": 4,
+          "maximum_floors": 9,
+          "floor_height": 4
+        },
+        "footprint": {
+          "minimum_width": 40,
+          "maximum_width": 72,
+          "minimum_depth": 34,
+          "maximum_depth": 60
+        },
+        "density": "medium",
+        "mixed_use": false
+      },
+      {
+        "id": "civic_government",
+        "type": "government",
+        "height": {
+          "minimum_floors": 3,
+          "maximum_floors": 7,
+          "floor_height": 4.2
+        },
+        "footprint": {
+          "minimum_width": 30,
+          "maximum_width": 58,
+          "minimum_depth": 26,
+          "maximum_depth": 48
+        },
+        "density": "medium",
+        "mixed_use": false
+      },
+      {
+        "id": "community_hub",
+        "type": "community",
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 3,
+          "floor_height": 3.8
+        },
+        "footprint": {
+          "minimum_width": 20,
+          "maximum_width": 36,
+          "minimum_depth": 16,
+          "maximum_depth": 30
+        },
+        "density": "low",
+        "mixed_use": false
+      },
+      {
+        "id": "parking_structure",
+        "type": "parking",
+        "height": {
+          "minimum_floors": 2,
+          "maximum_floors": 5,
+          "floor_height": 3
+        },
+        "footprint": {
+          "minimum_width": 28,
+          "maximum_width": 50,
+          "minimum_depth": 28,
+          "maximum_depth": 50
+        },
+        "density": "medium",
+        "mixed_use": false
+      },
+      {
+        "id": "utility_substation",
+        "type": "utility",
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 2,
+          "floor_height": 4.5
+        },
+        "footprint": {
+          "minimum_width": 15,
+          "maximum_width": 28,
+          "minimum_depth": 15,
+          "maximum_depth": 28
+        },
+        "density": "low",
+        "mixed_use": false
+      }
+    ],
+    "generation": {
+      "distribution": "density_weighted",
+      "placement": "plot_based",
+      "seed": 599139,
+      "maximum_buildings_per_block": 14
+    },
+    "orientation": {
+      "mode": "road_aligned",
+      "preferred_angle": 15,
+      "variation": 10
+    },
+    "spacing": {
+      "minimum_building_gap": 5,
+      "maximum_building_gap": 16,
+      "minimum_front_setback": 3,
+      "minimum_side_setback": 2,
+      "minimum_rear_setback": 3
+    },
+    "sustainability": {
+      "rooftop_solar_allowed": true,
+      "rooftop_solar_required": true,
+      "solar_coverage_target": 0.6,
+      "green_roof_target": 0.3,
+      "green_wall_target": 0.1,
+      "rainwater_collection": true,
+      "passive_cooling": true,
+      "natural_ventilation": true,
+      "energy_efficiency": "net_zero"
+    }
+  },
+  "transport": {
+    "mode_share": {
+      "walking": 0.28,
+      "cycling": 0.22,
+      "public_transport": 0.42,
+      "private_vehicle": 0.05,
+      "other": 0.03
+    },
+    "public_transport": {
+      "enabled": true,
+      "modes": [
+        "metro",
+        "tram",
+        "bus",
+        "rail"
+      ],
+      "coverage": {
+        "maximum_walk_distance": 350,
+        "minimum_population_coverage": 0.95
+      },
+      "stops": {
+        "minimum_spacing": 200,
+        "maximum_spacing": 500
+      },
+      "priority": "high"
+    },
+    "walking": {
+      "enabled": true,
+      "minimum_sidewalk_width": 3,
+      "maximum_distance_to_daily_services": 400,
+      "pedestrian_priority_zones": true,
+      "traffic_calming": true,
+      "shade_required": false,
+      "universal_access": true
+    },
+    "cycling": {
+      "enabled": true,
+      "minimum_lane_width": 2.5,
+      "separated_from_traffic": true,
+      "maximum_distance_to_cycle_network": 200,
+      "bike_parking": true
+    },
+    "roads": {
+      "private_vehicle_priority": "low",
+      "traffic_calming": true,
+      "low_emission_zones": true,
+      "freight_routes": true,
+      "emergency_route_access": true
+    },
+    "parking": {
+      "strategy": "reduced",
+      "maximum_surface_parking_ratio": 0.04,
+      "underground_parking_preferred": true,
+      "park_and_ride": true,
+      "ev_charging": true
+    },
+    "accessibility": {
+      "universal_design": true,
+      "maximum_gradient": 5,
+      "accessible_transit": true,
+      "accessible_crossings": true
+    }
+  },
+  "water": {
+    "supply": {
+      "sources": [
+        "surface_water",
+        "rainwater",
+        "recycled_water"
+      ],
+      "daily_capacity": 180000,
+      "reliability": "high",
+      "groundwater_recharge": true
+    },
+    "distribution": {
+      "potable_network": true,
+      "non_potable_network": true,
+      "district_metering": true,
+      "leakage_target": 0.04,
+      "storage_required": true
+    },
+    "consumption": {
+      "target_per_capita_daily": 110,
+      "maximum_per_capita_daily": 140,
+      "industrial_reuse_required": true,
+      "greywater_reuse": true
+    },
+    "stormwater": {
+      "strategy": "sustainable_drainage",
+      "retention_required": true,
+      "infiltration_required": true,
+      "permeable_surface_target": 0.42,
+      "rain_gardens": true,
+      "bioswales": true,
+      "retention_ponds": true,
+      "flood_protection_level": "high"
+    },
+    "wastewater": {
+      "treatment": "centralized",
+      "reuse_target": 0.7,
+      "treated_water_uses": [
+        "irrigation",
+        "industrial",
+        "toilet_flushing"
+      ],
+      "sewage_treatment_required": true
+    },
+    "conservation": {
+      "rainwater_harvesting": true,
+      "water_efficient_landscaping": true,
+      "native_vegetation_preferred": true,
+      "irrigation_efficiency_target": 0.9,
+      "water_reuse_target": 0.7
+    }
+  },
+  "energy_zones": {
+    "generation": {
+      "sources": [
+        "hydro",
+        "wind",
+        "solar",
+        "waste_to_energy"
+      ],
+      "renewable_target": 0.98,
+      "solar": {
+        "preferred": true,
+        "minimum_capacity_mw": 150,
+        "maximum_capacity_mw": 300,
+        "rooftop_generation": true,
+        "ground_mounted_generation": true
+      },
+      "wind": {
+        "preferred": true,
+        "minimum_capacity_mw": 100,
+        "maximum_capacity_mw": 250
+      }
+    },
+    "storage": {
+      "enabled": true,
+      "technologies": [
+        "battery",
+        "pumped_hydro",
+        "thermal"
+      ],
+      "minimum_capacity_mwh": 350,
+      "maximum_capacity_mwh": 800,
+      "distributed_storage": true
+    },
+    "distribution": {
+      "grid_connected": true,
+      "microgrids": true,
+      "smart_grid": true,
+      "district_energy": true,
+      "maximum_transmission_loss": 0.03,
+      "backup_generation": true
+    },
+    "zoning": {
+      "renewable_zones": [
+        {
+          "type": "waste_to_energy",
+          "priority": "high",
+          "minimum_area": 50000
+        },
+        {
+          "type": "rooftop_solar",
+          "priority": "high",
+          "minimum_area": 0
+        }
+      ],
+      "utility_zones": [
+        "substation",
+        "battery_storage",
+        "charging_hub",
+        "district_energy"
+      ],
+      "avoid_residential": true,
+      "avoid_water": false,
+      "avoid_protected_land": true
+    }
+  },
+  "vegetation": {
+    "green_space": {
+      "minimum_ratio": 0.35,
+      "target_ratio": 0.45,
+      "types": [
+        "urban_forest",
+        "park",
+        "green_corridor",
+        "community_garden",
+        "green_buffer"
+      ],
+      "connectivity_required": true,
+      "maximum_distance_to_green_space": 250
+    },
+    "trees": {
+      "canopy_target": 0.4,
+      "minimum_tree_density": 80,
+      "street_tree_spacing": 10,
+      "native_species_preferred": true,
+      "shade_priority": false,
+      "mature_canopy_required": true
+    },
+    "planting": {
+      "strategy": "native_ecology",
+      "native_species_only": true,
+      "drought_tolerant_preferred": false,
+      "water_efficient": true,
+      "green_roofs": true,
+      "green_walls": true,
+      "rain_gardens": true
+    },
+    "biodiversity": {
+      "priority": "high",
+      "wildlife_corridors": true,
+      "habitat_zones": true,
+      "protected_natural_areas": true,
+      "minimum_habitat_ratio": 0.2,
+      "native_species_target": 0.9
+    },
+    "generation": {
+      "distribution": "noise",
+      "density": 75,
+      "seed": 599139,
+      "terrain_adaptation": true,
+      "water_adaptation": true,
+      "avoid_buildings": true,
+      "avoid_roads": true
+    }
+  },
+  "environment": {
+    "air_quality": {
+      "target": "excellent",
+      "pollution_control": true,
+      "green_buffers": true,
+      "industrial_separation": true
+    },
+    "noise": {
+      "control_required": true,
+      "maximum_daytime_db": 50,
+      "maximum_nighttime_db": 38,
+      "quiet_zones": true,
+      "noise_buffers": true
+    },
+    "climate_resilience": {
+      "priority": "high",
+      "heat_resilience": true,
+      "flood_resilience": true,
+      "drought_resilience": true,
+      "storm_resilience": true,
+      "sea_level_rise_resilience": true,
+      "maximum_urban_heat_island_intensity": 1
+    },
+    "pollution": {
+      "air": true,
+      "water": true,
+      "soil": true,
+      "light": true,
+      "industrial_emission_controls": true,
+      "waste_management": true
+    },
+    "natural_resources": {
+      "protected_areas": true,
+      "resource_efficiency": "high_efficiency",
+      "soil_protection": true,
+      "groundwater_protection": true,
+      "wetland_protection": true,
+      "deforestation_avoidance": true
+    }
+  },
+  "sustainability": {
+    "energy": {
+      "renewable_share_target": 0.98,
+      "energy_efficiency_target": 0.5,
+      "grid_dependency_target": 0.05,
+      "energy_storage_target": 0.35,
+      "net_zero_target": true
+    },
+    "transport": {
+      "sustainable_mode_share": 0.92,
+      "maximum_average_commute_distance": 3800,
+      "maximum_average_commute_time": 20,
+      "vehicle_emission_target": 0
+    },
+    "water": {
+      "water_reuse_target": 0.7,
+      "water_loss_target": 0.04,
+      "rainwater_capture_target": 0.5,
+      "groundwater_recharge_target": 0.2
+    },
+    "land": {
+      "green_space_target": 0.45,
+      "built_land_target": 0.4,
+      "protected_land_target": 0.2,
+      "permeable_surface_target": 0.5
+    },
+    "environment": {
+      "carbon_emission_target": 200,
+      "air_quality_target": "excellent",
+      "urban_heat_reduction_target": 3,
+      "biodiversity_target": 0.45
+    },
+    "resource_efficiency": {
+      "waste_recycling_target": 0.9,
+      "waste_to_landfill_target": 0.02,
+      "material_reuse_target": 0.45,
+      "circular_economy_target": 0.75
+    }
+  },
+  "generation": {
+    "seed": 599139,
+    "deterministic": true,
+    "detail_level": "high",
+    "terrain_detail": "high",
+    "building_detail": "medium",
+    "vegetation_detail": "high",
+    "road_detail": "high",
+    "randomness": 0.15,
+    "lod": {
+      "enabled": true,
+      "distances": [
+        100,
+        300,
+        800,
+        2000
+      ]
+    },
+    "coordinate_precision": 0.1
+  }
+}
