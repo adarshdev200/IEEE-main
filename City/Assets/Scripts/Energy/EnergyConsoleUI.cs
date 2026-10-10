@@ -515,9 +515,17 @@ public class EnergyConsoleUI : MonoBehaviour
             _                  => 0f
         };
 
-        float co2AvoidedHourly = currentOutput * 0.72f;
-        int homes = (int)(currentOutput * 1000f / 1.4f);
-        int trees = (int)(co2AvoidedHourly * 24f * 45f);
+        // Real, dataset-backed impact estimates (see SustainabilityDatasets.cs):
+        //  • Grid emission factor .... CEA CO2 Baseline Database v21.0 (India).
+        //  • Lifecycle intensity ..... IPCC AR5 WG3 Annex III medians.
+        //  • Homes / trees ........... India household survey + EPA urban forestry.
+        float gridIntensityG = SustainabilityDatasets.GridIntensityGPerKwh;           // gCO2/kWh the grid would emit
+        float sourceIntensityG = SustainabilityDatasets.LifecycleIntensityGPerKwh(type); // gCO2eq/kWh of this clean source
+        float netAvoidedTPerMwh = Mathf.Max(0f, (gridIntensityG - sourceIntensityG) / 1000f); // t/MWh avoided vs grid
+
+        float co2AvoidedHourly = currentOutput * netAvoidedTPerMwh;                   // t/h (output_MW * t/MWh)
+        int homes = (int)(currentOutput * 1000f / (SustainabilityDatasets.HouseholdAnnualKwh / 8760f));
+        int trees = (int)(co2AvoidedHourly * 24f * SustainabilityDatasets.TreesPerTonnePerYear);
 
         GUILayout.BeginVertical(_ecoBannerStyle);
         GUILayout.BeginHorizontal();
@@ -535,10 +543,13 @@ public class EnergyConsoleUI : MonoBehaviour
         GUILayout.Space(2);
 
         GUILayout.BeginHorizontal();
-        GUILayout.Label($"Forest Equiv: <b>{trees:N0} trees/yr</b>", _ecoMetricRowStyle);
+        GUILayout.Label($"Forest Equiv: <b>{trees:N0} trees</b>", _ecoMetricRowStyle);
         GUILayout.FlexibleSpace();
-        GUILayout.Label("Carbon Intensity: <b>0.0 g/kWh</b>", _ecoMetricRowStyle);
+        GUILayout.Label($"Carbon Intensity: <b>{sourceIntensityG:F0} gCO₂e/kWh</b> <color=#9FB4A8>vs grid {gridIntensityG:F0}</color>", _ecoMetricRowStyle);
         GUILayout.EndHorizontal();
+        GUILayout.Space(4);
+
+        GUILayout.Label($"<color=#8AA093><size=9>{SustainabilityDatasets.AttributionLine}</size></color>", _ecoMetricRowStyle);
 
         GUILayout.EndVertical();
         GUILayout.Space(6);
@@ -882,7 +893,8 @@ public class EnergyConsoleUI : MonoBehaviour
         GUILayout.BeginHorizontal();
         GUILayout.Label($"Renewable: <b>{totalClean:F1} MW</b>  /  Demand: <b>{demand:F1} MW</b>", _sliderLabelStyle);
         GUILayout.FlexibleSpace();
-        float avoidedCo2 = totalClean * 0.72f;
+        // CEA India grid emission factor (tCO2/MWh) — see SustainabilityDatasets.cs.
+        float avoidedCo2 = totalClean * SustainabilityDatasets.GridEmissionFactorTPerMwh;
         GUILayout.Label($"Avoided: <b>{avoidedCo2:F1} t/h</b>", _subHeaderStyle);
         GUILayout.EndHorizontal();
 

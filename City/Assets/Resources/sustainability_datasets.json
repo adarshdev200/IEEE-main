@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "notes": "Real, citable reference datasets used to convert live clean-energy output into environmental-impact estimates. Values are documented and swappable per region. Loaded at runtime by SustainabilityDatasets.cs; the C# fallbacks mirror these numbers.",
+
+  "gridEmissionFactor": {
+    "value_tCO2_per_MWh": 0.727,
+    "region": "India - national unified grid",
+    "source": "CEA CO2 Baseline Database for the Indian Power Sector, Version 21.0",
+    "sourceDetail": "Weighted-average grid emission factor, FY2023-24 (0.727). FY2024-25 provisional: 0.710. Published by the Central Electricity Authority, Government of India.",
+    "url": "https://cea.nic.in/cdm-co2-baseline-database/",
+    "year": 2025
+  },
+
+  "lifecycleCarbonIntensity_gCO2e_per_kWh": {
+    "wind": 11,
+    "solar": 48,
+    "storage": 25,
+    "coal": 820,
+    "naturalGas": 490,
+    "source": "IPCC AR5 WG3 Annex III, Table A.III.2 (Schlomer et al., 2014) - lifecycle emission medians",
+    "sourceDetail": "Median lifecycle gCO2eq/kWh: wind onshore 11, utility solar PV 48, coal (PC) 820, gas (CCGT) 490. Battery storage ~25 is an added-overhead estimate for round-trip-stored renewables.",
+    "url": "https://www.ipcc.ch/site/assets/uploads/2018/02/ipcc_wg3_ar5_annex-iii.pdf"
+  },
+
+  "householdConsumption": {
+    "annual_kWh": 1937,
+    "region": "India - urban household (average)",
+    "source": "India household electricity-consumption survey (urban average ~1,937 kWh/household/yr; rural ~1,486)",
+    "sourceDetail": "Swap annual_kWh per region to localise the 'homes powered' estimate (e.g. US EIA average household ~10,500 kWh/yr).",
+    "url": "https://www.downtoearth.org.in/energy/cooling-appliances-now-drive-indias-household-electricity-use"
+  },
+
+  "treeSequestration": {
+    "tCO2_per_tree_per_year": 0.0218,
+    "source": "US EPA Greenhouse Gas Equivalencies Calculator / urban forestry",
+    "sourceDetail": "A mature urban tree sequesters ~21.8 kg CO2 per year (=> ~45.9 trees per tonne of CO2 per year).",
+    "url": "https://www.epa.gov/energy/greenhouse-gases-equivalencies-calculator-calculations-and-references"
+  }
+}
