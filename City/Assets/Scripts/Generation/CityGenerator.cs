@@ -137,13 +137,28 @@ public class CityGenerator : MonoBehaviour
         Camera cam = Camera.main;
         if (cam == null || _plan?.city?.dimensions == null) return;
 
-        float width = _plan.city.dimensions.width;
-        float depth = _plan.city.dimensions.depth;
-        float centerX = width * 0.5f;
-        float centerZ = depth * 0.5f;
+        float width  = _plan.city.dimensions.width;
+        float depth  = _plan.city.dimensions.depth;
+        float centerX = width  * 0.5f;
+        float centerZ = depth  * 0.5f;
 
-        cam.farClipPlane = Mathf.Max(cam.farClipPlane, Mathf.Max(width, depth) * 3f);
-        cam.transform.position = new Vector3(centerX, Mathf.Max(width, depth) * 0.45f, -Mathf.Max(width, depth) * 0.25f);
+        // Height: ~7% of the largest city dimension, clamped to a usable range.
+        // This places the camera close enough to see streets and buildings clearly
+        // regardless of city size (e.g. 6000m city → ~420m height).
+        float camHeight = Mathf.Clamp(Mathf.Max(width, depth) * 0.07f, 150f, 600f);
+
+        // Pull back slightly along -Z so the city fills the view naturally at ~55° pitch.
+        float pullBack = camHeight * 0.55f;
+
+        // Optimize depth buffer precision: nearClipPlane 2.0m dramatically improves 24-bit Z-buffer resolution
+        cam.nearClipPlane = 2.0f;
+        cam.farClipPlane = Mathf.Clamp(Mathf.Max(width, depth) * 2.5f, 4000f, 10000f);
+
+        // Place directly above city center, pulled back slightly on the Z axis
+        cam.transform.position = new Vector3(centerX, camHeight, centerZ - pullBack);
+
+        // Look at the horizontal center of the city, slightly above ground so the
+        // target point is in the middle of the city mass rather than the bare floor.
         cam.transform.LookAt(new Vector3(centerX, 0f, centerZ));
 
         FreeFlyCamera ffc = cam.GetComponent<FreeFlyCamera>();

@@ -32,13 +32,12 @@ public class RoadGenerator
     private Material _matTreeTrunk;
     private Material _matTreeCanopy;
 
-    // Layer elevations — generously elevated above block slabs (block top ≈ 0.07m).
-    // Keep strict ascending order: Intersection = Road < CenterLine < Sidewalk < Curb.
-    private const float IntersectY   = 0.15f;
-    private const float RoadY        = 0.15f;
-    private const float CenterLineY  = 0.20f;
-    private const float SidewalkY    = 0.22f;
-    private const float CurbY        = 0.28f;
+    // Layer elevations — strictly tiered to ensure no coplanar flickering
+    private const float IntersectY   = 0.10f;
+    private const float RoadY        = 0.10f;
+    private const float CenterLineY  = 0.12f;
+    private const float SidewalkY    = 0.20f;
+    private const float CurbY        = 0.22f;
 
     private const float MinSegLen    = 0.5f;
     private const float SidewalkWidth = 2.5f;
@@ -220,24 +219,17 @@ public class RoadGenerator
         return m;
     }
 
+    private float GetNodeHalfPad(string nodeId)
+    {
+        return 8f;
+    }
+
     private void RenderIntersectionPad(RoadNodeData node, List<RoadEdgeData> edges)
     {
         Vector2 pos = new Vector2(node.position.x, node.position.z);
-        float maxWidth = 8f;
+        float h = GetNodeHalfPad(node.id);
+        float y = GetY(pos.x, pos.y) + IntersectY;
 
-        if (edges != null)
-        {
-            foreach (var e in edges)
-            {
-                if ((e.from == node.id || e.to == node.id) && e.width > maxWidth)
-                    maxWidth = e.width;
-            }
-        }
-
-        float padSize = maxWidth + (SidewalkWidth + CurbWidth) * 2f;
-        float y       = GetY(pos.x, pos.y) + IntersectY;
-
-        float h = padSize * 0.5f;
         Vector3 v0 = new Vector3(pos.x - h, y, pos.y - h);
         Vector3 v1 = new Vector3(pos.x - h, y, pos.y + h);
         Vector3 v2 = new Vector3(pos.x + h, y, pos.y + h);
@@ -256,30 +248,18 @@ public class RoadGenerator
         float roadW = edge.width > 0f ? edge.width : DefaultWidth(edge.type);
         MeshBatcher targetBatcher = BatcherForType(edge.type);
 
-        string routing = edge.geometry?.routing ?? "straight";
+        float padHalfA = GetNodeHalfPad(edge.from);
+        float padHalfB = GetNodeHalfPad(edge.to);
 
-        if (routing == "custom" && edge.geometry?.waypoints != null && edge.geometry.waypoints.Count >= 2)
+        Vector2 dir = (b - a).normalized;
+        float totalLen = Vector2.Distance(a, b);
+        if (totalLen > padHalfA + padHalfB + 1f)
         {
-            var wp = edge.geometry.waypoints;
-            for (int i = 0; i < wp.Count - 1; i++)
-            {
-                var pa = new Vector2(wp[i].x, wp[i].z);
-                var pb = new Vector2(wp[i + 1].x, wp[i + 1].z);
-                RenderCrossSection(edge, pa, pb, roadW, targetBatcher, isArterial, isCollector, isCycle, isPed);
-            }
+            a += dir * padHalfA;
+            b -= dir * padHalfB;
         }
-        else if (routing == "orthogonal" || (routing != "straight_force" && ShouldRouteOrthogonally(edge.type, a, b)))
-        {
-            // Plan-logical urban routing: vehicles follow the urban street grid without slicing diagonally through neighborhoods
-            Vector2 corner = new Vector2(b.x, a.y);
-            RenderCrossSection(edge, a, corner, roadW, targetBatcher, isArterial, isCollector, isCycle, isPed);
-            RenderCrossSection(edge, corner, b, roadW, targetBatcher, isArterial, isCollector, isCycle, isPed);
-            RenderCornerPad(corner, roadW);
-        }
-        else
-        {
-            RenderCrossSection(edge, a, b, roadW, targetBatcher, isArterial, isCollector, isCycle, isPed);
-        }
+
+        RenderCrossSection(edge, a, b, roadW, targetBatcher, isArterial, isCollector, isCycle, isPed);
     }
 
     private static bool ShouldRouteOrthogonally(string edgeType, Vector2 a, Vector2 b)
@@ -366,6 +346,16 @@ public class RoadGenerator
         }
     }
 
+    private void AddRectQuad(MeshBatcher batcher, float minX, float minZ, float width, float depth, float yOffset)
+    {
+        float y = GetY(minX + width * 0.5f, minZ + depth * 0.5f) + yOffset;
+        Vector3 v0 = new Vector3(minX,         y, minZ);
+        Vector3 v1 = new Vector3(minX,         y, minZ + depth);
+        Vector3 v2 = new Vector3(minX + width, y, minZ + depth);
+        Vector3 v3 = new Vector3(minX + width, y, minZ);
+        batcher.AddQuad(v0, v1, v2, v3, Vector2.zero, Vector2.up, Vector2.one, Vector2.right);
+    }
+
     private int GenerateLocalGrid(SectorData sector)
     {
         float[] bounds = sector.geometry.bounds;
@@ -377,70 +367,50 @@ public class RoadGenerator
         float roadW   = sector.street_rules?.local_roads?.width > 0
             ? sector.street_rules.local_roads.width : 9f;
 
-        float spacingX = sector.street_rules?.blocks != null
+        float blockW = sector.street_rules?.blocks != null
             ? (sector.street_rules.blocks.minimum_width + sector.street_rules.blocks.maximum_width) * 0.5f
             : BlockSpacingForType(sector.type);
 
-        float spacingZ = sector.street_rules?.blocks != null
+        float blockD = sector.street_rules?.blocks != null
             ? (sector.street_rules.blocks.minimum_depth + sector.street_rules.blocks.maximum_depth) * 0.5f
-            : spacingX * 0.8f;
+            : blockW * 0.8f;
 
-        spacingX = Mathf.Max(spacingX, 60f);
-        spacingZ = Mathf.Max(spacingZ, 50f);
+        blockW = Mathf.Max(blockW, 60f);
+        blockD = Mathf.Max(blockD, 50f);
 
-        bool hasSidewalk  = true;
         bool hasTrees     = sector.street_rules?.street_trees?.enabled ?? false;
         float treeSpacing = sector.street_rules?.street_trees?.spacing > 0
-            ? Mathf.Max(sector.street_rules.street_trees.spacing, 25f) : 35f;
+            ? Mathf.Max(sector.street_rules.street_trees.spacing, 15f) : 25f;
 
         int count = 0;
 
-        // E-W roads
-        float z = sz + spacingZ;
-        while (z < sz + sDepth - spacingZ * 0.3f)
+        float curZ = sz + roadW;
+        while (curZ + blockD < sz + sDepth - roadW)
         {
-            Vector2 a = new Vector2(sx, z);
-            Vector2 b = new Vector2(sx + sWidth, z);
-            AddFlatStrip(_bLocal, a, b, roadW, 0f, RoadY);
-
-            if (hasSidewalk)
+            float curX = sx + roadW;
+            while (curX + blockW < sx + sWidth - roadW)
             {
-                float swOffset = roadW * 0.5f + SidewalkWidth * 0.5f;
-                AddFlatStrip(_bSidewalk, a, b, SidewalkWidth, -swOffset, SidewalkY);
-                AddFlatStrip(_bSidewalk, a, b, SidewalkWidth,  swOffset, SidewalkY);
+                // East road segment between this block and next column (disjoint from block)
+                AddRectQuad(_bLocal, curX + blockW, curZ, roadW, blockD, RoadY);
+
+                // North road segment between this block and next row (disjoint from block)
+                AddRectQuad(_bLocal, curX, curZ + blockD, blockW, roadW, RoadY);
+
+                // Intersection square at north-east corner (disjoint from road segments and blocks)
+                AddRectQuad(_bIntersection, curX + blockW, curZ + blockD, roadW, roadW, IntersectY);
+
+                if (hasTrees && blockD > 25f)
+                {
+                    AddStreetTrees(
+                        new Vector2(curX + blockW + roadW * 0.5f, curZ),
+                        new Vector2(curX + blockW + roadW * 0.5f, curZ + blockD),
+                        roadW * 0.5f + 1.5f, treeSpacing);
+                }
+
+                curX += blockW + roadW;
+                count++;
             }
-
-            if (hasTrees)
-            {
-                AddStreetTrees(a, b, roadW * 0.5f + SidewalkWidth * 0.7f, treeSpacing);
-            }
-
-            z += spacingZ;
-            count++;
-        }
-
-        // N-S roads
-        float x = sx + spacingX;
-        while (x < sx + sWidth - spacingX * 0.3f)
-        {
-            Vector2 a = new Vector2(x, sz);
-            Vector2 b = new Vector2(x, sz + sDepth);
-            AddFlatStrip(_bLocal, a, b, roadW, 0f, RoadY);
-
-            if (hasSidewalk)
-            {
-                float swOffset = roadW * 0.5f + SidewalkWidth * 0.5f;
-                AddFlatStrip(_bSidewalk, a, b, SidewalkWidth, -swOffset, SidewalkY);
-                AddFlatStrip(_bSidewalk, a, b, SidewalkWidth,  swOffset, SidewalkY);
-            }
-
-            if (hasTrees)
-            {
-                AddStreetTrees(a, b, roadW * 0.5f + SidewalkWidth * 0.7f, treeSpacing);
-            }
-
-            x += spacingX;
-            count++;
+            curZ += blockD + roadW;
         }
 
         return count;
@@ -463,7 +433,7 @@ public class RoadGenerator
         Vector2 cb = b2 + right2 * lateralOffset;
 
         float hw = width * 0.5f;
-        const float ovlp = 0.3f;
+        const float ovlp = 0f;
         Vector2 ea = ca - dir2 * ovlp;
         Vector2 eb = cb + dir2 * ovlp;
 

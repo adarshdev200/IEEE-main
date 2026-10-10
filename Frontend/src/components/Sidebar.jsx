@@ -47,8 +47,16 @@ const NAV = [
   },
 ]
 
-export default function Sidebar({ onExit, collapsed }) {
+export default function Sidebar({ onExit, onMyCities, collapsed }) {
   const [active, setActive] = useState('Home')
+
+  function handleNavClick(label) {
+    setActive(label)
+    if (label === 'My Cities' && onMyCities) {
+      onMyCities()
+    }
+  }
+
   return (
     <aside className={`side${collapsed ? ' side--collapsed' : ''}`} aria-hidden={collapsed}>
       <button className="side__brand" onClick={onExit} title="Exit to home">
@@ -60,7 +68,7 @@ export default function Sidebar({ onExit, collapsed }) {
           <button
             key={n.label}
             className={`side__item${active === n.label ? ' is-active' : ''}`}
-            onClick={() => setActive(n.label)}
+            onClick={() => handleNavClick(n.label)}
           >
             <svg width="22" height="22" viewBox="0 0 24 24">
               {n.icon}

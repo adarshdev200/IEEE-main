@@ -54,11 +54,12 @@ public class VegetationGenerator
             float sWidth = sector.geometry.bounds[2];
             float sDepth = sector.geometry.bounds[3];
 
-            // Render rich green park turf/slab slightly above terrain (Y = 0.03m) to give parks a dedicated natural identity
+            // Render rich green park turf/slab at Y=0.10m — clearly above floor (-0.50m)
+            // and below block slabs (0.20m) so there is zero z-fighting.
             float pCenterX = sx + sWidth * 0.5f;
             float pCenterZ = sz + sDepth * 0.5f;
             float terrainH = _terrainGen != null ? _terrainGen.SampleHeight(pCenterX, pCenterZ) : 0f;
-            groundBatcher.AddBox(new Vector3(pCenterX, terrainH + 0.02f, pCenterZ), new Vector3(sWidth - 2f, 0.03f, sDepth - 2f));
+            groundBatcher.AddBox(new Vector3(pCenterX, terrainH + 0.05f, pCenterZ), new Vector3(sWidth - 2f, 0.10f, sDepth - 2f));
 
             float areaHa    = (sWidth * sDepth) / 10000f;
             int   treeCount = Mathf.RoundToInt(areaHa * density);

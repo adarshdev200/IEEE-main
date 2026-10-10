@@ -23,7 +23,7 @@ public class BlockGenerator
     public List<GeneratedBlock> GeneratedBlocks { get; private set; } = new List<GeneratedBlock>();
 
     private Transform _blocksRoot;
-    private const float BlockY = 0.05f;  // slight lift above terrain
+    public const float BlockTopY = 0.20f;  // Top surface of block sidewalk slabs
 
     public BlockGenerator(Transform parent, CityMaterials mats, TerrainGenerator terrainGen = null)
     {
@@ -83,7 +83,8 @@ public class BlockGenerator
                     float centerX = curX + blockW * 0.5f;
                     float centerZ = curZ + blockD * 0.5f;
                     float terrainH = _terrainGen != null ? _terrainGen.SampleHeight(centerX, centerZ) : 0f;
-                    batcher.AddBox(new Vector3(centerX, terrainH + BlockY, centerZ), new Vector3(blockW, 0.04f, blockD));
+                    // Slab thickness 0.10m, top face sits at terrainH + BlockTopY (0.20m)
+                    batcher.AddBox(new Vector3(centerX, terrainH + BlockTopY - 0.05f, centerZ), new Vector3(blockW, 0.10f, blockD));
 
                     totalBlocks++;
                     curX += blockW + roadW;
@@ -99,7 +100,7 @@ public class BlockGenerator
     }
 
     private static bool IsNonDevelopable(string type) => type is
-        "park" or "forest" or "wetland" or "water" or "agriculture";
+        "park" or "forest" or "wetland" or "water" or "agriculture" or "energy";
 
     private static float GetBlockWidth(SectorData sector, BlockSizeData size)
     {

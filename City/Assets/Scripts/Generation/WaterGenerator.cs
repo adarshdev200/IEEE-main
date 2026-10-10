@@ -8,7 +8,7 @@ public class WaterGenerator
     private readonly CityMaterials _mats;
     private readonly TerrainGenerator _terrainGen;
 
-    private const float WaterOffset = 0.04f;
+    private const float WaterOffset = 0.05f;
 
     public WaterGenerator(
         Transform parent,

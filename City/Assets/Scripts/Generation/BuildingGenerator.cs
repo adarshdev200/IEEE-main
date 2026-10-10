@@ -128,8 +128,9 @@ public class BuildingGenerator
                     float pz = block.z + frontSetback + row * (plotD + gap) + bd * 0.5f;
 
                     float terrainHeight = _terrainGen != null ? _terrainGen.SampleHeight(px, pz) : 0f;
-                    float centerY = terrainHeight + height * 0.5f;
-                    float roofY   = terrainHeight + height;
+                    float baseSurfaceY = terrainHeight + BlockGenerator.BlockTopY;
+                    float centerY = baseSurfaceY + height * 0.5f;
+                    float roofY   = baseSurfaceY + height;
 
                     // Choose batcher based on district identity and archetype
                     MeshBatcher targetBatcher = bDefault;

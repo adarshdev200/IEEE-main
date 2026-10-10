@@ -37,9 +37,9 @@ public class TerrainGenerator
         _floorObject = new GameObject("CityGridFloor");
         _floorObject.transform.SetParent(_parent, false);
 
-        // Position slightly below 0 so all road/sidewalk/block overlays (Y >= 0.02)
+        // Position well below 0 so all road/sidewalk/block/park overlays (Y >= 0.05)
         // cleanly render above it with zero z-fighting or flickering artifacts.
-        const float floorTopY = -0.05f;
+        const float floorTopY = -0.50f;
         const float floorThickness = 2.0f;
         _floorObject.transform.position = new Vector3(centerX, floorTopY - floorThickness * 0.5f, centerZ);
         _floorObject.transform.localScale = new Vector3(totalWidth, floorThickness, totalDepth);

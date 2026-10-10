@@ -130,6 +130,7 @@ public sealed class EnergyGenerator
 
         int solarFarmCount = 0;
         int turbineCount   = 0;
+        int evHubCount = 0;
 
         foreach (SectorData sector in sectors)
         {
@@ -160,7 +161,16 @@ public sealed class EnergyGenerator
             // West/South zone: High-yield ground mounted solar arrays oriented towards optimal solar angle
             // East/High-elevation zone: Wind park oriented towards dominant wind corridor
             // Central perimeter: Grid battery storage & high-voltage transmission substation
-            if (solarEnabled)
+            if (sector.id != null && sector.id.StartsWith("sub_"))
+            {
+                CreateSubstation(centerX, centerZ, baseY);
+                continue;
+            }
+
+            bool sectorIsSolar = sector.id != null && sector.id.Contains("solar");
+            bool sectorIsWind  = sector.id != null && sector.id.Contains("wind");
+
+            if (solarEnabled && (sectorIsSolar || !sectorIsWind) && usableWidth >= 60f && usableDepth >= 60f)
             {
                 float solarW = usableWidth * 0.52f;
                 float solarD = usableDepth * 0.75f;
@@ -171,7 +181,7 @@ public sealed class EnergyGenerator
                 solarFarmCount++;
             }
 
-            if (windEnabled && usableWidth >= 20f && usableDepth >= 20f)
+            if (windEnabled && (sectorIsWind || !sectorIsSolar) && usableWidth >= 60f && usableDepth >= 60f)
             {
                 float windW  = usableWidth * 0.44f;
                 float windD  = usableDepth * 0.75f;
@@ -193,20 +203,13 @@ public sealed class EnergyGenerator
                 centerX + usableWidth * 0.2f,
                 centerZ - usableDepth * 0.42f,
                 baseY);
-        }
 
-        // EV charging hubs + parking scattered through commercial / mixed-use sectors
-        int evHubCount = 0;
-        foreach (SectorData sector in sectors)
-        {
-            if (sector?.geometry?.bounds == null || sector.geometry.bounds.Length < 4) continue;
-            string type = Convert.ToString(ReadValue(sector, "type"));
-            bool isCommercial = string.Equals(type, "commercial", StringComparison.OrdinalIgnoreCase)
-                              || string.Equals(type, "mixed_use", StringComparison.OrdinalIgnoreCase);
-            bool evFlag = sector.energy != null && sector.energy.ev_charging;
-            if (!isCommercial && !evFlag) continue;
-
-            evHubCount += CreateEvHubsForSector(sector);
+            // Clean EV charging hub inside the dedicated energy sector (no building overlap)
+            if (usableWidth >= 80f && usableDepth >= 80f)
+            {
+                CreateEvChargingHub(centerX, centerZ + usableDepth * 0.35f, baseY, new System.Random(sector.id.GetHashCode()));
+                evHubCount++;
+            }
         }
 
         energyMgr.InitializeData(energyZones, climate, solarFarmCount, turbineCount);

@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react'
 import Sidebar from './Sidebar.jsx'
 import ParametersPanel from './ParametersPanel.jsx'
 import Outputs from './Outputs.jsx'
-import Viewer from './Viewer.jsx'
 import { interpretVision, generateCityModel, missingParams } from '../lib/interpreter.js'
 
 const PARAM_LABELS = {
@@ -30,7 +29,7 @@ const Arrow = () => (
   </svg>
 )
 
-export default function Builder({ onHome }) {
+export default function Builder({ onHome, onMyCities }) {
   const [params, setParams] = useState({ location: '', land_area_km2: '', population: '' })
   const [messages, setMessages] = useState([])
   const [started, setStarted] = useState(false)
@@ -40,7 +39,6 @@ export default function Builder({ onHome }) {
   const [busy, setBusy] = useState(false)
   const [planBusy, setPlanBusy] = useState(false)
   const [planError, setPlanError] = useState(null)
-  const [showViewer, setShowViewer] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const endRef = useRef(null)
 
@@ -124,7 +122,7 @@ export default function Builder({ onHome }) {
 
   return (
     <div className="studio">
-      <Sidebar onExit={onHome} collapsed={!sidebarOpen} />
+      <Sidebar onExit={onHome} onMyCities={onMyCities} collapsed={!sidebarOpen} />
 
       <main className="studio__chat">
         <button
@@ -153,10 +151,39 @@ export default function Builder({ onHome }) {
             <div className="conv__hero">
               <h1 className="conv__title">What are we building next?</h1>
               <p className="conv__sub">
-                Set your parameters on the right, describe your vision, and I’ll turn it into a
+                Set your parameters on the right, describe your vision, and I'll turn it into a
                 sustainable 3D city.
               </p>
             </div>
+
+            {/* Working indicator — shown while AI is processing */}
+            {(busy || planBusy) && (
+              <div className="builder__working">
+                <span className="builder__working-dot" />
+                <span className="builder__working-dot" />
+                <span className="builder__working-dot" />
+                <span className="builder__working-label">
+                  {planBusy ? 'Generating city model…' : 'Interpreting your vision…'}
+                </span>
+              </div>
+            )}
+
+            {/* Planning complete banner */}
+            {cityModel && !planBusy && (
+              <div className="builder__complete">
+                <span className="builder__complete-icon">✓</span>
+                <div className="builder__complete-text">
+                  <strong>Planning complete</strong>
+                  <span>Your 3D city model is ready to render.</span>
+                </div>
+                <button
+                  className="builder__complete-cta"
+                  onClick={onMyCities}
+                >
+                  Go to My Cities →
+                </button>
+              </div>
+            )}
 
             <form className="composer" onSubmit={handleSend}>
               <svg className="composer__spark" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -199,13 +226,11 @@ export default function Builder({ onHome }) {
           requirements={requirements}
           cityModel={cityModel}
           onGenerateModel={handleGenerateModel}
-          onView={() => setShowViewer(true)}
+          onView={onMyCities}
           planBusy={planBusy}
           planError={planError}
         />
       </aside>
-
-      {showViewer && cityModel && <Viewer model={cityModel} onClose={() => setShowViewer(false)} />}
     </div>
   )
 }
