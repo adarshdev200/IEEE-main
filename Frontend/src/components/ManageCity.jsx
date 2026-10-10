@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react'
 import Sidebar from './Sidebar.jsx'
-import { parseCoords, fetchAll, assessRisks } from '../lib/disaster.js'
+import { parseCoords, fetchAll, assessRisks, fetchAgri, assessAgri } from '../lib/disaster.js'
 
 const WEATHER_CODES = {
   0: 'Clear sky', 1: 'Mainly clear', 2: 'Partly cloudy', 3: 'Overcast',
@@ -31,16 +31,28 @@ export default function ManageCity({ city, onExit, onStudio, onMyCities }) {
   const [error, setError] = useState(null)
   const [data, setData] = useState(null)
   const [assessment, setAssessment] = useState(null)
+  const [agri, setAgri] = useState(null)
   const [updatedAt, setUpdatedAt] = useState(null)
+
+  const isRural = !!city?.rural
 
   const load = useCallback(async () => {
     if (!coords) return
     setLoading(true)
     setError(null)
     try {
-      const result = await fetchAll(coords)
+      // Core disaster feed + (rural only) the agronomy feed, fetched in parallel.
+      const [result, agriRaw] = await Promise.all([
+        fetchAll(coords),
+        isRural ? fetchAgri(coords) : Promise.resolve(null),
+      ])
       setData(result)
       setAssessment(assessRisks(result))
+      setAgri(
+        isRural
+          ? assessAgri({ weather: result.weather, agri: agriRaw, landAreaKm2: city?.land_area_km2 })
+          : null
+      )
       setUpdatedAt(new Date())
     } catch (e) {
       setError(String(e.message || e))
@@ -48,7 +60,7 @@ export default function ManageCity({ city, onExit, onStudio, onMyCities }) {
       setLoading(false)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [city?.coordinates])
+  }, [city?.coordinates, isRural, city?.land_area_km2])
 
   useEffect(() => { load() }, [load])
 
@@ -147,6 +159,61 @@ export default function ManageCity({ city, onExit, onStudio, onMyCities }) {
                     <p className="alert__rec"><strong>Recommended:</strong> {r.recommendation}</p>
                   </div>
                 ))}
+              </section>
+            )}
+
+            {/* Farmer resilience — rural locations only */}
+            {isRural && agri && (
+              <section className="manage__section agri">
+                <h2 className="manage__h2">🌾 Farmer resilience</h2>
+                <p className="manage__note">
+                  Agronomy advisories for this rural location — root-zone soil moisture, irrigation,
+                  field-worker heat and rainwater harvesting, derived from live Open-Meteo soil
+                  moisture &amp; reference-ET₀ data.
+                </p>
+
+                <div className={`agri__banner risk-bg--${agri.overallLevel}`}>
+                  <span className="manage__overall-dot" />
+                  <span>{agri.summary}</span>
+                </div>
+
+                {agri.stats.length > 0 && (
+                  <div className="manage__cards agri__stats">
+                    {agri.stats.map((s) => (
+                      <Stat key={s.label} label={s.label} value={s.value} sub={s.sub} />
+                    ))}
+                  </div>
+                )}
+
+                <div className="manage__risks agri__advisories">
+                  {agri.advisories.map((a) => (
+                    <div key={a.type} className={`riskcard risk--${a.level}`}>
+                      <div className="riskcard__top">
+                        <span className="riskcard__icon">{a.icon}</span>
+                        <span className="riskcard__label">{a.label}</span>
+                        <span className={`riskcard__badge risk-badge--${a.level}`}>{a.levelLabel}</span>
+                      </div>
+                      <div className="riskcard__meter"><span style={{ width: `${(a.level / 3) * 100}%` }} /></div>
+                      <p className="riskcard__factor">{a.factors[0]}</p>
+                      <p className="alert__rec"><strong>Advice:</strong> {a.recommendation}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="agri__rainwater">
+                  <span className="agri__rainwater-icon">🪣</span>
+                  <div>
+                    <strong>Rainwater harvesting potential</strong>
+                    <p>
+                      {agri.rainwater.rainMm} mm of rain forecast over the next 7 days — about{' '}
+                      <strong>{agri.rainwater.litersPerHa.toLocaleString()} L per hectare</strong>
+                      {agri.rainwater.totalLiters != null && (
+                        <> (≈ {agri.rainwater.totalLiters.toLocaleString()} L across {city.land_area_km2} km²)</>
+                      )}{' '}
+                      could be captured. Ready tanks, farm ponds and check-dams before the rain arrives.
+                    </p>
+                  </div>
+                </div>
               </section>
             )}
 

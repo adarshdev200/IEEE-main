@@ -77,6 +77,22 @@ export default function ParametersPanel({ params, setParams, missing, labels }) 
         </label>
       ))}
 
+      <label className="field field--check">
+        <input
+          type="checkbox"
+          className="field__checkbox"
+          checked={!!params.rural}
+          onChange={(e) => update('rural', e.target.checked)}
+        />
+        <span className="field__check-text">
+          <span className="field__label">Rural / agricultural area</span>
+          <span className="field__check-hint">
+            Enables a Farmer Resilience panel in Manage City — soil moisture, irrigation,
+            field-worker heat windows and rainwater harvesting for this location.
+          </span>
+        </span>
+      </label>
+
       <button
         type="button"
         className={`params__advtoggle${showAdv ? ' is-open' : ''}`}

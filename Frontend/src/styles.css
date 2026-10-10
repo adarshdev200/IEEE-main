@@ -2580,6 +2580,55 @@ body {
 .event__title a:hover { text-decoration: underline; }
 .event__meta { flex: none; color: #8aa093; font-size: 12px; }
 
+/* Rural / agricultural checkbox in the parameters panel */
+.field--check {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+}
+.field__checkbox {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  flex: none;
+  accent-color: #2f8255;
+  cursor: pointer;
+}
+.field__check-text { display: flex; flex-direction: column; gap: 3px; }
+.field__check-hint { font-size: 12px; color: #70837a; line-height: 1.5; }
+.studio__right .field__check-hint { color: #9fb4a8; }
+
+/* Farmer resilience module (rural only) */
+.agri .manage__h2 { display: flex; align-items: center; gap: 6px; }
+.agri__banner {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 14px;
+  border: 1px solid;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #15362a;
+  margin-bottom: 14px;
+}
+.agri__stats { margin-bottom: 16px; }
+.agri__advisories { margin-bottom: 16px; }
+.agri__advisories .alert__rec { margin-top: 8px; }
+.agri__rainwater {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #f0f7fb;
+  border: 1px solid #d5e7f1;
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.agri__rainwater-icon { font-size: 22px; line-height: 1; }
+.agri__rainwater strong { color: #15362a; font-size: 14px; }
+.agri__rainwater p { margin-top: 4px; color: #3d5248; font-size: 13px; line-height: 1.6; }
+
 @media (max-width: 720px) {
   .manage__main { padding: 20px 16px 48px; }
   .manage__head { flex-direction: column; }
