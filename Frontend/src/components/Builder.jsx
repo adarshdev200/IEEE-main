@@ -32,7 +32,7 @@ const Arrow = () => (
 )
 
 export default function Builder({ onHome, onMyCities, onManageCity, onCityGenerated }) {
-  const [params, setParams] = useState({ location: '', land_area_km2: '', population: '' })
+  const [params, setParams] = useState({ location: '', land_area_km2: '', population: '', rural: false })
   const [messages, setMessages] = useState([])
   const [started, setStarted] = useState(false)
   const [input, setInput] = useState('')
@@ -90,6 +90,7 @@ export default function Builder({ onHome, onMyCities, onManageCity, onCityGenera
         coordinates: params.coordinates,
         land_area_km2: params.land_area_km2,
         population: params.population,
+        rural: !!params.rural,
       })
       setMessages((prev) => [
         ...prev.slice(0, -1),
