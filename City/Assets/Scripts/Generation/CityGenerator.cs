@@ -16,6 +16,7 @@ public class CityGenerator : MonoBehaviour
     [SerializeField] private TextAsset cityPlan;
     [SerializeField] private TextAsset cityPlanAsset;
 
+    [SerializeField] private Material cityBaseMaterial;
     [Header("Generation")]
     [SerializeField] private bool generateOnStart = true;
 
@@ -245,7 +246,11 @@ public class CityGenerator : MonoBehaviour
 
     private void InitMaterials()
     {
-        Materials = new CityMaterials();
+        if (cityBaseMaterial == null || cityBaseMaterial.shader == null)
+            throw new InvalidOperationException(
+                "CityGenerator: Assign CityBaseMaterial in the Inspector.");
+
+        Materials = new CityMaterials(cityBaseMaterial.shader);
     }
 
     private void InitSubGenerators()
@@ -335,8 +340,14 @@ public class CityMaterials
     public readonly Material Energy;
     public readonly Material Transport;
 
-    public CityMaterials()
+    private readonly Shader _shader;
+
+    public CityMaterials(Shader shader)
     {
+        if (shader == null)
+            throw new ArgumentNullException(nameof(shader));
+
+        _shader = shader;
         Terrain          = Make(new Color(0.18f, 0.32f, 0.18f), 0.1f);
         Road             = Make(new Color(0.15f, 0.16f, 0.18f), 0.2f);
         Sidewalk         = Make(new Color(0.72f, 0.70f, 0.65f), 0.1f);
@@ -357,19 +368,23 @@ public class CityMaterials
         SolarRoof        = MakeEmissive("Building_SolarRoof", new Color(0.03f, 0.10f, 0.28f), new Color(0.0f, 0.18f, 0.75f));
     }
 
-    private static Material Make(Color color, float smoothness = 0.3f)
+    private Material Make(Color color, float smoothness = 0.3f)
     {
-        Shader sh = Shader.Find("Universal Render Pipeline/Lit")
-                 ?? Shader.Find("Standard");
-        var mat = new Material(sh);
+        var mat = new Material(_shader);
         mat.enableInstancing = true;
-        if (mat.HasProperty("_BaseColor"))  mat.SetColor("_BaseColor", color);
-        if (mat.HasProperty("_Color"))      mat.SetColor("_Color", color);
-        if (mat.HasProperty("_Smoothness")) mat.SetFloat("_Smoothness", smoothness);
+
+        if (mat.HasProperty("_BaseColor"))
+            mat.SetColor("_BaseColor", color);
+
+        if (mat.HasProperty("_Color"))
+            mat.SetColor("_Color", color);
+
+        if (mat.HasProperty("_Smoothness"))
+            mat.SetFloat("_Smoothness", smoothness);
+
         return mat;
     }
-
-    private static Material MakeEmissive(string name, Color color, Color emit)
+    private Material MakeEmissive(string name, Color color, Color emit)
     {
         var mat = Make(color, 0.6f);
         mat.name = name;

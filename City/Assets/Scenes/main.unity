@@ -479,9 +479,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CityGenerator
   cityPlan: {fileID: 4900000, guid: a9ac4680222d3a110bae55b61d7176b3, type: 3}
-  coordinateScale: 0.1
-  maxBuildingsPerSector: 150
-  buildingSpacing: 45
+  cityPlanAsset: {fileID: 4900000, guid: a9ac4680222d3a110bae55b61d7176b3, type: 3}
+  cityBaseMaterial: {fileID: 2100000, guid: 40e41f99901f3a8c99e1443219f491eb, type: 2}
+  generateOnStart: 1
 --- !u!4 &1112023023
 Transform:
   m_ObjectHideFlags: 0
