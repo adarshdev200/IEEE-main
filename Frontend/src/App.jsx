@@ -2,9 +2,30 @@ import { useState } from 'react'
 import Landing from './components/Landing.jsx'
 import Login from './components/Login.jsx'
 import Builder from './components/Builder.jsx'
+import ManageCity from './components/ManageCity.jsx'
+
+const CITY_KEY = 'cewnity.city'
+
+function loadCity() {
+  try {
+    return JSON.parse(localStorage.getItem(CITY_KEY)) || null
+  } catch {
+    return null
+  }
+}
 
 export default function App() {
-  const [view, setView] = useState('home') // 'home' | 'login' | 'builder' | 'cityview'
+  const [view, setView] = useState('home') // 'home' | 'login' | 'builder' | 'cityview' | 'managecity'
+  const [city, setCity] = useState(loadCity)
+
+  function saveCity(info) {
+    setCity(info)
+    try {
+      localStorage.setItem(CITY_KEY, JSON.stringify(info))
+    } catch {
+      /* storage may be unavailable */
+    }
+  }
 
   if (view === 'login') {
     return <Login onSignIn={() => setView('builder')} onBack={() => setView('home')} />
@@ -13,6 +34,18 @@ export default function App() {
     return (
       <Builder
         onHome={() => setView('home')}
+        onMyCities={() => setView('cityview')}
+        onManageCity={() => setView('managecity')}
+        onCityGenerated={saveCity}
+      />
+    )
+  }
+  if (view === 'managecity') {
+    return (
+      <ManageCity
+        city={city}
+        onExit={() => setView('home')}
+        onStudio={() => setView('builder')}
         onMyCities={() => setView('cityview')}
       />
     )

@@ -24,6 +24,15 @@ const NAV = [
     ),
   },
   {
+    label: 'Manage City',
+    icon: (
+      <>
+        <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z" stroke="currentColor" strokeWidth="1.7" fill="none" strokeLinejoin="round" />
+        <path d="M9 12l2 2 4-4.5" stroke="currentColor" strokeWidth="1.7" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      </>
+    ),
+  },
+  {
     label: 'Templates',
     icon: (
       <>
@@ -47,14 +56,15 @@ const NAV = [
   },
 ]
 
-export default function Sidebar({ onExit, onMyCities, collapsed }) {
-  const [active, setActive] = useState('Home')
+export default function Sidebar({ onExit, onStudio, onMyCities, onManageCity, active: activeProp, collapsed }) {
+  const [activeState, setActiveState] = useState('Home')
+  const active = activeProp || activeState
 
   function handleNavClick(label) {
-    setActive(label)
-    if (label === 'My Cities' && onMyCities) {
-      onMyCities()
-    }
+    setActiveState(label)
+    if (label === 'My Cities') onMyCities?.()
+    else if (label === 'Manage City') onManageCity?.()
+    else if (label === 'Home') onStudio?.()
   }
 
   return (

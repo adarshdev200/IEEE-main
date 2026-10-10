@@ -31,7 +31,7 @@ const Arrow = () => (
   </svg>
 )
 
-export default function Builder({ onHome, onMyCities }) {
+export default function Builder({ onHome, onMyCities, onManageCity, onCityGenerated }) {
   const [params, setParams] = useState({ location: '', land_area_km2: '', population: '' })
   const [messages, setMessages] = useState([])
   const [started, setStarted] = useState(false)
@@ -84,9 +84,16 @@ export default function Builder({ onHome, onMyCities }) {
       setGenerating(false)
       setBusy(false)
       setModelReady(true)
+      // Persist the city's location + parameters so Manage City can monitor it.
+      onCityGenerated?.({
+        name: params.location,
+        coordinates: params.coordinates,
+        land_area_km2: params.land_area_km2,
+        population: params.population,
+      })
       setMessages((prev) => [
         ...prev.slice(0, -1),
-        { role: 'bot', text: 'Your sustainable city model is ready. Click Generate Model to open it in My Cities.' },
+        { role: 'bot', text: 'Your sustainable city model is ready. Click Generate Model to open it in My Cities, or check Manage City for its live disaster outlook.' },
       ])
     }, GENERATION_DELAY_MS)
   }
@@ -95,7 +102,7 @@ export default function Builder({ onHome, onMyCities }) {
 
   return (
     <div className="studio">
-      <Sidebar onExit={onHome} onMyCities={onMyCities} collapsed={!sidebarOpen} />
+      <Sidebar onExit={onHome} onMyCities={onMyCities} onManageCity={onManageCity} active="Home" collapsed={!sidebarOpen} />
 
       <main className="studio__chat">
         <button
