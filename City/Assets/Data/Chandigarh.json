@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "city": {
     "id": "chandigarh_india",
-    "name": "Chandigarh",
+    "name": "Chandigarh Sustainable Masterplan",
     "location": {
       "country": "India",
       "region": "Union Territory (Capital of Punjab & Haryana)",
@@ -246,7 +246,7 @@
   "sectors": [
     {
       "id": "sec1_capitol",
-      "name": "Sector 1 - Capitol Complex",
+      "name": "Sector 1 - Capitol Complex & Le Corbusier Heritage Zone",
       "type": "civic",
       "geometry": {
         "type": "rectangle",
@@ -282,7 +282,8 @@
           "corbusier_secretariat",
           "palace_of_assembly",
           "high_court_pavilion",
-          "open_hand_monument_base"
+          "open_hand_monument_base",
+          "smart_microgrid_control_center"
         ],
         "height": {
           "minimum_floors": 3,
@@ -374,7 +375,7 @@
     },
     {
       "id": "sukhna_lake_reserve",
-      "name": "Sukhna Lake & Ecological Reserve",
+      "name": "Sukhna Lake & Ecological Water Reserve",
       "type": "water",
       "geometry": {
         "type": "rectangle",
@@ -407,7 +408,9 @@
       },
       "building_rules": {
         "allowed_archetypes": [
-          "rose_garden_pavilion"
+          "rose_garden_pavilion",
+          "floating_solar_station",
+          "rainwater_retention_center"
         ],
         "height": {
           "minimum_floors": 1,
@@ -416,9 +419,9 @@
         },
         "footprint": {
           "minimum_width": 10,
-          "maximum_width": 30,
+          "maximum_width": 35,
           "minimum_depth": 10,
-          "maximum_depth": 30
+          "maximum_depth": 35
         },
         "spacing": {
           "front_setback": 15,
@@ -479,9 +482,9 @@
       ],
       "energy": {
         "rooftop_solar": true,
-        "solar_coverage_target": 0.5,
-        "district_energy": false,
-        "battery_storage": false
+        "solar_coverage_target": 0.85,
+        "district_energy": true,
+        "battery_storage": true
       },
       "constraints": {
         "maximum_slope": 4,
@@ -493,7 +496,7 @@
     },
     {
       "id": "rock_garden_sec1",
-      "name": "Nek Chand Rock Garden",
+      "name": "Nek Chand Rock Garden & Eco-Sculpture Sanctuary",
       "type": "recreation",
       "geometry": {
         "type": "rectangle",
@@ -615,7 +618,7 @@
     },
     {
       "id": "sec2_governors",
-      "name": "Sector 2 - Governor Residences & Raj Bhawan",
+      "name": "Sector 2 - Governor Residences & Raj Bhawan Heritage Estate",
       "type": "residential",
       "geometry": {
         "type": "rectangle",
@@ -737,7 +740,7 @@
     },
     {
       "id": "sec12_pgimer",
-      "name": "Sector 12 - PGIMER Medical Campus",
+      "name": "Sector 12 - PGIMER Medical Campus & Zero-Downtime Smart Microgrid",
       "type": "healthcare",
       "geometry": {
         "type": "rectangle",
@@ -771,7 +774,8 @@
       "building_rules": {
         "allowed_archetypes": [
           "pgimer_hospital_tower",
-          "fire_police_station"
+          "fire_police_station",
+          "solar_substation_hub"
         ],
         "height": {
           "minimum_floors": 4,
@@ -849,7 +853,7 @@
       ],
       "energy": {
         "rooftop_solar": true,
-        "solar_coverage_target": 0.75,
+        "solar_coverage_target": 0.85,
         "district_energy": true,
         "battery_storage": true
       },
@@ -863,7 +867,7 @@
     },
     {
       "id": "sec14_panjab_univ",
-      "name": "Sector 14 - Panjab University Campus",
+      "name": "Sector 14 - Panjab University Campus & Solar Innovation Hub",
       "type": "education",
       "geometry": {
         "type": "rectangle",
@@ -898,7 +902,8 @@
         "allowed_archetypes": [
           "pu_gandhi_bhawan",
           "community_school_block",
-          "residential_tower"
+          "residential_tower",
+          "solar_substation_hub"
         ],
         "height": {
           "minimum_floors": 2,
@@ -976,7 +981,7 @@
       ],
       "energy": {
         "rooftop_solar": true,
-        "solar_coverage_target": 0.7,
+        "solar_coverage_target": 0.75,
         "district_energy": true,
         "battery_storage": true
       },
@@ -990,7 +995,7 @@
     },
     {
       "id": "sec10_museum_culture",
-      "name": "Sector 10 - Museum & Art Complex",
+      "name": "Sector 10 - Government Museum, Fine Arts & Cultural Bioswales",
       "type": "civic",
       "geometry": {
         "type": "rectangle",
@@ -1024,7 +1029,8 @@
       "building_rules": {
         "allowed_archetypes": [
           "pu_gandhi_bhawan",
-          "sector22_corbusier_villa"
+          "sector22_corbusier_villa",
+          "vertical_farm_greenhouse"
         ],
         "height": {
           "minimum_floors": 2,
@@ -1099,7 +1105,7 @@
       ],
       "energy": {
         "rooftop_solar": true,
-        "solar_coverage_target": 0.65,
+        "solar_coverage_target": 0.7,
         "district_energy": true,
         "battery_storage": false
       },
@@ -1113,7 +1119,7 @@
     },
     {
       "id": "sec16_rose_garden",
-      "name": "Sector 16 - Rose Garden & General Hospital",
+      "name": "Sector 16 - Zakir Hussain Rose Garden & Botanical Sanctuary",
       "type": "park",
       "geometry": {
         "type": "rectangle",
@@ -1147,7 +1153,8 @@
       "building_rules": {
         "allowed_archetypes": [
           "rose_garden_pavilion",
-          "pgimer_hospital_tower"
+          "pgimer_hospital_tower",
+          "rainwater_retention_center"
         ],
         "height": {
           "minimum_floors": 1,
@@ -1239,7 +1246,7 @@
     },
     {
       "id": "sec17_city_centre",
-      "name": "Sector 17 - Commercial City Centre & Central Plaza",
+      "name": "Sector 17 - Pedestrian Plaza & Zero-Emission Commercial Heart",
       "type": "commercial",
       "geometry": {
         "type": "rectangle",
@@ -1273,7 +1280,8 @@
       "building_rules": {
         "allowed_archetypes": [
           "sco_commercial_block",
-          "fire_police_station"
+          "fire_police_station",
+          "ev_charging_hub"
         ],
         "height": {
           "minimum_floors": 4,
@@ -1354,7 +1362,7 @@
       ],
       "energy": {
         "rooftop_solar": true,
-        "solar_coverage_target": 0.85,
+        "solar_coverage_target": 0.9,
         "district_energy": true,
         "battery_storage": true
       },
@@ -1368,7 +1376,7 @@
     },
     {
       "id": "sec22_historic_res",
-      "name": "Sector 22 - Historic Residential Sector & Shastri Market",
+      "name": "Sector 22 - Corbusier Historic Sector & Shastri Solar Market",
       "type": "mixed_use",
       "geometry": {
         "type": "rectangle",
@@ -1480,7 +1488,7 @@
       ],
       "energy": {
         "rooftop_solar": true,
-        "solar_coverage_target": 0.7,
+        "solar_coverage_target": 0.75,
         "district_energy": true,
         "battery_storage": false
       },
@@ -1494,7 +1502,7 @@
     },
     {
       "id": "sec18_residential",
-      "name": "Sector 18 - Residential & Institutional District",
+      "name": "Sector 18 - Green Residential & Institutional Microgrid District",
       "type": "residential",
       "geometry": {
         "type": "rectangle",
@@ -1603,7 +1611,7 @@
       ],
       "energy": {
         "rooftop_solar": true,
-        "solar_coverage_target": 0.65,
+        "solar_coverage_target": 0.7,
         "district_energy": true,
         "battery_storage": false
       },
@@ -1617,7 +1625,7 @@
     },
     {
       "id": "sec26_grain_market",
-      "name": "Sector 26 - Wholesale Grain & Timber Market",
+      "name": "Sector 26 - Wholesale Grain Market & Waste-to-Energy Digester Hub",
       "type": "logistics",
       "geometry": {
         "type": "rectangle",
@@ -1651,7 +1659,8 @@
       "building_rules": {
         "allowed_archetypes": [
           "industrial_shed",
-          "sco_commercial_block"
+          "sco_commercial_block",
+          "waste_to_energy_plant"
         ],
         "height": {
           "minimum_floors": 1,
@@ -1726,7 +1735,7 @@
       ],
       "energy": {
         "rooftop_solar": true,
-        "solar_coverage_target": 0.8,
+        "solar_coverage_target": 0.85,
         "district_energy": true,
         "battery_storage": true
       },
@@ -1740,7 +1749,7 @@
     },
     {
       "id": "industrial_area_ph1",
-      "name": "Industrial Area Phase 1 & Elante Complex",
+      "name": "Industrial Area Phase 1 - Elante Retail & Industrial Solar Grid",
       "type": "industrial",
       "geometry": {
         "type": "rectangle",
@@ -1775,7 +1784,8 @@
         "allowed_archetypes": [
           "elante_retail_mall",
           "industrial_shed",
-          "solar_substation_hub"
+          "solar_substation_hub",
+          "waste_to_energy_plant"
         ],
         "height": {
           "minimum_floors": 2,
@@ -1850,7 +1860,7 @@
       ],
       "energy": {
         "rooftop_solar": true,
-        "solar_coverage_target": 0.85,
+        "solar_coverage_target": 0.9,
         "district_energy": true,
         "battery_storage": true
       },
@@ -1864,7 +1874,7 @@
     },
     {
       "id": "sec35_commercial_hub",
-      "name": "Sector 35 - Hospitality & Retail Hub",
+      "name": "Sector 35 - Hospitality & EV Charging Sub-Center",
       "type": "commercial",
       "geometry": {
         "type": "rectangle",
@@ -1898,7 +1908,8 @@
       "building_rules": {
         "allowed_archetypes": [
           "sco_commercial_block",
-          "sector44_apartments"
+          "sector44_apartments",
+          "ev_charging_hub"
         ],
         "height": {
           "minimum_floors": 3,
@@ -1973,7 +1984,7 @@
       ],
       "energy": {
         "rooftop_solar": true,
-        "solar_coverage_target": 0.75,
+        "solar_coverage_target": 0.8,
         "district_energy": true,
         "battery_storage": false
       },
@@ -1987,7 +1998,7 @@
     },
     {
       "id": "sec34_financial_hub",
-      "name": "Sector 34 - Financial & Educational Sub-Center",
+      "name": "Sector 34 - Financial District & Smart Microgrid Hub",
       "type": "office",
       "geometry": {
         "type": "rectangle",
@@ -2022,7 +2033,8 @@
         "allowed_archetypes": [
           "sco_commercial_block",
           "residential_tower",
-          "community_school_block"
+          "community_school_block",
+          "smart_microgrid_control_center"
         ],
         "height": {
           "minimum_floors": 4,
@@ -2100,9 +2112,9 @@
       ],
       "energy": {
         "rooftop_solar": true,
-        "solar_coverage_target": 0.8,
+        "solar_coverage_target": 0.85,
         "district_energy": true,
-        "battery_storage": false
+        "battery_storage": true
       },
       "constraints": {
         "maximum_slope": 2,
@@ -2114,7 +2126,7 @@
     },
     {
       "id": "sec43_isbt_transport",
-      "name": "Sector 43 - ISBT Inter-State Bus Hub & District Courts",
+      "name": "Sector 43 - ISBT Inter-State Bus Terminal & e-BRT Charging Hub",
       "type": "transport",
       "geometry": {
         "type": "rectangle",
@@ -2149,7 +2161,8 @@
         "allowed_archetypes": [
           "isbt_transit_terminal",
           "fire_police_station",
-          "sco_commercial_block"
+          "sco_commercial_block",
+          "ev_charging_hub"
         ],
         "height": {
           "minimum_floors": 3,
@@ -2227,7 +2240,7 @@
       ],
       "energy": {
         "rooftop_solar": true,
-        "solar_coverage_target": 0.85,
+        "solar_coverage_target": 0.9,
         "district_energy": true,
         "battery_storage": true
       },
@@ -2241,7 +2254,7 @@
     },
     {
       "id": "sec36_leisure_green",
-      "name": "Sector 36 - Residential & Leisure Valley Corridor",
+      "name": "Sector 36 - Leisure Valley Ecological & N-Choe Drainage Corridor",
       "type": "park",
       "geometry": {
         "type": "rectangle",
@@ -2275,7 +2288,8 @@
       "building_rules": {
         "allowed_archetypes": [
           "sector22_corbusier_villa",
-          "rose_garden_pavilion"
+          "rose_garden_pavilion",
+          "rainwater_retention_center"
         ],
         "height": {
           "minimum_floors": 2,
@@ -2350,7 +2364,7 @@
       ],
       "energy": {
         "rooftop_solar": true,
-        "solar_coverage_target": 0.65,
+        "solar_coverage_target": 0.7,
         "district_energy": true,
         "battery_storage": false
       },
@@ -2364,7 +2378,7 @@
     },
     {
       "id": "industrial_area_ph2",
-      "name": "Industrial Area Phase 2 & Auto Hub",
+      "name": "Industrial Area Phase 2 - Solar Microgrid & Auto Hub",
       "type": "industrial",
       "geometry": {
         "type": "rectangle",
@@ -2398,7 +2412,8 @@
       "building_rules": {
         "allowed_archetypes": [
           "industrial_shed",
-          "solar_substation_hub"
+          "solar_substation_hub",
+          "ev_charging_hub"
         ],
         "height": {
           "minimum_floors": 1,
@@ -2470,7 +2485,7 @@
       ],
       "energy": {
         "rooftop_solar": true,
-        "solar_coverage_target": 0.85,
+        "solar_coverage_target": 0.9,
         "district_energy": true,
         "battery_storage": true
       },
@@ -2484,7 +2499,7 @@
     },
     {
       "id": "sec44_residential",
-      "name": "Sector 44 - High Density Multi-family Residential",
+      "name": "Sector 44 - Multi-family High Density Smart Residential",
       "type": "residential",
       "geometry": {
         "type": "rectangle",
@@ -2596,7 +2611,7 @@
       ],
       "energy": {
         "rooftop_solar": true,
-        "solar_coverage_target": 0.75,
+        "solar_coverage_target": 0.8,
         "district_energy": true,
         "battery_storage": false
       },
@@ -2610,7 +2625,7 @@
     },
     {
       "id": "sec42_sports_complex",
-      "name": "Sector 42 - Lake & Sports Stadium Complex",
+      "name": "Sector 42 - Lake Park, Sports Complex & Bio-Retention Basin",
       "type": "recreation",
       "geometry": {
         "type": "rectangle",
@@ -2644,7 +2659,8 @@
       "building_rules": {
         "allowed_archetypes": [
           "rose_garden_pavilion",
-          "community_school_block"
+          "community_school_block",
+          "rainwater_retention_center"
         ],
         "height": {
           "minimum_floors": 1,
@@ -2719,7 +2735,7 @@
       ],
       "energy": {
         "rooftop_solar": true,
-        "solar_coverage_target": 0.7,
+        "solar_coverage_target": 0.75,
         "district_energy": true,
         "battery_storage": false
       },
@@ -2733,7 +2749,7 @@
     },
     {
       "id": "sec48_green_belt",
-      "name": "Sector 48 - Solar Farm & Renewable Energy Reserve",
+      "name": "Sector 48 - 10MW Utility Solar Farm & Tertiary Water Recycling Hub",
       "type": "energy",
       "geometry": {
         "type": "rectangle",
@@ -2766,7 +2782,10 @@
       },
       "building_rules": {
         "allowed_archetypes": [
-          "solar_substation_hub"
+          "solar_substation_hub",
+          "ev_charging_hub",
+          "rainwater_retention_center",
+          "waste_to_energy_plant"
         ],
         "height": {
           "minimum_floors": 1,
@@ -2852,7 +2871,7 @@
     },
     {
       "id": "it_park_kishangarh",
-      "name": "Rajiv Gandhi Chandigarh IT Park",
+      "name": "Rajiv Gandhi IT Park & Zero-Carbon Smart Campus",
       "type": "office",
       "geometry": {
         "type": "rectangle",
@@ -2886,7 +2905,9 @@
       "building_rules": {
         "allowed_archetypes": [
           "it_park_glass_tower",
-          "fire_police_station"
+          "fire_police_station",
+          "ev_charging_hub",
+          "solar_substation_hub"
         ],
         "height": {
           "minimum_floors": 5,
@@ -2961,7 +2982,7 @@
       ],
       "energy": {
         "rooftop_solar": true,
-        "solar_coverage_target": 0.9,
+        "solar_coverage_target": 0.95,
         "district_energy": true,
         "battery_storage": true
       },
@@ -3068,7 +3089,7 @@
           0,
           3900
         ],
-        "type": "intersection",
+        "type": "bridge",
         "capacity": 4
       },
       {
@@ -3104,7 +3125,7 @@
           4600,
           3900
         ],
-        "type": "roundabout",
+        "type": "bridge",
         "capacity": 6
       },
       {
@@ -3113,8 +3134,8 @@
           5100,
           4500
         ],
-        "type": "intersection",
-        "capacity": 4
+        "type": "transit_hub",
+        "capacity": 6
       },
       {
         "id": "n_sec17_west",
@@ -3185,8 +3206,8 @@
           4600,
           1900
         ],
-        "type": "roundabout",
-        "capacity": 6
+        "type": "bridge",
+        "capacity": 8
       },
       {
         "id": "n_vikas_vidya",
@@ -3222,6 +3243,33 @@
           900
         ],
         "type": "intersection",
+        "capacity": 4
+      },
+      {
+        "id": "n_sukhna_bypass_bridge",
+        "position": [
+          4000,
+          4700
+        ],
+        "type": "bridge",
+        "capacity": 4
+      },
+      {
+        "id": "n_isbt43_transit_hub",
+        "position": [
+          2400,
+          1500
+        ],
+        "type": "transit_hub",
+        "capacity": 8
+      },
+      {
+        "id": "n_leisure_valley_eco_bridge",
+        "position": [
+          3000,
+          2500
+        ],
+        "type": "bridge",
         "capacity": 4
       }
     ],
@@ -3594,13 +3642,13 @@
         "id": "e_dakshin_3",
         "from": "n_dakshin_himalaya",
         "to": "n_dakshin_purv",
-        "type": "arterial",
+        "type": "motorway",
         "geometry": {
           "routing": "straight"
         },
-        "width": 24,
+        "width": 28,
         "lanes": 6,
-        "speed_limit": 60,
+        "speed_limit": 70,
         "one_way": false,
         "sidewalk": {
           "enabled": true,
@@ -4177,6 +4225,174 @@
         },
         "street_lighting": true,
         "public_transport": false
+      },
+      {
+        "id": "e_sukhna_bypass_1",
+        "from": "n_uttar_himalaya",
+        "to": "n_sukhna_bypass_bridge",
+        "type": "collector",
+        "geometry": {
+          "routing": "curved"
+        },
+        "width": 18,
+        "lanes": 4,
+        "speed_limit": 50,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 3
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 10
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_sukhna_bypass_2",
+        "from": "n_sukhna_bypass_bridge",
+        "to": "n_madhya_itpark",
+        "type": "collector",
+        "geometry": {
+          "routing": "curved"
+        },
+        "width": 18,
+        "lanes": 4,
+        "speed_limit": 50,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 3
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2.5,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 10
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_isbt43_flyover_in",
+        "from": "n_dakshin_jan",
+        "to": "n_isbt43_transit_hub",
+        "type": "collector",
+        "geometry": {
+          "routing": "orthogonal"
+        },
+        "width": 16,
+        "lanes": 4,
+        "speed_limit": 40,
+        "one_way": true,
+        "sidewalk": {
+          "enabled": true,
+          "width": 3
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 10
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_isbt43_flyover_out",
+        "from": "n_isbt43_transit_hub",
+        "to": "n_vikas_jan",
+        "type": "collector",
+        "geometry": {
+          "routing": "orthogonal"
+        },
+        "width": 16,
+        "lanes": 4,
+        "speed_limit": 40,
+        "one_way": true,
+        "sidewalk": {
+          "enabled": true,
+          "width": 3
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 10
+        },
+        "street_lighting": true,
+        "public_transport": true
+      },
+      {
+        "id": "e_leisure_eco_link_1",
+        "from": "n_sec17_jan",
+        "to": "n_leisure_valley_eco_bridge",
+        "type": "pedestrian",
+        "geometry": {
+          "routing": "curved"
+        },
+        "width": 8,
+        "lanes": 1,
+        "speed_limit": 10,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": true,
+          "width": 4
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 2,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 8
+        },
+        "street_lighting": true,
+        "public_transport": false
+      },
+      {
+        "id": "e_leisure_eco_link_2",
+        "from": "n_leisure_valley_eco_bridge",
+        "to": "n_dakshin_jan",
+        "type": "cycle",
+        "geometry": {
+          "routing": "curved"
+        },
+        "width": 4,
+        "lanes": 2,
+        "speed_limit": 20,
+        "one_way": false,
+        "sidewalk": {
+          "enabled": false,
+          "width": 0
+        },
+        "cycling": {
+          "enabled": true,
+          "width": 4,
+          "separated": true
+        },
+        "street_trees": {
+          "enabled": true,
+          "spacing": 8
+        },
+        "street_lighting": true,
+        "public_transport": false
       }
     ]
   },
@@ -4540,6 +4756,108 @@
         },
         "density": "high",
         "mixed_use": false
+      },
+      {
+        "id": "floating_solar_station",
+        "type": "utility",
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 1,
+          "floor_height": 3.5
+        },
+        "footprint": {
+          "minimum_width": 20,
+          "maximum_width": 60,
+          "minimum_depth": 20,
+          "maximum_depth": 60
+        },
+        "density": "low",
+        "mixed_use": false
+      },
+      {
+        "id": "ev_charging_hub",
+        "type": "utility",
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 2,
+          "floor_height": 4
+        },
+        "footprint": {
+          "minimum_width": 15,
+          "maximum_width": 40,
+          "minimum_depth": 15,
+          "maximum_depth": 40
+        },
+        "density": "medium",
+        "mixed_use": false
+      },
+      {
+        "id": "waste_to_energy_plant",
+        "type": "utility",
+        "height": {
+          "minimum_floors": 2,
+          "maximum_floors": 4,
+          "floor_height": 5
+        },
+        "footprint": {
+          "minimum_width": 30,
+          "maximum_width": 80,
+          "minimum_depth": 30,
+          "maximum_depth": 70
+        },
+        "density": "medium",
+        "mixed_use": false
+      },
+      {
+        "id": "rainwater_retention_center",
+        "type": "utility",
+        "height": {
+          "minimum_floors": 1,
+          "maximum_floors": 2,
+          "floor_height": 4
+        },
+        "footprint": {
+          "minimum_width": 20,
+          "maximum_width": 50,
+          "minimum_depth": 20,
+          "maximum_depth": 50
+        },
+        "density": "low",
+        "mixed_use": false
+      },
+      {
+        "id": "smart_microgrid_control_center",
+        "type": "government",
+        "height": {
+          "minimum_floors": 2,
+          "maximum_floors": 4,
+          "floor_height": 3.8
+        },
+        "footprint": {
+          "minimum_width": 25,
+          "maximum_width": 50,
+          "minimum_depth": 25,
+          "maximum_depth": 45
+        },
+        "density": "medium",
+        "mixed_use": false
+      },
+      {
+        "id": "vertical_farm_greenhouse",
+        "type": "community",
+        "height": {
+          "minimum_floors": 2,
+          "maximum_floors": 5,
+          "floor_height": 4
+        },
+        "footprint": {
+          "minimum_width": 20,
+          "maximum_width": 50,
+          "minimum_depth": 20,
+          "maximum_depth": 45
+        },
+        "density": "medium",
+        "mixed_use": false
       }
     ],
     "generation": {
@@ -4562,10 +4880,10 @@
     },
     "sustainability": {
       "rooftop_solar_allowed": true,
-      "rooftop_solar_required": false,
-      "solar_coverage_target": 0.55,
-      "green_roof_target": 0.2,
-      "green_wall_target": 0.05,
+      "rooftop_solar_required": true,
+      "solar_coverage_target": 0.75,
+      "green_roof_target": 0.35,
+      "green_wall_target": 0.15,
       "rainwater_collection": true,
       "passive_cooling": true,
       "natural_ventilation": true,
@@ -4574,11 +4892,11 @@
   },
   "transport": {
     "mode_share": {
-      "walking": 0.25,
-      "cycling": 0.2,
-      "public_transport": 0.35,
-      "private_vehicle": 0.15,
-      "other": 0.05
+      "walking": 0.28,
+      "cycling": 0.22,
+      "public_transport": 0.38,
+      "private_vehicle": 0.08,
+      "other": 0.04
     },
     "public_transport": {
       "enabled": true,
@@ -4588,19 +4906,19 @@
         "brt"
       ],
       "coverage": {
-        "maximum_walk_distance": 400,
-        "minimum_population_coverage": 0.9
+        "maximum_walk_distance": 350,
+        "minimum_population_coverage": 0.95
       },
       "stops": {
-        "minimum_spacing": 250,
-        "maximum_spacing": 600
+        "minimum_spacing": 200,
+        "maximum_spacing": 500
       },
       "priority": "high"
     },
     "walking": {
       "enabled": true,
-      "minimum_sidewalk_width": 2,
-      "maximum_distance_to_daily_services": 500,
+      "minimum_sidewalk_width": 2.5,
+      "maximum_distance_to_daily_services": 450,
       "pedestrian_priority_zones": true,
       "traffic_calming": true,
       "shade_required": true,
@@ -4608,9 +4926,9 @@
     },
     "cycling": {
       "enabled": true,
-      "minimum_lane_width": 2,
+      "minimum_lane_width": 2.5,
       "separated_from_traffic": true,
-      "maximum_distance_to_cycle_network": 300,
+      "maximum_distance_to_cycle_network": 200,
       "bike_parking": true
     },
     "roads": {
@@ -4622,14 +4940,14 @@
     },
     "parking": {
       "strategy": "reduced",
-      "maximum_surface_parking_ratio": 0.1,
+      "maximum_surface_parking_ratio": 0.08,
       "underground_parking_preferred": true,
       "park_and_ride": true,
       "ev_charging": true
     },
     "accessibility": {
       "universal_design": true,
-      "maximum_gradient": 6,
+      "maximum_gradient": 5,
       "accessible_transit": true,
       "accessible_crossings": true
     }
@@ -4641,7 +4959,7 @@
         "rainwater",
         "recycled_water"
       ],
-      "daily_capacity": 65000,
+      "daily_capacity": 75000,
       "reliability": "high",
       "groundwater_recharge": true
     },
@@ -4649,12 +4967,12 @@
       "potable_network": true,
       "non_potable_network": true,
       "district_metering": true,
-      "leakage_target": 0.04,
+      "leakage_target": 0.03,
       "storage_required": true
     },
     "consumption": {
-      "target_per_capita_daily": 140,
-      "maximum_per_capita_daily": 180,
+      "target_per_capita_daily": 135,
+      "maximum_per_capita_daily": 170,
       "industrial_reuse_required": true,
       "greywater_reuse": true
     },
@@ -4662,7 +4980,7 @@
       "strategy": "sustainable_drainage",
       "retention_required": true,
       "infiltration_required": true,
-      "permeable_surface_target": 0.4,
+      "permeable_surface_target": 0.5,
       "rain_gardens": true,
       "bioswales": true,
       "retention_ponds": true,
@@ -4670,7 +4988,7 @@
     },
     "wastewater": {
       "treatment": "hybrid",
-      "reuse_target": 0.65,
+      "reuse_target": 0.75,
       "treated_water_uses": [
         "irrigation",
         "industrial",
@@ -4682,29 +5000,30 @@
       "rainwater_harvesting": true,
       "water_efficient_landscaping": true,
       "native_vegetation_preferred": true,
-      "irrigation_efficiency_target": 0.9,
-      "water_reuse_target": 0.65
+      "irrigation_efficiency_target": 0.95,
+      "water_reuse_target": 0.75
     }
   },
   "energy_zones": {
     "generation": {
       "sources": [
         "solar",
-        "wind",
+        "biomass",
+        "waste_to_energy",
         "grid"
       ],
-      "renewable_target": 0.85,
+      "renewable_target": 0.9,
       "solar": {
         "preferred": true,
-        "minimum_capacity_mw": 120,
-        "maximum_capacity_mw": 220,
+        "minimum_capacity_mw": 140,
+        "maximum_capacity_mw": 250,
         "rooftop_generation": true,
         "ground_mounted_generation": true
       },
       "wind": {
         "preferred": false,
-        "minimum_capacity_mw": 10,
-        "maximum_capacity_mw": 30
+        "minimum_capacity_mw": 5,
+        "maximum_capacity_mw": 20
       }
     },
     "storage": {
@@ -4713,8 +5032,8 @@
         "battery",
         "thermal"
       ],
-      "minimum_capacity_mwh": 180,
-      "maximum_capacity_mwh": 400,
+      "minimum_capacity_mwh": 220,
+      "maximum_capacity_mwh": 450,
       "distributed_storage": true
     },
     "distribution": {
@@ -4722,20 +5041,30 @@
       "microgrids": true,
       "smart_grid": true,
       "district_energy": true,
-      "maximum_transmission_loss": 0.04,
+      "maximum_transmission_loss": 0.03,
       "backup_generation": true
     },
     "zoning": {
       "renewable_zones": [
         {
           "type": "solar_farm",
-          "priority": "high",
-          "minimum_area": 50000
+          "priority": "very_high",
+          "minimum_area": 60000
         },
         {
           "type": "rooftop_solar",
-          "priority": "high",
+          "priority": "very_high",
           "minimum_area": 0
+        },
+        {
+          "type": "biomass",
+          "priority": "high",
+          "minimum_area": 20000
+        },
+        {
+          "type": "waste_to_energy",
+          "priority": "high",
+          "minimum_area": 25000
         }
       ],
       "utility_zones": [
@@ -4751,8 +5080,8 @@
   },
   "vegetation": {
     "green_space": {
-      "minimum_ratio": 0.35,
-      "target_ratio": 0.42,
+      "minimum_ratio": 0.38,
+      "target_ratio": 0.45,
       "types": [
         "park",
         "urban_forest",
@@ -4761,12 +5090,12 @@
         "street_green"
       ],
       "connectivity_required": true,
-      "maximum_distance_to_green_space": 250
+      "maximum_distance_to_green_space": 200
     },
     "trees": {
-      "canopy_target": 0.45,
-      "minimum_tree_density": 85,
-      "street_tree_spacing": 10,
+      "canopy_target": 0.5,
+      "minimum_tree_density": 95,
+      "street_tree_spacing": 8,
       "native_species_preferred": true,
       "shade_priority": true,
       "mature_canopy_required": true
@@ -4785,12 +5114,12 @@
       "wildlife_corridors": true,
       "habitat_zones": true,
       "protected_natural_areas": true,
-      "minimum_habitat_ratio": 0.2,
-      "native_species_target": 0.85
+      "minimum_habitat_ratio": 0.25,
+      "native_species_target": 0.9
     },
     "generation": {
       "distribution": "noise",
-      "density": 85,
+      "density": 95,
       "seed": 767794,
       "terrain_adaptation": true,
       "water_adaptation": true,
@@ -4807,8 +5136,8 @@
     },
     "noise": {
       "control_required": true,
-      "maximum_daytime_db": 55,
-      "maximum_nighttime_db": 42,
+      "maximum_daytime_db": 50,
+      "maximum_nighttime_db": 40,
       "quiet_zones": true,
       "noise_buffers": true
     },
@@ -4819,7 +5148,7 @@
       "drought_resilience": true,
       "storm_resilience": true,
       "sea_level_rise_resilience": false,
-      "maximum_urban_heat_island_intensity": 2
+      "maximum_urban_heat_island_intensity": 1.5
     },
     "pollution": {
       "air": true,
@@ -4840,41 +5169,41 @@
   },
   "sustainability": {
     "energy": {
-      "renewable_share_target": 0.85,
-      "energy_efficiency_target": 0.4,
-      "grid_dependency_target": 0.15,
-      "energy_storage_target": 0.25,
+      "renewable_share_target": 0.9,
+      "energy_efficiency_target": 0.45,
+      "grid_dependency_target": 0.1,
+      "energy_storage_target": 0.3,
       "net_zero_target": true
     },
     "transport": {
-      "sustainable_mode_share": 0.8,
-      "maximum_average_commute_distance": 4500,
-      "maximum_average_commute_time": 25,
+      "sustainable_mode_share": 0.88,
+      "maximum_average_commute_distance": 4000,
+      "maximum_average_commute_time": 20,
       "vehicle_emission_target": 0
     },
     "water": {
-      "water_reuse_target": 0.6,
-      "water_loss_target": 0.05,
-      "rainwater_capture_target": 0.4,
-      "groundwater_recharge_target": 0.15
+      "water_reuse_target": 0.75,
+      "water_loss_target": 0.03,
+      "rainwater_capture_target": 0.5,
+      "groundwater_recharge_target": 0.2
     },
     "land": {
-      "green_space_target": 0.35,
-      "built_land_target": 0.45,
-      "protected_land_target": 0.1,
-      "permeable_surface_target": 0.4
+      "green_space_target": 0.4,
+      "built_land_target": 0.42,
+      "protected_land_target": 0.12,
+      "permeable_surface_target": 0.5
     },
     "environment": {
-      "carbon_emission_target": 800,
+      "carbon_emission_target": 500,
       "air_quality_target": "excellent",
-      "urban_heat_reduction_target": 2.5,
-      "biodiversity_target": 0.35
+      "urban_heat_reduction_target": 3,
+      "biodiversity_target": 0.4
     },
     "resource_efficiency": {
-      "waste_recycling_target": 0.8,
-      "waste_to_landfill_target": 0.05,
-      "material_reuse_target": 0.35,
-      "circular_economy_target": 0.6
+      "waste_recycling_target": 0.88,
+      "waste_to_landfill_target": 0.02,
+      "material_reuse_target": 0.45,
+      "circular_economy_target": 0.75
     }
   },
   "generation": {
@@ -4882,8 +5211,8 @@
     "deterministic": true,
     "detail_level": "high",
     "terrain_detail": "high",
-    "building_detail": "medium",
-    "vegetation_detail": "medium",
+    "building_detail": "high",
+    "vegetation_detail": "high",
     "road_detail": "high",
     "randomness": 0.15,
     "lod": {
