@@ -1,14 +1,16 @@
 import { useState, useRef, useEffect } from 'react'
 import Sidebar from './Sidebar.jsx'
 import ParametersPanel from './ParametersPanel.jsx'
-import Outputs from './Outputs.jsx'
-import { interpretVision, generateCityModel, missingParams } from '../lib/interpreter.js'
+import { missingParams } from '../lib/interpreter.js'
 
 const PARAM_LABELS = {
   location: 'Location',
   land_area_km2: 'Land Area (km²)',
   population: 'Population',
 }
+
+// How long the simulated "generation" runs before the Generate Model button appears.
+const GENERATION_DELAY_MS = 2500
 
 const EXAMPLES = [
   'A highly walkable coastal city for 100k people with strong public transport and solar + wind energy.',
@@ -34,21 +36,23 @@ export default function Builder({ onHome, onMyCities }) {
   const [messages, setMessages] = useState([])
   const [started, setStarted] = useState(false)
   const [input, setInput] = useState('')
-  const [requirements, setRequirements] = useState(null)
-  const [cityModel, setCityModel] = useState(null)
   const [busy, setBusy] = useState(false)
-  const [planBusy, setPlanBusy] = useState(false)
-  const [planError, setPlanError] = useState(null)
+  const [generating, setGenerating] = useState(false)
+  const [modelReady, setModelReady] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const endRef = useRef(null)
+  const timerRef = useRef(null)
 
   useEffect(() => {
     if (started) endRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, started])
 
+  // Clean up the pending timer if the component unmounts mid-generation.
+  useEffect(() => () => clearTimeout(timerRef.current), [])
+
   const addMessage = (role, text) => setMessages((prev) => [...prev, { role, text }])
 
-  async function handleSend(e) {
+  function handleSend(e) {
     e?.preventDefault?.()
     const text = input.trim()
     if (!text || busy) return
@@ -61,61 +65,30 @@ export default function Builder({ onHome, onMyCities }) {
       const names = missing.map((k) => PARAM_LABELS[k]).join(', ')
       addMessage(
         'bot',
-        `Before I can build the requirements, I need these parameters: ${names}. ` +
+        `Before I can build your city, I need these parameters: ${names}. ` +
           'Please fill them in on the right and send your vision again.'
       )
       return
     }
 
+    // Simulated generation — the frontend intentionally does not call the
+    // interpreter or the city planner here. After a short delay a Generate
+    // Model button appears that opens the prebuilt city in My Cities.
     setBusy(true)
-    addMessage('bot', 'Interpreting your vision…')
-    try {
-      const { schema, notes } = await interpretVision(text, params)
-      setRequirements(schema)
-      setCityModel(null)
-      setPlanError(null)
-      setMessages((prev) => [
-        ...prev.slice(0, -1),
-        {
-          role: 'bot',
-          text:
-            'Got it — I interpreted your vision into a formal requirements schema. ' +
-            notes.join(' ') +
-            ' Open the City Model tab on the right to generate the full 3D-ready model.',
-        },
-      ])
-    } finally {
-      setBusy(false)
-    }
-  }
+    setModelReady(false)
+    setGenerating(true)
+    addMessage('bot', 'Generating a model…')
 
-  async function handleGenerateModel() {
-    if (!requirements || planBusy) return
-    setPlanBusy(true)
-    setPlanError(null)
-    addMessage('bot', 'Generating the full 3D city model (blocks, roads, water, greenery, windmills)…')
-    try {
-      const { cityModel, modelName } = await generateCityModel(requirements, params)
-      setCityModel(cityModel)
+    clearTimeout(timerRef.current)
+    timerRef.current = setTimeout(() => {
+      setGenerating(false)
+      setBusy(false)
+      setModelReady(true)
       setMessages((prev) => [
         ...prev.slice(0, -1),
-        {
-          role: 'bot',
-          text:
-            `Done — ${modelName} generated a renderable city model with ` +
-            `${cityModel.blocks?.length ?? 0} building blocks, ` +
-            `${cityModel.green_areas?.length ?? 0} green areas, ` +
-            `${cityModel.water_bodies?.length ?? 0} water bodies and ` +
-            `${cityModel.windmills?.length ?? 0} windmills. ` +
-            'It validates against your schema. Download it or view it in 3D from the City Model tab.',
-        },
+        { role: 'bot', text: 'Your sustainable city model is ready. Click Generate Model to open it in My Cities.' },
       ])
-    } catch (err) {
-      setPlanError(String(err.message || err))
-      setMessages((prev) => [...prev.slice(0, -1), { role: 'bot', text: `Couldn't generate the model: ${err.message || err}` }])
-    } finally {
-      setPlanBusy(false)
-    }
+    }, GENERATION_DELAY_MS)
   }
 
   const missing = missingParams(params)
@@ -156,31 +129,24 @@ export default function Builder({ onHome, onMyCities }) {
               </p>
             </div>
 
-            {/* Working indicator — shown while AI is processing */}
-            {(busy || planBusy) && (
-              <div className="builder__working">
-                <span className="builder__working-dot" />
-                <span className="builder__working-dot" />
-                <span className="builder__working-dot" />
-                <span className="builder__working-label">
-                  {planBusy ? 'Generating city model…' : 'Interpreting your vision…'}
-                </span>
+            {/* Generating indicator — circular loader while the model is "generated" */}
+            {generating && (
+              <div className="builder__generating">
+                <span className="builder__spinner" aria-hidden />
+                <span className="builder__working-label">Generating a model…</span>
               </div>
             )}
 
-            {/* Planning complete banner */}
-            {cityModel && !planBusy && (
+            {/* Generate Model button — appears once generation "completes" */}
+            {modelReady && !generating && (
               <div className="builder__complete">
                 <span className="builder__complete-icon">✓</span>
                 <div className="builder__complete-text">
-                  <strong>Planning complete</strong>
-                  <span>Your 3D city model is ready to render.</span>
+                  <strong>Model ready</strong>
+                  <span>Your 3D city model has been generated.</span>
                 </div>
-                <button
-                  className="builder__complete-cta"
-                  onClick={onMyCities}
-                >
-                  Go to My Cities →
+                <button className="builder__complete-cta" onClick={onMyCities}>
+                  Generate Model →
                 </button>
               </div>
             )}
@@ -222,14 +188,6 @@ export default function Builder({ onHome, onMyCities }) {
 
       <aside className="studio__right">
         <ParametersPanel params={params} setParams={setParams} missing={missing} labels={PARAM_LABELS} />
-        <Outputs
-          requirements={requirements}
-          cityModel={cityModel}
-          onGenerateModel={handleGenerateModel}
-          onView={onMyCities}
-          planBusy={planBusy}
-          planError={planError}
-        />
       </aside>
     </div>
   )
