@@ -2582,16 +2582,23 @@ body {
 
 /* Rural / agricultural checkbox in the parameters panel */
 .field--check {
+  display: flex;
   flex-direction: row;
   align-items: flex-start;
   gap: 10px;
   cursor: pointer;
 }
-.field__checkbox {
+/* Override the generic `.field input` (full-width text-input) styling. */
+.field--check input.field__checkbox {
   width: 18px;
   height: 18px;
-  margin-top: 2px;
+  min-width: 18px;
+  margin-top: 1px;
+  padding: 0;
   flex: none;
+  background: none;
+  border: none;
+  border-radius: 0;
   accent-color: #2f8255;
   cursor: pointer;
 }
